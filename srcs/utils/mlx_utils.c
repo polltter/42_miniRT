@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:34:39 by touteiro          #+#    #+#             */
-/*   Updated: 2023/04/17 20:35:01 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/04/18 20:11:43 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,19 @@ t_mlx_data	*mlx(void)
 	static t_mlx_data	data;
 
 	return (&data);
+}
+
+void	my_pixel_put(t_data *img, int x, int y, int color)
+{
+	char	*pixel;
+
+	pixel = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
+	*(unsigned int *)pixel = color;
+}
+
+int	get_rgb(int r, int g, int b)
+{
+	return (r << 16 | g << 8 | b);
 }
 
 void	data_init(t_mlx_data *data)
@@ -33,6 +46,7 @@ int	ft_close(t_mlx_data *data)
 	mlx_destroy_image(data->mlx, data->img.img);
 	mlx_destroy_window(data->mlx, data->mlx_win);
 	mlx_destroy_display(data->mlx);
+	array(m()->spheres)->destroy();
 	free(data->mlx);
 	exit(0);
 }

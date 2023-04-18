@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:04:27 by touteiro          #+#    #+#             */
-/*   Updated: 2023/04/17 20:07:12 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/04/18 20:02:40 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,13 @@ typedef struct s_sphere			t_sphere;
 typedef struct s_coord			t_coord;
 typedef struct s_light			t_light;
 typedef struct s_plane			t_plane;
+typedef struct s_point			t_point;
 typedef struct s_data			t_data;
+typedef struct s_main			t_main;
+
+struct s_main {
+	void	*spheres;
+};
 
 struct s_coord {
 	double	x;
@@ -93,5 +99,12 @@ struct s_cylinder {
 	double  diameter;
 	double  height;
 };
+
+typedef struct s_point
+{
+	double	x;
+	double	y;
+}	t_point;
+
 
 #endif

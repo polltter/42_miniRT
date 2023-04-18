@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mouse.c                                            :+:      :+:    :+:   */
+/*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/17 20:31:35 by touteiro          #+#    #+#             */
-/*   Updated: 2023/04/18 16:21:05 by touteiro         ###   ########.fr       */
+/*   Created: 2023/04/18 15:54:15 by touteiro          #+#    #+#             */
+/*   Updated: 2023/04/18 16:41:57 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int	handle_mouse(int button, int x, int y, t_mlx_data *data)
+double	convert_point(double x, double is_Y)
 {
-	(void)button;
-	(void)x;
-	(void)y;
-	(void)data;
-	return (0);
+	if (!is_Y)
+		return (IMG_W / 2 + x);
+	else
+		return (IMG_H / 2 - x);
 }

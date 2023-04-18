@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mouse.c                                            :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/17 20:31:35 by touteiro          #+#    #+#             */
-/*   Updated: 2023/04/18 16:21:05 by touteiro         ###   ########.fr       */
+/*   Created: 2023/04/18 19:57:55 by touteiro          #+#    #+#             */
+/*   Updated: 2023/04/18 20:11:45 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int	handle_mouse(int button, int x, int y, t_mlx_data *data)
+t_main	*m(void)
 {
-	(void)button;
-	(void)x;
-	(void)y;
-	(void)data;
-	return (0);
+	static t_main	data;
+
+	return (&data);
 }
