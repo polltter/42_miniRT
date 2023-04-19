@@ -16,6 +16,15 @@ typedef struct s_light t_light;
 typedef struct s_plane t_plane;
 typedef struct s_data t_data;
 
+enum e_types {
+    AL,
+    L,
+    C,
+    SPH,
+    PL,
+    CY,
+};
+
 struct s_coord {
     double  x;
     double  y;

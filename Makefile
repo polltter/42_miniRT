@@ -1,4 +1,4 @@
-SRCS	= ${wildcard SRCS/*.c} ${wildcard SRCS/*/*.c} ${wildcard SRCS/*/*/*.c} main.c
+SRCS	= ${wildcard SRCS/*.c} ${wildcard SRCS/*/*.c} ${wildcard SRCS/*/*/*.c} main.c #testing.c
 
 NAME	= miniRT
 
