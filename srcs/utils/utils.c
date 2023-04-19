@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 19:57:55 by touteiro          #+#    #+#             */
-/*   Updated: 2023/04/19 12:15:59 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/04/19 15:57:25 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,29 @@ t_coord	set_coord_values(double x, double y, double z)
 	coord.y = y;
 	coord.z = z;
 	return (coord);
+}
+
+t_coord	coord_constant_op(int op, t_coord coord, double constant)
+{
+	if (op == MULTIPLY)
+	{
+		coord.x *= constant;
+		coord.y *= constant;
+		coord.z *= constant;
+	}
+	else
+	{
+		coord.x /= constant;
+		coord.y /= constant;
+		coord.z /= constant;
+	}
+	return (coord);
+}
+
+double	vector_length(t_coord vector)
+{
+	double	len;
+
+	len = sqrt(pow(vector.x, 2) + pow(vector.y, 2) + pow(vector.z, 2));
+	return (len);
 }

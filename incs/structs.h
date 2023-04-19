@@ -6,14 +6,14 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:04:27 by touteiro          #+#    #+#             */
-/*   Updated: 2023/04/19 14:45:59 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/04/19 15:00:00 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-typedef struct s_default_light	t_default_light;
+typedef struct s_ambient_light	t_ambient_light;
 typedef struct s_default_body	t_default_body;
 typedef struct s_mlx_data		t_mlx_data;
 typedef struct s_cylinder		t_cylinder;
@@ -27,12 +27,12 @@ typedef struct s_data			t_data;
 typedef struct s_main			t_main;
 
 enum e_types {
-    AL,
-    L,
-    C,
-    SPH,
-    PL,
-    CY,
+	AL,
+	L,
+	C,
+	SPH,
+	PL,
+	CY,
 };
 
 struct s_coord {
@@ -57,7 +57,7 @@ struct s_mlx_data {
 	t_data		img;
 };
 
-struct s_default_light {
+struct s_ambient_light {
 	int		id;
 	double	light_ratio;
 	int		color;
@@ -114,7 +114,7 @@ typedef struct s_point
 
 struct s_main {
 	void			*spheres;
-	t_default_light	ambient;
+	t_ambient_light	ambient;
 	void			*lights;
 };
 

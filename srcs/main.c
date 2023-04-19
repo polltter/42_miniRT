@@ -6,23 +6,11 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:56:14 by touteiro          #+#    #+#             */
-/*   Updated: 2023/04/19 14:44:50 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/04/19 16:59:26 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
-
-double	compute_lighting();
-
-t_coord	canvas_to_viewport(double x, double y)
-{
-	t_coord	new;
-
-	new.x = x / IMG_W;
-	new.y = y / IMG_H;
-	new.z = 1;
-	return (new);
-}
 
 double	dot_product(t_coord a, t_coord b)
 {
@@ -33,6 +21,47 @@ double	dot_product(t_coord a, t_coord b)
 	result += (a.y * b.y);
 	result += (a.z * b.z);
 	return (result);
+}
+
+void	print_coords(t_coord coord)
+{
+	printf("%f %f %f\n", coord.x, coord.y, coord.z);
+}
+
+double	compute_lighting(t_coord point, t_coord normal)
+{
+	double 	i;
+	double	n_dot_l;
+	t_elems *temp;
+	t_coord	light;
+
+	i = 0.0;
+	temp = array(m()->lights)->begin;
+	i += m()->ambient.light_ratio;
+	while (temp)
+	{
+		light = do_op_coords(SUBTRACT, (*(t_light *)temp->cont).coord, point);
+		n_dot_l = dot_product(normal, light);
+		// printf("%f\n", (*(t_light *)temp->cont).light_ratio);
+		if (n_dot_l > 0)
+			i += (*(t_light *)temp->cont).light_ratio * n_dot_l / (vector_length(normal) * vector_length(light));
+		temp = temp->next;
+	}
+	// printf("%d\n", get_rgb(0, 0, 255));
+	// printf("%f\n", i);
+	// printf("%f\n", get_rgb(0, 0, 255) * i);
+	// exit(0);
+	return(i);
+}
+
+t_coord	canvas_to_viewport(double x, double y)
+{
+	t_coord	new;
+
+	new.x = x / IMG_W;
+	new.y = y / IMG_H;
+	new.z = 1;
+	return (new);
 }
 
 t_point sphere_collision(t_coord O, t_coord D, t_sphere sphere)
@@ -81,7 +110,13 @@ int	trace_ray(t_coord O, t_coord D, double t_min, double t_max)
 	}
 	if (!closest)
 		return (get_rgb(255, 255, 255));
-	return (closest->color);
+
+	t_coord	point = do_op_coords(ADD, O, coord_constant_op(MULTIPLY, D, closest_t));
+	t_coord normal = do_op_coords(SUBTRACT, point, closest->coord);
+	normal = coord_constant_op(DIVIDE, normal, vector_length(normal));
+	// if (closest->color * compute_lighting(point, normal) > get_rgb(255, 255, 255))
+		// return (get_rgb(255, 255, 255));
+	return (closest->color * compute_lighting(point, normal));
 }
 
 int	render(t_mlx_data *data)
@@ -105,6 +140,8 @@ int	render(t_mlx_data *data)
 		{
 			D = canvas_to_viewport(start_x, start_y);
 			color = trace_ray(camera.coord, D, 1, INT_MAX);
+			// if (color >= get_rgb(0, 255, 255))
+				// printf("oi\n");
 			if (convert_point(start_x, 0) >= 0 && convert_point(start_x, 0) < IMG_W && \
 				convert_point(start_y, 1) >= 0 && convert_point(start_y, 1) < IMG_H)
 				my_pixel_put(&mlx()->img, convert_point(start_x, 0), convert_point(start_y, 1), color);
@@ -124,12 +161,14 @@ int	main(void)
 	data_init(&data);
 	*mlx() = data;
 	m()->spheres = creat_array();
-	(array(m()->spheres))->add((void *)(&(t_sphere){2, get_rgb(255, 0, 0), (t_coord){0, -1, 10}, 2}))->del = NULL;
-	(array(m()->spheres))->add((void *)(&(t_sphere){2, get_rgb(0, 255, 0), (t_coord){1, 0, 25}, 2}))->del = NULL;
-	(array(m()->spheres))->add((void *)(&(t_sphere){2, get_rgb(0, 0, 255), (t_coord){-1, 0, 4}, 2}))->del = NULL;
-	m()->ambient = (t_default_light){1, 0.2, get_rgb(255, 255, 255)};
+	// (array(m()->spheres))->add((void *)(&(t_sphere){2, get_rgb(0, 255, 0), (t_coord){-3, -1, 10}, 4}))->del = NULL;
+	(array(m()->spheres))->add((void *)(&(t_sphere){2, get_rgb(255, 0, 0), (t_coord){0, 0, 25}, 25}))->del = NULL;
+	// (array(m()->spheres))->add((void *)(&(t_sphere){2, get_rgb(0, 0, 255), (t_coord){-1, 0, 4}, 2}))->del = NULL;
+	// (array(m()->spheres))->add((void *)(&(t_sphere){2, get_rgb(0, 255, 0), (t_coord){0, -5001, 10000}, 10000}))->del = NULL;
+	m()->ambient = (t_ambient_light){1, .6, get_rgb(255, 255, 255)};
 	m()->lights = creat_array();
-	array(m()->lights)->add((void *)(&(t_light){1, .6, get_rgb(255, 255, 255), (t_coord){2, 1, 0}}));
+	array(m()->lights)->add((void *)(&(t_light){1, 0.3, get_rgb(255, 255, 255), (t_coord){-42, 1, 0}}));
+	// array(m()->lights)->add((void *)(&(t_light){1, 0.3, get_rgb(255, 255, 255), (t_coord){0, 0, 0}}));
 	mlx_mouse_hook(mlx()->mlx_win, handle_mouse, &data);
 	mlx_loop_hook(mlx()->mlx, render, &data);
 	mlx_key_hook(mlx()->mlx_win, handle_keys, &data);

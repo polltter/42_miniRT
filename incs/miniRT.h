@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:04:06 by touteiro          #+#    #+#             */
-/*   Updated: 2023/04/19 12:09:38 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/04/19 15:27:04 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ int			get_rgb(int r, int g, int b);
 
 //Struct utils
 t_coord		set_coord_values(double x, double y, double z);
+t_coord		coord_constant_op(int op, t_coord coord, double constant);
 t_coord		do_op_coords(int op, t_coord a, t_coord b);
+double		vector_length(t_coord vector);
 double	    ft_atod(char *str, double max);
 int	        ft_atoi(char *nptr, int max);
 void        freepp(void **to_free);
