@@ -16,11 +16,12 @@
 # include "list_utils.h"
 # include "ft_strings.h"
 # include "structs.h"
-# include "mlx.h"
+# include "../mlx//mlx.h"
 # include <X11/keysym.h>
 # include <X11/X.h>
 # include <X11/Xlib.h>
 # include "stdio.h"
+# include "stdlib.h"
 # include <math.h>
 # include <limits.h>
 
@@ -55,5 +56,8 @@ int			handle_mouse(int button, int x, int y, t_mlx_data *data);
 
 //error_management/error.c
 int    error(char *err);
+
+//bodys/build
+void    *build(char *input);
 
 #endif

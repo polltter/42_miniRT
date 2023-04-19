@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "../incs/miniRT.h"
 
 double	compute_lighting();
 
@@ -97,11 +97,11 @@ int	render(t_mlx_data *data)
 	// camera.coord = set_coord_values(0, 0, 0);
 	camera.vector = set_coord_values(0, 0, 0);
 	camera.id = 1;
-	start_x = -IMG_W / 2;
-	start_y = -IMG_H / 2;
-	while (start_x < IMG_W / 2)
+	start_x = -IMG_W / 2.0;
+	start_y = -IMG_H / 2.0;
+	while (start_x < IMG_W / 2.0)
 	{
-		while (start_y < IMG_H / 2)
+		while (start_y < IMG_H / 2.0)
 		{
 			D = canvas_to_viewport(start_x, start_y);
 			color = trace_ray(camera.coord, D, 1, INT_MAX);
@@ -110,7 +110,7 @@ int	render(t_mlx_data *data)
 				my_pixel_put(&mlx()->img, convert_point(start_x, 0), convert_point(start_y, 1), color);
 			start_y += 1.0;
 		}
-		start_y = -IMG_H / 2;
+		start_y = -IMG_H / 2.0;
 		start_x += 1.0;
 	}
 	mlx_put_image_to_window(mlx()->mlx, mlx()->mlx_win, mlx()->img.img, 0, 0);
@@ -124,12 +124,14 @@ int	main(void)
 	data_init(&data);
 	*mlx() = data;
 	m()->spheres = creat_array();
-	(array(m()->spheres))->add((void *)(&(t_sphere){2, get_rgb(255, 0, 0), (t_coord){0, -1, 10}, 2}))->del = NULL;
-	(array(m()->spheres))->add((void *)(&(t_sphere){2, get_rgb(0, 255, 0), (t_coord){1, 0, 25}, 2}))->del = NULL;
-	(array(m()->spheres))->add((void *)(&(t_sphere){2, get_rgb(0, 0, 255), (t_coord){-1, 0, 4}, 2}))->del = NULL;
-	m()->ambient = (t_default_light){1, 0.2, get_rgb(255, 255, 255)};
-	m()->lights = creat_array();
-	array(m()->lights)->add((void *)(&(t_light){1, .6, get_rgb(255, 255, 255), (t_coord){2, 1, 0}}));
+//	(array(m()->spheres))->add((void *)(&(t_sphere){2, get_rgb(255, 0, 0), (t_coord){0, -1, 10}, 2}))->del = NULL;
+//	(array(m()->spheres))->add((void *)(&(t_sphere){2, get_rgb(0, 255, 0), (t_coord){1, 0, 25}, 2}))->del = NULL;
+//	(array(m()->spheres))->add((void *)(&(t_sphere){2, get_rgb(0, 0, 255), (t_coord){-1, 0, 4}, 2}))->del = NULL;
+//	m()->ambient = (t_default_light){1, 0.2, get_rgb(255, 255, 255)};
+//	m()->lights = creat_array();
+//	array(m()->lights)->add((void *)(&(t_light){1, .6, get_rgb(255, 255, 255), (t_coord){2, 1, 0}}));
+    void *s = build("sp 0,0,20 10 255,0,0");
+    array(m()->spheres)->add(s);
 	mlx_mouse_hook(mlx()->mlx_win, handle_mouse, &data);
 	mlx_loop_hook(mlx()->mlx, render, &data);
 	mlx_key_hook(mlx()->mlx_win, handle_keys, &data);

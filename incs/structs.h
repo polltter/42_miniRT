@@ -25,6 +25,7 @@ typedef struct s_plane			t_plane;
 typedef struct s_point			t_point;
 typedef struct s_data			t_data;
 typedef struct s_main			t_main;
+typedef struct s_body           t_body;
 
 enum e_types {
     AL,
