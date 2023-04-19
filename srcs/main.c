@@ -6,11 +6,13 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:56:14 by touteiro          #+#    #+#             */
-/*   Updated: 2023/04/19 12:14:58 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/04/19 14:28:58 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+
+double	compute_lighting()
 
 t_coord	canvas_to_viewport(double x, double y)
 {
@@ -91,7 +93,8 @@ int	render(t_mlx_data *data)
 	int			color;
 
 	(void)data;
-	camera.coord = set_coord_values(0, 0, 0);
+	camera.coord = (t_coord){0, 0, 0};
+	// camera.coord = set_coord_values(0, 0, 0);
 	camera.vector = set_coord_values(0, 0, 0);
 	camera.id = 1;
 	start_x = -IMG_W / 2;
@@ -121,10 +124,12 @@ int	main(void)
 	data_init(&data);
 	*mlx() = data;
 	m()->spheres = creat_array();
-	(array(m()->spheres))->add((void *)(&(t_sphere){1, get_rgb(255, 0, 0), (t_coord){0, -1, 10}, 2}))->del = NULL;
+	(array(m()->spheres))->add((void *)(&(t_sphere){2, get_rgb(255, 0, 0), (t_coord){0, -1, 10}, 2}))->del = NULL;
 	(array(m()->spheres))->add((void *)(&(t_sphere){2, get_rgb(0, 255, 0), (t_coord){1, 0, 25}, 2}))->del = NULL;
-	(array(m()->spheres))->add((void *)(&(t_sphere){3, get_rgb(0, 0, 255), (t_coord){-1, 0, 4}, 2}))->del = NULL;
-
+	(array(m()->spheres))->add((void *)(&(t_sphere){2, get_rgb(0, 0, 255), (t_coord){-1, 0, 4}, 2}))->del = NULL;
+	m()->ambient = (t_default_light){1, 0.2, get_rgb(255, 255, 255)};
+	m()->lights = creat_array();
+	array(m()->lights)->add((void *)(&(t_light){1, .6, get_rgb(255, 255, 255), (t_coord){2, 1, 0}})
 	mlx_mouse_hook(mlx()->mlx_win, handle_mouse, &data);
 	mlx_loop_hook(mlx()->mlx, render, &data);
 	mlx_key_hook(mlx()->mlx_win, handle_keys, &data);
