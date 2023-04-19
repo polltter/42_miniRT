@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:04:27 by touteiro          #+#    #+#             */
-/*   Updated: 2023/04/19 14:42:18 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/04/19 14:45:59 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,6 @@ typedef struct s_plane			t_plane;
 typedef struct s_point			t_point;
 typedef struct s_data			t_data;
 typedef struct s_main			t_main;
-
-struct s_main {
-	void			*spheres;
-	t_default_light	ambient;
-	void			*lights;
-};
 
 enum e_types {
     AL,
@@ -118,5 +112,10 @@ typedef struct s_point
 	double	y;
 }	t_point;
 
+struct s_main {
+	void			*spheres;
+	t_default_light	ambient;
+	void			*lights;
+};
 
 #endif
