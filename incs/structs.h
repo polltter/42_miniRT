@@ -30,6 +30,15 @@ struct s_main {
 	void	*spheres;
 };
 
+enum e_types {
+    AL,
+    L,
+    C,
+    SPH,
+    PL,
+    CY,
+};
+
 struct s_coord {
 	double	x;
 	double	y;
@@ -69,6 +78,7 @@ struct s_camera {
 	int     id;
 	t_coord coord;
 	t_coord vector;
+    int     fov;
 };
 
 struct s_default_body {

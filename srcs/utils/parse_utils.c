@@ -2,7 +2,7 @@
 // Created by miguel on 18-04-2023.
 //
 
-#include "../../INCS/miniRT.h"
+#include "miniRT.h"
 
 int	ft_atoi(char *nptr, int max)
 {

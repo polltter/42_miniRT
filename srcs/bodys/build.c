@@ -2,9 +2,9 @@
 // Created by miguel on 17-04-2023.
 //
 
-#include "../../INCS/miniRT.h"
+#include "miniRT.h"
 
-t_default_body  **__this(void)
+t_default_body  **___this(void)
 {
     static t_default_body	*a;
 
@@ -13,8 +13,8 @@ t_default_body  **__this(void)
 
 t_default_body	*body(void *obj)
 {
-    *__this() = obj;
-    return (*__this());
+    *___this() = obj;
+    return (*___this());
 }
 
 int get_color(char *color)
@@ -39,7 +39,7 @@ int get_color(char *color)
 		error("Invalid color");
 	}
     freepp((void **)colors);
-    return (r << 16 || g << 8 || b);
+    return (get_rgb(r, g, b));
 }
 
 t_coord get_coord(char *s_coords, float max)
@@ -66,17 +66,18 @@ int get_id(char *s_id)
     else if (!s().equal(s_id, "cy"))
         return (CY);
     error("Not a valid body");
+    return (0);
 }
 
 void    build_default_body(char **details)
 {
     int i;
     i = 1;
-    (*__this())->id = get_id(*details);
-    (*__this())->coord = get_coord(details[i], (float)INT_MAX);
+    (*___this())->id = get_id(*details);
+    (*___this())->coord = get_coord(details[i], (float)INT_MAX);
     while (details[i])
         i++;
-    (*__this())->color = get_color(details[--i]);
+    (*___this())->color = get_color(details[--i]);
 }
 
 void    build_sphere(char *input)
@@ -87,7 +88,7 @@ void    build_sphere(char *input)
     if (!*(details) || !*(details + 1) || !*(details + 2) || !*(details + 3))
         error("Wrong number of arguments");
     build_default_body(details);
-    ((t_sphere *)(*__this()))->diameter = ft_atod(*(details + 2), (float)INT_MAX);
+    ((t_sphere *)(*___this()))->diameter = ft_atod(*(details + 2), (float)INT_MAX);
 	freepp((void **)details);
 }
 
@@ -99,7 +100,7 @@ void    build_plane(char *input)
 	if (!*(details) || !*(details + 1) || !*(details + 2) || !*(details + 3))
 		error("Wrong number of arguments");
 	build_default_body(details);
-	((t_plane *)(*__this()))->vector = get_coord(*(details + 2), 1.0);
+	((t_plane *)(*___this()))->vector = get_coord(*(details + 2), 1.0);
 	freepp((void **)details);
 }
 
@@ -112,7 +113,7 @@ void    build_cylinder(char *input)
 		!*(details + 4) || !*(details + 5))
 		error("Wrong number of arguments");
 	build_plane(input);
-	((t_cylinder *)(*__this()))->diameter = ft_atod(details[3], (float)INT_MAX);
-	((t_cylinder *)(*__this()))->height = ft_atod(details[4], (float)INT_MAX);
+	((t_cylinder *)(*___this()))->diameter = ft_atod(details[3], (float)INT_MAX);
+	((t_cylinder *)(*___this()))->height = ft_atod(details[4], (float)INT_MAX);
 	freepp((void **)details);
 }

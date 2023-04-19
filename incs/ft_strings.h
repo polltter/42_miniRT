@@ -13,7 +13,7 @@
 #ifndef FT_STRINGS_H
 # define FT_STRINGS_H
 
-# include "../list/list_utils.h"
+# include "list_utils.h"
 # include <stddef.h>
 # include <stdio.h>
 # include <stdlib.h>

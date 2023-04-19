@@ -14,6 +14,7 @@
 # define MINIRT_H
 
 # include "list_utils.h"
+# include "ft_strings.h"
 # include "structs.h"
 # include "mlx.h"
 # include <X11/keysym.h>
@@ -44,9 +45,15 @@ int			get_rgb(int r, int g, int b);
 //Struct utils
 t_coord		set_coord_values(double x, double y, double z);
 t_coord		do_op_coords(int op, t_coord a, t_coord b);
+double	    ft_atod(char *str, double max);
+int	        ft_atoi(char *nptr, int max);
+void        freepp(void **to_free);
 
 //Handles
 int			handle_keys(int k);
 int			handle_mouse(int button, int x, int y, t_mlx_data *data);
+
+//error_management/error.c
+int    error(char *err);
 
 #endif
