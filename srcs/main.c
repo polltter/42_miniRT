@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "../incs/miniRT.h"
 
 double	dot_product(t_coord a, t_coord b)
 {
@@ -83,6 +83,18 @@ t_point sphere_collision(t_coord O, t_coord D, t_sphere sphere)
 	return (new);
 }
 
+int get_color_light(int color, double li)
+{
+    int r;
+    int g;
+    int b;
+
+    r = (color >> 16 & 255) * li;
+    g = (color >> 8 & 255) * li;
+    b = (color >> 0 & 255) * li;
+    return (get_rgb(r, g, b));
+}
+
 int	trace_ray(t_coord O, t_coord D, double t_min, double t_max)
 {
 	double		closest_t;
@@ -116,7 +128,8 @@ int	trace_ray(t_coord O, t_coord D, double t_min, double t_max)
 	normal = coord_constant_op(DIVIDE, normal, vector_length(normal));
 	// if (closest->color * compute_lighting(point, normal) > get_rgb(255, 255, 255))
 		// return (get_rgb(255, 255, 255));
-	return (closest->color * compute_lighting(point, normal));
+
+	return (get_color_light(closest->color, compute_lighting(point, normal)));
 }
 
 int	render(t_mlx_data *data)
@@ -161,14 +174,14 @@ int	main(void)
 	data_init(&data);
 	*mlx() = data;
 	m()->spheres = creat_array();
-	// (array(m()->spheres))->add((void *)(&(t_sphere){2, get_rgb(0, 255, 0), (t_coord){-3, -1, 10}, 4}))->del = NULL;
-	(array(m()->spheres))->add((void *)(&(t_sphere){2, get_rgb(255, 0, 0), (t_coord){0, 0, 25}, 25}))->del = NULL;
-	// (array(m()->spheres))->add((void *)(&(t_sphere){2, get_rgb(0, 0, 255), (t_coord){-1, 0, 4}, 2}))->del = NULL;
-	// (array(m()->spheres))->add((void *)(&(t_sphere){2, get_rgb(0, 255, 0), (t_coord){0, -5001, 10000}, 10000}))->del = NULL;
-	m()->ambient = (t_ambient_light){1, .6, get_rgb(255, 255, 255)};
+	 (array(m()->spheres))->add((void *)(&(t_sphere){2, get_rgb(0, 0, 225), (t_coord){-3, -1, 10}, 4}))->del = NULL;
+	(array(m()->spheres))->add((void *)(&(t_sphere){2, get_rgb(0, 255, 0), (t_coord){1.5, 2, 4}, 2}))->del = NULL;
+	 (array(m()->spheres))->add((void *)(&(t_sphere){2, get_rgb(255, 0, 0), (t_coord){-1, 0, 4}, 2}))->del = NULL;
+	 (array(m()->spheres))->add((void *)(&(t_sphere){2, get_rgb(0, 150, 150), (t_coord){0, -5001, 0}, 10000}))->del = NULL;
+	m()->ambient = (t_ambient_light){1, .3, get_rgb(255, 255, 255)};
 	m()->lights = creat_array();
-	array(m()->lights)->add((void *)(&(t_light){1, 0.3, get_rgb(255, 255, 255), (t_coord){-42, 1, 0}}));
-	// array(m()->lights)->add((void *)(&(t_light){1, 0.3, get_rgb(255, 255, 255), (t_coord){0, 0, 0}}));
+//	array(m()->lights)->add((void *)(&(t_light){1, 0.6, get_rgb(255, 255, 255), (t_coord){-42, 1, 0}}));
+	 array(m()->lights)->add((void *)(&(t_light){1, 0.6, get_rgb(255, 255, 255), (t_coord){4, 0, 0}}));
 	mlx_mouse_hook(mlx()->mlx_win, handle_mouse, &data);
 	mlx_loop_hook(mlx()->mlx, render, &data);
 	mlx_key_hook(mlx()->mlx_win, handle_keys, &data);
