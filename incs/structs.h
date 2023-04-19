@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:04:27 by touteiro          #+#    #+#             */
-/*   Updated: 2023/04/18 20:02:40 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/04/19 14:40:45 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ typedef struct s_data			t_data;
 typedef struct s_main			t_main;
 
 struct s_main {
-	void	*spheres;
+	void			*spheres;
+	t_default_light	ambient;
+	void			*lights;
 };
 
 enum e_types {
@@ -78,7 +80,7 @@ struct s_camera {
 	int     id;
 	t_coord coord;
 	t_coord vector;
-    int     fov;
+	int		fov;
 };
 
 struct s_default_body {
