@@ -6,7 +6,7 @@
 #    By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/17 18:45:23 by touteiro          #+#    #+#              #
-#    Updated: 2023/04/18 20:21:13 by touteiro         ###   ########.fr        #
+#    Updated: 2023/04/19 11:44:38 by touteiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CC		= cc
 CFLAGS	= -I incs -Imlx -Wall -Werror -Wextra -g3 -O3 -fsanitize=address 
 
 LIST_SRCS_FILES		= list_utils list_utils_2 list_utils_3 list_utils_4
-UTILS_FILES			= mlx_utils draw utils
+UTILS_FILES			= mlx_utils draw_utils utils
 HANDLES_FILES		= keys mouse
 GENERAL_SRC_FILES	= main
 

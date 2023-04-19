@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:04:06 by touteiro          #+#    #+#             */
-/*   Updated: 2023/04/18 20:11:35 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/04/19 12:09:38 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@
 
 # define IMG_W 1000
 # define IMG_H 1000
+# define ADD		100
+# define SUBTRACT	101
+# define MULTIPLY	102
+# define DIVIDE		103
 
 //MLX utils
 t_mlx_data	*mlx(void);
@@ -34,8 +38,12 @@ int			ft_close(t_mlx_data *data);
 void		my_pixel_put(t_data *img, int x, int y, int color);
 
 //Draw utils
-double			convert_point(double x, double is_Y);
+double		convert_point(double x, double is_Y);
 int			get_rgb(int r, int g, int b);
+
+//Struct utils
+t_coord		set_coord_values(double x, double y, double z);
+t_coord		do_op_coords(int op, t_coord a, t_coord b);
 
 //Handles
 int			handle_keys(int k);
