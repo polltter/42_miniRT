@@ -2,9 +2,9 @@
 // Created by miguel on 17-04-2023.
 //
 
-#include "miniRT.h"
+#include "../../incs/miniRT.h"
 
-t_default_body  **___this(void)
+t_default_body  **__this_body(void)
 {
     static t_default_body	*a;
 
@@ -13,8 +13,8 @@ t_default_body  **___this(void)
 
 t_default_body	*body(void *obj)
 {
-    *___this() = obj;
-    return (*___this());
+    *__this_body() = obj;
+    return (*__this_body());
 }
 
 int get_color(char *color)
@@ -73,11 +73,11 @@ void    build_default_body(char **details)
 {
     int i;
     i = 1;
-    (*___this())->id = get_id(*details);
-    (*___this())->coord = get_coord(details[i], (float)INT_MAX);
+    (*__this_body())->id = get_id(*details);
+    (*__this_body())->coord = get_coord(details[i], (float)(1000000000));
     while (details[i])
         i++;
-    (*___this())->color = get_color(details[--i]);
+    (*__this_body())->color = get_color(details[--i]);
 }
 
 void    build_sphere(char *input)
@@ -88,7 +88,7 @@ void    build_sphere(char *input)
     if (!*(details) || !*(details + 1) || !*(details + 2) || !*(details + 3))
         error("Wrong number of arguments");
     build_default_body(details);
-    ((t_sphere *)(*___this()))->diameter = ft_atod(*(details + 2), (float)INT_MAX);
+    ((t_sphere *)(*__this_body()))->diameter = ft_atod(*(details + 2), (float)(1000000000));
 	freepp((void **)details);
 }
 
@@ -100,7 +100,7 @@ void    build_plane(char *input)
 	if (!*(details) || !*(details + 1) || !*(details + 2) || !*(details + 3))
 		error("Wrong number of arguments");
 	build_default_body(details);
-	((t_plane *)(*___this()))->vector = get_coord(*(details + 2), 1.0);
+	((t_plane *)(*__this_body()))->vector = get_coord(*(details + 2), 1.0);
 	freepp((void **)details);
 }
 
@@ -113,7 +113,43 @@ void    build_cylinder(char *input)
 		!*(details + 4) || !*(details + 5))
 		error("Wrong number of arguments");
 	build_plane(input);
-	((t_cylinder *)(*___this()))->diameter = ft_atod(details[3], (float)INT_MAX);
-	((t_cylinder *)(*___this()))->height = ft_atod(details[4], (float)INT_MAX);
+	((t_cylinder *)(*__this_body()))->diameter = ft_atod(details[3], (float)INT_MAX);
+	((t_cylinder *)(*__this_body()))->height = ft_atod(details[4], (float)INT_MAX);
 	freepp((void **)details);
+}
+
+void    *build(char *input)
+{
+    char    **details;
+    int     id;
+    void    *b;
+
+    details = s().split(input, ' ');
+    id = get_id(*details);
+    freepp((void **)details);
+    b = NULL;
+    if (id == PL)
+    {
+        b = ft_calloc(sizeof(t_plane));
+        body(b);
+        build_plane(input);
+    }
+    else if (id == SPH)
+    {
+        b = ft_calloc(sizeof(t_sphere));
+        body(b);
+        build_sphere(input);
+    }
+    else if (id == CY)
+    {
+        b = ft_calloc(sizeof(t_cylinder));
+        body(b);
+        build_cylinder(input);
+    }
+    else
+    {
+
+        error("Wrong identifier.");
+    }
+    return (b);
 }

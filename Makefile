@@ -12,7 +12,7 @@
 
 NAME	= miniRT
 CC		= cc
-CFLAGS	= -I incs -Imlx -Wall -Werror -Wextra -g3 -O3 -fsanitize=address 
+CFLAGS	= -I incs -Imlx -Wall -Werror -Wextra -g3 -O3 #-fsanitize=address
 
 LIST_SRCS_FILES		= list_utils list_utils_2 list_utils_3 list_utils_4
 STRS_SRCS_FILES		= ft_split  strings  strings_utils1  strings_utils2

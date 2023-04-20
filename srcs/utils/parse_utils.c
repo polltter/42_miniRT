@@ -2,7 +2,7 @@
 // Created by miguel on 18-04-2023.
 //
 
-#include "miniRT.h"
+#include "../../incs/miniRT.h"
 
 int	ft_atoi(char *nptr, int max)
 {
@@ -27,7 +27,10 @@ int	ft_atoi(char *nptr, int max)
         nb += nptr[i] - '0';
         i++;
         if (nb > max)
-            error("argument to big");
+        {
+            printf("%d\n", max);
+            error("Argument to big.\n");
+        }
     }
     return (sign * nb);
 }
@@ -42,6 +45,7 @@ double	ft_atod(char *str, double max)
     sign = 1;
     d = 0;
     j = 0;
+    printf("inside atod %f -- %d\n", max, (int)max);
     i = ft_atoi(str, ceil(max));
     if (!s().contains(str, "."))
         return (i * 1.0);
@@ -55,7 +59,7 @@ double	ft_atod(char *str, double max)
         d /= 10.0;
     }
     return (((sign * d + i) * (sign * d + i) <= max) \
-        || error("argument to big"));
+        || error("Argument to big.\n"));
 }
 
 void    freepp(void **to_free)
@@ -66,4 +70,9 @@ void    freepp(void **to_free)
     while (to_free[++i])
         free(to_free[i]);
     free(to_free);
+}
+
+int    error(char *err)
+{
+    exit(write(2, err, s().len(err, 0)));
 }

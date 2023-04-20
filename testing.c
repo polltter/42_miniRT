@@ -27,7 +27,10 @@ int	ft_atoi(char *nptr, int max)
         nb += nptr[i] - '0';
         i++;
         if (nb > max)
-            error("argument to big");
+        {
+            printf("%d\n", max);
+            error("Argument to big\n");
+        }
     }
     return (sign * nb);
 }
