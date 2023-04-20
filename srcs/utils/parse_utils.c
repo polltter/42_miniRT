@@ -57,8 +57,8 @@ double	ft_atod(char *str, double max)
         d += str[j] - '0';
         d /= 10.0;
     }
-    return (((sign * d + i) * (sign * d + i) <= max) \
-        || error("Argument to big.\n"));
+    return ((sign * d + i) * (((sign * d + i) <= max) \
+        || error("Argument to big.\n")));
 }
 
 void    freepp(void **to_free)

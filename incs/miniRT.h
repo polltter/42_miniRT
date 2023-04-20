@@ -25,7 +25,7 @@
 # include <math.h>
 # include <limits.h>
 
-# define IMG_W 1500
+# define IMG_W 1000
 # define IMG_H 1000
 # define ADD		100
 # define SUBTRACT	101
