@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:56:14 by touteiro          #+#    #+#             */
-/*   Updated: 2023/04/20 18:30:37 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/04/20 19:12:10 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@ double	dot_product(t_coord a, t_coord b)
 void	print_coords(t_coord coord)
 {
 	printf("%f %f %f\n", coord.x, coord.y, coord.z);
+}
+
+t_coord	reflect_ray(t_coord light, t_coord normal)
+{
+	return (do_op_coords(SUBTRACT, coord_constant_op(MULTIPLY, coord_constant_op(MULTIPLY, normal, 2), dot_product(normal, light)), light));
 }
 
 double	compute_lighting(t_coord point, t_coord normal, t_coord vector, double specular)
@@ -64,7 +69,7 @@ double	compute_lighting(t_coord point, t_coord normal, t_coord vector, double sp
 		//Compute reflection
 		if (specular > 0)
 		{
-			reflected = do_op_coords(SUBTRACT, coord_constant_op(MULTIPLY, coord_constant_op(MULTIPLY, normal, 2), dot_product(normal, light)), light);
+			reflected = reflect_ray(light, normal);
 			r_dot_v = dot_product(reflected, vector);
 			if (r_dot_v > 0)
 				i += (*(t_light *)temp->cont).light_ratio * pow(r_dot_v / (vector_length(reflected) / vector_length(vector)), specular);
@@ -147,8 +152,11 @@ int	trace_ray(t_coord O, t_coord D, double t_min, double t_max, int recursion_de
 {
 	double		closest_t;
 	t_sphere	*closest;
+	double		reflective;
+	int			local_color;
+	int			reflected_color;
+	t_coord		mirror;
 
-	(void)recursion_depth;
 	closest_t = INT_MAX;
 	closest = closest_intersection(O, D, t_min, t_max, &closest_t);
 	if (!closest)
@@ -157,7 +165,15 @@ int	trace_ray(t_coord O, t_coord D, double t_min, double t_max, int recursion_de
 	t_coord	point = do_op_coords(ADD, O, coord_constant_op(MULTIPLY, D, closest_t));
 	t_coord normal = do_op_coords(SUBTRACT, point, closest->coord);
 	normal = coord_constant_op(DIVIDE, normal, vector_length(normal));
-	return (get_color_light(closest->color, compute_lighting(point, normal, coord_constant_op(MULTIPLY, D, -1), closest->specular)));
+	local_color = get_color_light(closest->color, compute_lighting(point, normal, coord_constant_op(MULTIPLY, D, -1), closest->specular));
+	
+	reflective = closest->reflective;
+	if (recursion_depth <= 0 || reflective <= 0)
+		return (local_color);
+	mirror = reflect_ray(coord_constant_op(MULTIPLY, D, -1), normal);
+	reflected_color = trace_ray(point, mirror, .001, INT_MAX, recursion_depth - 1);
+	return (get_color_light(local_color, (1 - reflective)) + get_color_light(reflected_color, reflective));
+	// return (local_color * (1 - reflective) + reflected_color * reflective);
 }
 
 int	render(t_mlx_data *data)
@@ -181,8 +197,6 @@ int	render(t_mlx_data *data)
 		{
 			D = canvas_to_viewport(start_x, start_y);
 			color = trace_ray(camera.coord, D, 1, INT_MAX, 3);
-			// if (color >= get_rgb(0, 255, 255))
-				// printf("oi\n");
 			if (convert_point(start_x, 0) >= 0 && convert_point(start_x, 0) < IMG_W && \
 				convert_point(start_y, 1) >= 0 && convert_point(start_y, 1) < IMG_H)
 				my_pixel_put(&mlx()->img, convert_point(start_x, 0), convert_point(start_y, 1), color);
@@ -203,10 +217,10 @@ int	main(void)
 	*mlx() = data;
 	m()->spheres = creat_array();
 	(array(m()->spheres))->add((void *)(&(t_sphere){SPH, get_rgb(255, 0, 0), (t_coord){0, -1, 3}, 2, 5, 0.2}))->del = NULL;
-	(array(m()->spheres))->add((void *)(&(t_sphere){SPH, get_rgb(0, 0, 255), (t_coord){2, 0, 4}, 2, 7, 0.3}))->del = NULL;
+	(array(m()->spheres))->add((void *)(&(t_sphere){SPH, get_rgb(0, 0, 255), (t_coord){2, 2, 4}, 2, 7, 0.3}))->del = NULL;
 	(array(m()->spheres))->add((void *)(&(t_sphere){SPH, get_rgb(0, 255, 0), (t_coord){-2, 0, 4}, 2, 2, 0.4}))->del = NULL;
-	(array(m()->spheres))->add((void *)(&(t_sphere){SPH, get_rgb(230, 180, 230), (t_coord){0, -5001, 0}, 10000, 0, 0.5}))->del = NULL;
-	m()->ambient = (t_ambient_light){AL, .3, get_rgb(255, 255, 255)};
+	(array(m()->spheres))->add((void *)(&(t_sphere){SPH, get_rgb(255, 255, 0), (t_coord){0, -5001, 0}, 10000, 20, 0}))->del = NULL;
+	m()->ambient = (t_ambient_light){AL, 0.3, get_rgb(255, 255, 255)};
 	m()->lights = creat_array();
 	// array(m()->lights)->add((void *)(&(t_light){1, 0.6, get_rgb(255, 255, 255), (t_coord){-42, 1, 0}}));
 	array(m()->lights)->add((void *)(&(t_light){L, 0.3, get_rgb(255, 255, 255), (t_coord){2, 1, 0}}));
