@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:56:14 by touteiro          #+#    #+#             */
-/*   Updated: 2023/04/20 18:30:37 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/04/19 14:44:50 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ t_coord	canvas_to_viewport(double x, double y)
 	new.z = 1;
 	return (new);
 }
-#include "../incs/miniRT.h"
 
 double	dot_product(t_coord a, t_coord b)
 {
@@ -130,7 +129,7 @@ t_sphere	*closest_intersection(t_coord O, t_coord D, double t_min, double t_max,
 	t_elems		*temp;
 	t_point		t;
 	t_sphere	*closest;
-	
+
 	temp = array(m()->spheres)->begin;
 	closest = NULL;
 	while (temp)
@@ -164,7 +163,7 @@ int	trace_ray(t_coord O, t_coord D, double t_min, double t_max, int recursion_de
 	closest = closest_intersection(O, D, t_min, t_max, &closest_t);
 	if (!closest)
 		return (get_rgb(255, 255, 255));
-	
+
 	t_coord	point = do_op_coords(ADD, O, coord_constant_op(MULTIPLY, D, closest_t));
 	t_coord normal = do_op_coords(SUBTRACT, point, closest->coord);
 	normal = coord_constant_op(DIVIDE, normal, vector_length(normal));
@@ -221,14 +220,14 @@ int	main(void)
 	m()->spheres = creat_array();
 	m()->ambient = (t_ambient_light){1, 0.2, get_rgb(255, 255, 255)};
 	m()->lights = creat_array();
-	// array(m()->lights)->add((void *)(&(t_light){1, 0.6, get_rgb(255, 255, 255), (t_coord){-42, 1, 0}}));
-	array(m()->lights)->add((void *)(&(t_light){L, 0.3, get_rgb(255, 255, 255), (t_coord){2, 1, 0}}));
-	// array(m()->lights)->add((void *)(&(t_light){L, 0.3, get_rgb(255, 255, 255), (t_coord){-4, 1, 10}}));
+	array(m()->lights)->add((void *)(&(t_light){1, .6, get_rgb(255, 255, 255), (t_coord){2, 1, 0}}));
+    array(m()->spheres)->add(build("sp 0,-1,3 2 255,0,0"));
+    array(m()->spheres)->add(build("sp 2,0,4 1 0,0,255"));
+    array(m()->spheres)->add(build("sp -2,0,4 1 0,255,0"));
 	mlx_mouse_hook(mlx()->mlx_win, handle_mouse, &data);
 	mlx_loop_hook(mlx()->mlx, render, &data);
 	mlx_key_hook(mlx()->mlx_win, handle_keys, &data);
 	mlx_hook(mlx()->mlx_win, DestroyNotify, 0, ft_close, &data);
 	mlx_loop(data.mlx);
-
 	return (0);
 }
