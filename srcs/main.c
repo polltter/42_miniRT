@@ -45,6 +45,11 @@ void	print_coords(t_coord coord)
 	printf("%f %f %f\n", coord.x, coord.y, coord.z);
 }
 
+t_coord	reflect_ray(t_coord light, t_coord normal)
+{
+	return (do_op_coords(SUBTRACT, coord_constant_op(MULTIPLY, coord_constant_op(MULTIPLY, normal, 2), dot_product(normal, light)), light));
+}
+
 double	compute_lighting(t_coord point, t_coord normal, t_coord vector, double specular)
 {
 	double 	i;
@@ -72,13 +77,12 @@ double	compute_lighting(t_coord point, t_coord normal, t_coord vector, double sp
 		}
 		//Compute diffusion
 		n_dot_l = dot_product(normal, light);
-		// printf("%f\n", (*(t_light *)temp->cont).light_ratio);
 		if (n_dot_l > 0)
 			i += (*(t_light *)temp->cont).light_ratio * n_dot_l / (vector_length(normal) * vector_length(light));
 		//Compute reflection
 		if (specular > 0)
 		{
-			reflected = do_op_coords(SUBTRACT, coord_constant_op(MULTIPLY, coord_constant_op(MULTIPLY, normal, 2), dot_product(normal, light)), light);
+			reflected = reflect_ray(light, normal);
 			r_dot_v = dot_product(reflected, vector);
 			if (r_dot_v > 0)
 				i += (*(t_light *)temp->cont).light_ratio * pow(r_dot_v / (vector_length(reflected) / vector_length(vector)), specular);
@@ -126,7 +130,7 @@ t_sphere	*closest_intersection(t_coord O, t_coord D, double t_min, double t_max,
 	t_elems		*temp;
 	t_point		t;
 	t_sphere	*closest;
-
+	
 	temp = array(m()->spheres)->begin;
 	closest = NULL;
 	while (temp)
@@ -151,17 +155,28 @@ int	trace_ray(t_coord O, t_coord D, double t_min, double t_max, int recursion_de
 {
 	double		closest_t;
 	t_sphere	*closest;
+	double		reflective;
+	int			local_color;
+	int			reflected_color;
+	t_coord		mirror;
 
-	(void)recursion_depth;
 	closest_t = INT_MAX;
 	closest = closest_intersection(O, D, t_min, t_max, &closest_t);
 	if (!closest)
 		return (get_rgb(255, 255, 255));
-
+	
 	t_coord	point = do_op_coords(ADD, O, coord_constant_op(MULTIPLY, D, closest_t));
 	t_coord normal = do_op_coords(SUBTRACT, point, closest->coord);
 	normal = coord_constant_op(DIVIDE, normal, vector_length(normal));
-	return (get_color_light(closest->color, compute_lighting(point, normal, coord_constant_op(MULTIPLY, D, -1), closest->specular)));
+	local_color = get_color_light(closest->color, compute_lighting(point, normal, coord_constant_op(MULTIPLY, D, -1), closest->specular));
+
+	reflective = closest->reflective;
+	if (recursion_depth <= 0 || reflective <= 0)
+		return (local_color);
+	mirror = reflect_ray(coord_constant_op(MULTIPLY, D, -1), normal);
+	reflected_color = trace_ray(point, mirror, .001, INT_MAX, recursion_depth - 1);
+	return (get_color_light(local_color, (1 - reflective)) + get_color_light(reflected_color, reflective));
+	// return (local_color * (1 - reflective) + reflected_color * reflective);
 }
 
 int	render(t_mlx_data *data)
@@ -206,11 +221,9 @@ int	main(void)
 	m()->spheres = creat_array();
 	m()->ambient = (t_ambient_light){1, 0.2, get_rgb(255, 255, 255)};
 	m()->lights = creat_array();
-	array(m()->lights)->add((void *)(&(t_light){1, .6, get_rgb(255, 255, 255), (t_coord){2, 1, 0}}));
-    array(m()->spheres)->add(build("sp 0,-1,3    2  0  0.2       255,0,0"));
-    array(m()->spheres)->add(build("sp 2,0,4     1  0  0.2       0,0,255"));
-    array(m()->spheres)->add(build("sp -2,0,4    1  0   0       0,255,0"));
-    array(m()->spheres)->add(build("sp 0,-5001,0 10000 15   0  255,255,0"));
+	// array(m()->lights)->add((void *)(&(t_light){1, 0.6, get_rgb(255, 255, 255), (t_coord){-42, 1, 0}}));
+	array(m()->lights)->add((void *)(&(t_light){L, 0.3, get_rgb(255, 255, 255), (t_coord){2, 1, 0}}));
+	// array(m()->lights)->add((void *)(&(t_light){L, 0.3, get_rgb(255, 255, 255), (t_coord){-4, 1, 10}}));
 	mlx_mouse_hook(mlx()->mlx_win, handle_mouse, &data);
 	mlx_loop_hook(mlx()->mlx, render, &data);
 	mlx_key_hook(mlx()->mlx_win, handle_keys, &data);
