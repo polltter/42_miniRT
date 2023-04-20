@@ -6,11 +6,15 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:56:14 by touteiro          #+#    #+#             */
-/*   Updated: 2023/04/19 14:44:50 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/04/20 18:30:37 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/miniRT.h"
+
+# define SHINY 11.75 //for specular reflection
+
+t_sphere	*closest_intersection(t_coord O, t_coord D, double t_min, double t_max, double *closest_t);
 
 double	compute_lighting();
 
@@ -41,12 +45,16 @@ void	print_coords(t_coord coord)
 	printf("%f %f %f\n", coord.x, coord.y, coord.z);
 }
 
-double	compute_lighting(t_coord point, t_coord normal)
+double	compute_lighting(t_coord point, t_coord normal, t_coord vector, double specular)
 {
 	double 	i;
 	double	n_dot_l;
+	double	r_dot_v;
+	double		shadow_t;
+	t_sphere	*shadow_sphere;
 	t_elems *temp;
 	t_coord	light;
+	t_coord	reflected;
 
 	i = 0.0;
 	temp = array(m()->lights)->begin;
@@ -54,16 +62,31 @@ double	compute_lighting(t_coord point, t_coord normal)
 	while (temp)
 	{
 		light = do_op_coords(SUBTRACT, (*(t_light *)temp->cont).coord, point);
+		//Shadow check
+		shadow_t = INT_MAX;
+		shadow_sphere = closest_intersection(point, light, .001, INT_MAX, &shadow_t);
+		if (shadow_sphere)
+		{
+			temp = temp->next;
+			continue ;
+		}
+		//Compute diffusion
 		n_dot_l = dot_product(normal, light);
 		// printf("%f\n", (*(t_light *)temp->cont).light_ratio);
 		if (n_dot_l > 0)
 			i += (*(t_light *)temp->cont).light_ratio * n_dot_l / (vector_length(normal) * vector_length(light));
+		//Compute reflection
+		if (specular > 0)
+		{
+			reflected = do_op_coords(SUBTRACT, coord_constant_op(MULTIPLY, coord_constant_op(MULTIPLY, normal, 2), dot_product(normal, light)), light);
+			r_dot_v = dot_product(reflected, vector);
+			if (r_dot_v > 0)
+				i += (*(t_light *)temp->cont).light_ratio * pow(r_dot_v / (vector_length(reflected) / vector_length(vector)), specular);
+		}
 		temp = temp->next;
 	}
-	// printf("%d\n", get_rgb(0, 0, 255));
-	// printf("%f\n", i);
-	// printf("%f\n", get_rgb(0, 0, 255) * i);
-	// exit(0);
+	if (i > 1) // Incorrect, needs to be improved
+		i = 1;
 	return(i);
 }
 
@@ -98,41 +121,47 @@ int get_color_light(int color, double li)
     return (get_rgb(r, g, b));
 }
 
-int	trace_ray(t_coord O, t_coord D, double t_min, double t_max)
+t_sphere	*closest_intersection(t_coord O, t_coord D, double t_min, double t_max, double *closest_t)
 {
-	double		closest_t;
-	t_sphere	*closest;
-	t_point		t;
 	t_elems		*temp;
+	t_point		t;
+	t_sphere	*closest;
 
-	closest = NULL;
-	closest_t = INT_MAX;
 	temp = array(m()->spheres)->begin;
+	closest = NULL;
 	while (temp)
 	{
 		t = sphere_collision(O, D, *(t_sphere *)(temp->cont));
-		if (t.x > t_min && t.x < t_max && t.x < closest_t)
+		if (t.x > t_min && t.x < t_max && t.x < *closest_t)
 		{
-			closest_t = t.x;
+			*closest_t = t.x;
 			closest = (t_sphere *)(temp->cont);
 		}
-		if (t.y > t_min && t.y < t_max && t.y < closest_t)
+		if (t.y > t_min && t.y < t_max && t.y < *closest_t)
 		{
-			closest_t = t.y;
+			*closest_t = t.y;
 			closest = (t_sphere *)(temp->cont);
 		}
 		temp = temp->next;
 	}
+	return (closest);
+}
+
+int	trace_ray(t_coord O, t_coord D, double t_min, double t_max, int recursion_depth)
+{
+	double		closest_t;
+	t_sphere	*closest;
+
+	(void)recursion_depth;
+	closest_t = INT_MAX;
+	closest = closest_intersection(O, D, t_min, t_max, &closest_t);
 	if (!closest)
 		return (get_rgb(255, 255, 255));
 
 	t_coord	point = do_op_coords(ADD, O, coord_constant_op(MULTIPLY, D, closest_t));
 	t_coord normal = do_op_coords(SUBTRACT, point, closest->coord);
 	normal = coord_constant_op(DIVIDE, normal, vector_length(normal));
-	// if (closest->color * compute_lighting(point, normal) > get_rgb(255, 255, 255))
-		// return (get_rgb(255, 255, 255));
-
-	return (get_color_light(closest->color, compute_lighting(point, normal)));
+	return (get_color_light(closest->color, compute_lighting(point, normal, coord_constant_op(MULTIPLY, D, -1), closest->specular)));
 }
 
 int	render(t_mlx_data *data)
@@ -146,7 +175,7 @@ int	render(t_mlx_data *data)
 	(void)data;
 	camera.coord = (t_coord){0, 0, 0};
 	// camera.coord = set_coord_values(0, 0, 0);
-	camera.vector = set_coord_values(0, 0, 0);
+	camera.vector = set_coord_values(-1, 0, 0);
 	camera.id = 1;
 	start_x = -IMG_W / 2;
 	start_y = -IMG_H / 2;
@@ -187,5 +216,6 @@ int	main(void)
 	mlx_key_hook(mlx()->mlx_win, handle_keys, &data);
 	mlx_hook(mlx()->mlx_win, DestroyNotify, 0, ft_close, &data);
 	mlx_loop(data.mlx);
+
 	return (0);
 }
