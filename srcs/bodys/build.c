@@ -78,6 +78,8 @@ void    build_default_body(char **details)
     while (details[i])
         i++;
     (*__this_body())->color = get_color(details[--i]);
+    (*__this_body())->reflective = ft_atod(details[--i], 1);
+    (*__this_body())->specular = ft_atod(details[--i], 1000);
 }
 
 void    build_sphere(char *input)
@@ -147,9 +149,6 @@ void    *build(char *input)
         build_cylinder(input);
     }
     else
-    {
-
         error("Wrong identifier.");
-    }
     return (b);
 }

@@ -13,7 +13,7 @@
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-typedef struct s_default_light	t_default_light;
+typedef struct s_ambient_light	t_ambient_light;
 typedef struct s_default_body	t_default_body;
 typedef struct s_mlx_data		t_mlx_data;
 typedef struct s_cylinder		t_cylinder;
@@ -58,7 +58,7 @@ struct s_mlx_data {
 	t_data		img;
 };
 
-struct s_default_light {
+struct s_ambient_light {
 	int		id;
 	double	light_ratio;
 	int		color;
@@ -79,29 +79,37 @@ struct s_camera {
 };
 
 struct s_default_body {
-	int     id;
-	int     color;
-	t_coord coord;
+    int     id;
+    int     color;
+    t_coord coord;
+    double	specular;
+    double	reflective;
 };
 
 struct s_sphere {
-	int     id;
-	int     color;
-	t_coord coord;
-	double  diameter;
+    int     id;
+    int     color;
+    t_coord coord;
+    double	specular;
+    double	reflective;
+    double  diameter;
 };
 
 struct s_plane {
-	int     id;
-	int     color;
-	t_coord coord;
+    int     id;
+    int     color;
+    t_coord coord;
+    double	specular;
+    double	reflective;
 	t_coord vector;
 };
 
 struct s_cylinder {
-	int     id;
-	int     color;
-	t_coord coord;
+    int     id;
+    int     color;
+    t_coord coord;
+    double	specular;
+    double	reflective;
 	t_coord vector;
 	double  diameter;
 	double  height;
@@ -115,7 +123,7 @@ typedef struct s_point
 
 struct s_main {
 	void			*spheres;
-	t_default_light	ambient;
+	t_ambient_light	ambient;
 	void			*lights;
 };
 
