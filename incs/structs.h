@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:04:27 by touteiro          #+#    #+#             */
-/*   Updated: 2023/04/19 15:00:00 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/04/20 16:06:35 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ struct s_sphere {
 	int     color;
 	t_coord coord;
 	double  diameter;
+	double	specular;
 };
 
 struct s_plane {
