@@ -45,7 +45,6 @@ double	ft_atod(char *str, double max)
     sign = 1;
     d = 0;
     j = 0;
-    printf("inside atod %f -- %d\n", max, (int)max);
     i = ft_atoi(str, ceil(max));
     if (!s().contains(str, "."))
         return (i * 1.0);

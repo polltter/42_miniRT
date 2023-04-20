@@ -67,16 +67,6 @@ double	compute_lighting(t_coord point, t_coord normal)
 	return(i);
 }
 
-t_coord	canvas_to_viewport(double x, double y)
-{
-	t_coord	new;
-
-	new.x = x / IMG_W;
-	new.y = y / IMG_H;
-	new.z = 1;
-	return (new);
-}
-
 t_point sphere_collision(t_coord O, t_coord D, t_sphere sphere)
 {
 	double	r;
@@ -185,15 +175,13 @@ int	main(void)
 	data_init(&data);
 	*mlx() = data;
 	m()->spheres = creat_array();
-//	(array(m()->spheres))->add((void *)(&(t_sphere){2, get_rgb(255, 0, 0), (t_coord){0, -1, 10}, 2}))->del = NULL;
-//	(array(m()->spheres))->add((void *)(&(t_sphere){2, get_rgb(0, 255, 0), (t_coord){1, 0, 25}, 2}))->del = NULL;
-//	(array(m()->spheres))->add((void *)(&(t_sphere){2, get_rgb(0, 0, 255), (t_coord){-1, 0, 4}, 2}))->del = NULL;
-//	m()->ambient = (t_default_light){1, 0.2, get_rgb(255, 255, 255)};
-//	m()->lights = creat_array();
-//	array(m()->lights)->add((void *)(&(t_light){1, .6, get_rgb(255, 255, 255), (t_coord){2, 1, 0}}));
+	m()->ambient = (t_ambient_light){1, 0.2, get_rgb(255, 255, 255)};
+	m()->lights = creat_array();
+	array(m()->lights)->add((void *)(&(t_light){1, .6, get_rgb(255, 255, 255), (t_coord){2, 1, 0}}));
     array(m()->spheres)->add(build("sp 0,-1,3 2 255,0,0"));
     array(m()->spheres)->add(build("sp 2,0,4 1 0,0,255"));
     array(m()->spheres)->add(build("sp -2,0,4 1 0,255,0"));
+    array(m()->spheres)->add(build("sp 0,-5001,0 10000 255,255,0"));
 	mlx_mouse_hook(mlx()->mlx_win, handle_mouse, &data);
 	mlx_loop_hook(mlx()->mlx, render, &data);
 	mlx_key_hook(mlx()->mlx_win, handle_keys, &data);
