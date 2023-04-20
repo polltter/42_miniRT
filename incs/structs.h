@@ -79,31 +79,37 @@ struct s_camera {
 };
 
 struct s_default_body {
-	int     id;
-	int     color;
-	t_coord coord;
+    int     id;
+    int     color;
+    t_coord coord;
+    double	specular;
+    double	reflective;
 };
 
 struct s_sphere {
-	int     id;
-	int     color;
-	t_coord coord;
-	double  diameter;
-	double	specular;
-	double	reflective;
+    int     id;
+    int     color;
+    t_coord coord;
+    double	specular;
+    double	reflective;
+    double  diameter;
 };
 
 struct s_plane {
-	int     id;
-	int     color;
-	t_coord coord;
+    int     id;
+    int     color;
+    t_coord coord;
+    double	specular;
+    double	reflective;
 	t_coord vector;
 };
 
 struct s_cylinder {
-	int     id;
-	int     color;
-	t_coord coord;
+    int     id;
+    int     color;
+    t_coord coord;
+    double	specular;
+    double	reflective;
 	t_coord vector;
 	double  diameter;
 	double  height;

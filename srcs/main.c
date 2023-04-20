@@ -184,7 +184,7 @@ int	render(t_mlx_data *data)
 		while (start_y < IMG_H / 2)
 		{
 			D = canvas_to_viewport(start_x, start_y);
-			color = trace_ray(camera.coord, D, 1, INT_MAX);
+			color = trace_ray(camera.coord, D, 1, INT_MAX, 3);
 			if (convert_point(start_x, 0) >= 0 && convert_point(start_x, 0) < IMG_W && \
 				convert_point(start_y, 1) >= 0 && convert_point(start_y, 1) < IMG_H)
 				my_pixel_put(&mlx()->img, convert_point(start_x, 0), convert_point(start_y, 1), color);
@@ -207,10 +207,10 @@ int	main(void)
 	m()->ambient = (t_ambient_light){1, 0.2, get_rgb(255, 255, 255)};
 	m()->lights = creat_array();
 	array(m()->lights)->add((void *)(&(t_light){1, .6, get_rgb(255, 255, 255), (t_coord){2, 1, 0}}));
-    array(m()->spheres)->add(build("sp 0,-1,3 2 255,0,0"));
-    array(m()->spheres)->add(build("sp 2,0,4 1 0,0,255"));
-    array(m()->spheres)->add(build("sp -2,0,4 1 0,255,0"));
-    array(m()->spheres)->add(build("sp 0,-5001,0 10000 255,255,0"));
+    array(m()->spheres)->add(build("sp 0,-1,3    2  0  0.2       255,0,0"));
+    array(m()->spheres)->add(build("sp 2,0,4     1  0  0.2       0,0,255"));
+    array(m()->spheres)->add(build("sp -2,0,4    1  0   0       0,255,0"));
+    array(m()->spheres)->add(build("sp 0,-5001,0 10000 15   0  255,255,0"));
 	mlx_mouse_hook(mlx()->mlx_win, handle_mouse, &data);
 	mlx_loop_hook(mlx()->mlx, render, &data);
 	mlx_key_hook(mlx()->mlx_win, handle_keys, &data);
