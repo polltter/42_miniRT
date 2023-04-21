@@ -83,4 +83,9 @@ int             get_id(char *input);
 //bodys/build_lights
 t_ambient_light build_AL(char *input, int id);
 void    *build_light(char *input, int id);
+
+//rotations
+t_point find_theta(void);
+void  rotate_camera(t_point theta, t_coord *D);
+
 #endif

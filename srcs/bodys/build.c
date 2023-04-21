@@ -31,6 +31,8 @@ t_camera    build_camera(char *input, int id)
     freepp((void **)details);
     if (camera.fov < 0)
         error("Invalid value for FOV!\n");
+    m()->viewport.height = IMG_H / 1000.0;
+    m()->viewport.width = 2 * tan(camera.fov / 2.0 * M_PI / 180.0);
     return (camera);
 }
 

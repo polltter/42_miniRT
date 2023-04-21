@@ -15,15 +15,16 @@
 # define SHINY 11.75 //for specular reflection
 
 t_sphere	*closest_intersection(t_coord O, t_coord D, double t_min, double t_max, double *closest_t);
+void    **who_movin(void);
 
 double	compute_lighting();
 
 t_coord	canvas_to_viewport(double x, double y)
 {
-	t_coord	new;
+	static t_coord	new;
 
-	new.x = x / IMG_W;
-	new.y = y / IMG_H;
+	new.x = x / IMG_W * m()->viewport.width;
+	new.y = y / IMG_H * m()->viewport.height;
 	new.z = 1;
 	return (new);
 }
@@ -207,17 +208,22 @@ int store_colors(int color, int flag)
 
 int	render(t_mlx_data *data)
 {
-	t_camera	camera;
+//	t_camera	camera;
 	double		start_x;
 	double		start_y;
 	t_coord		D;
+    t_point     theta;
 	int			color;
+//    double      dot;
 
 	(void)data;
-	camera.coord = (t_coord){0, 0, 0};
+//    dot = dot_product((t_coord){0,0,1}, m()->camera.vector);
+//    theta = acos(dot / (vector_length((t_coord){0,0,1}) * vector_length(m()->camera.vector)));
+
+//	camera.coord = (t_coord){0, 0, 0};
 	// camera.coord = set_coord_values(0, 0, 0);
-	camera.vector = set_coord_values(-1, 0, 0);
-	camera.id = 1;
+    theta = find_theta();
+    m()->camera.id = C;
 	start_x = -IMG_W / 2;
 	start_y = -IMG_H / 2;
 	while (start_x < IMG_W / 2)
@@ -225,7 +231,8 @@ int	render(t_mlx_data *data)
 		while (start_y < IMG_H / 2)
 		{
             D = canvas_to_viewport(start_x, start_y);
-            color = trace_ray(camera.coord, D, 1, INT_MAX, 3);
+            rotate_camera(theta, &D);
+            color = trace_ray(m()->camera.coord, D, 1, INT_MAX, 3);
 			if (convert_point(start_x, 0) >= 0 && convert_point(start_x, 0) < IMG_W && \
 				convert_point(start_y, 1) >= 0 && convert_point(start_y, 1) < IMG_H)
 				my_pixel_put(&mlx()->img, convert_point(start_x, 0), convert_point(start_y, 1), color);
@@ -235,7 +242,7 @@ int	render(t_mlx_data *data)
 		start_x += 1.0;
 	}
 	mlx_put_image_to_window(mlx()->mlx, mlx()->mlx_win, mlx()->img.img, 0, 0);
-	return (0);
+    return (0);
 }
 
 int	main(int ac, char **av)
