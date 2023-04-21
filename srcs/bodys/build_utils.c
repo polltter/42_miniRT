@@ -10,7 +10,6 @@ t_default_body	*body(void *obj)
     return (*__this_body());
 }
 
-
 char    *space_str(void)
 {
     return (" \t\n\v\f\r");
@@ -27,7 +26,7 @@ int get_color(char *color)
     if (!*colors || !*(colors + 1) || !*(colors + 2))
     {
         freepp((void **)colors);
-        error("Wrong number of arguments");
+        error("Wrong number of arguments for colors");
     }
     r = ft_atoi(colors[0], 255);
     g = ft_atoi(colors[1], 255);
@@ -56,14 +55,32 @@ t_coord get_coord(char *s_coords, float max)
     return (coord);
 }
 
-int get_id(char *s_id)
+int clean_id(char **s_id)
 {
-    if (!s().equal(s_id, "sp"))
+    freepp((void **)s_id);
+    return (1);
+}
+
+int get_id(char *input)
+{
+    char    **s_id;
+
+    s_id = s().split(input, space_str());
+    if (!*s_id)
+        error("Wrong number of inputs");
+    if (!s().equal(*s_id, "sp") && clean_id(s_id))
         return (SPH);
-    else if (!s().equal(s_id, "pl"))
+    else if (!s().equal(*s_id, "pl") && clean_id(s_id))
         return (PL);
-    else if (!s().equal(s_id, "cy"))
+    else if (!s().equal(*s_id, "cy") && clean_id(s_id))
         return (CY);
-    error("Not a valid body");
+    else if (!s().equal(*s_id, "A") && clean_id(s_id))
+        return (AL);
+    else if (!s().equal(*s_id, "L") && clean_id(s_id))
+        return (L);
+    else if (!s().equal(*s_id, "C") && clean_id(s_id))
+        return (C);
+    clean_id(s_id);
+    error("Not a valid identifier!");
     return (0);
 }

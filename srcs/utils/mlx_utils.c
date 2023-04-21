@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "../../incs/miniRT.h"
 
 t_mlx_data	*mlx(void)
 {
@@ -46,7 +46,7 @@ int	ft_close(t_mlx_data *data)
 	mlx_destroy_image(data->mlx, data->img.img);
 	mlx_destroy_window(data->mlx, data->mlx_win);
 	mlx_destroy_display(data->mlx);
-	array(m()->spheres)->destroy();
+	array(m()->bodys)->destroy();
 	free(data->mlx);
 	exit(0);
 }
