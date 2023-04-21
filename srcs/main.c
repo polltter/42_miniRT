@@ -223,7 +223,7 @@ int	main(int ac, char **av)
 	m()->ambient = (t_ambient_light){1, 0.2, get_rgb(255, 255, 255)};
 	m()->lights = creat_array();
 	array(m()->lights)->add((void *)(&(t_light){1, .6, get_rgb(255, 255, 255), (t_coord){2, 1, 0}}));
-    array(m()->spheres)->add(build("sp 0,-1,3 2  5 0.1  255,0,0"));
+    array(m()->spheres)->add(build("sp 0,-1,3 2     5 0.1  255,0,0"));
     array(m()->spheres)->add(build("sp 2,0,4  1  5 0.1  0,0,255"));
     array(m()->spheres)->add(build("sp -2,0,4 1  5 0.1  0,255,0"));
     array(m()->spheres)->add(build("sp 0,-5001,0 10000  5 0.1  0,255,0"));

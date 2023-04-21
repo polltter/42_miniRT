@@ -10,34 +10,34 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_strings.h"
+#include "../../../incs/ft_strings.h"
 
-char	**rec_split(char **splited, int words, char c, const char *s)
+char	**rec_split(char **splited, int words, char *c, const char *str)
 {
 	char	*word;
 	int		i;
 
 	i = 0;
-	while (s && *s && *s == c)
-		s++;
-	while (s && s[i] && s[i] != c)
+	while (str && *str && s().contains_char(c, *str))
+		str++;
+	while (str && str[i] && !s().contains_char(c, str[i]))
 		i++;
 	word = NULL;
 	if (i)
 	{
 		word = ft_calloc(i + 1);
-		while (*s && *s != c)
-			*word++ = *s++;
+		while (*str && !s().contains_char(c, *str))
+			*word++ = *str++;
 	}
 	if (word)
-		splited = rec_split(splited, words + 1, c, s);
-	else if (!*s)
+		splited = rec_split(splited, words + 1, c, str);
+	else if (!*str)
 		splited = ft_calloc(sizeof(char *) * (words + 1));
 	splited[words] = word - i;
 	return (splited);
 }
 
-char	**ft_split(const char *s, char c)
+char	**ft_split(const char *str, char *c)
 {
-	return (rec_split(0, 0, c, s));
+	return (rec_split(0, 0, c, str));
 }

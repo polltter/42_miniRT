@@ -23,7 +23,7 @@ typedef struct s_s
 	int		(*len)(const char *, char c);
 	char	*(*copy)(const char *);
 	char	*(*copy_n)(const char *, int size);
-	char	**(*split)(const char *, int);
+	char	**(*split)(const char *, char *);
 	int		(*equal)(const char *, const char *);
 	int		(*equal_n)(const char *, const char *, int);
 	int		(*contains)(const char *, const char *);
@@ -31,6 +31,7 @@ typedef struct s_s
 	char	*(*join)(char *, char *, char *);
 	int		(*alnum)(char *);
 	char	*(*append)(char *s, char c);
+	int		(*contains_char)(const char *s, char c);
 }			t_s;
 
 t_s	s(void);
