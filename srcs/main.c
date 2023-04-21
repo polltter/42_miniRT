@@ -178,6 +178,33 @@ int	trace_ray(t_coord O, t_coord D, double t_min, double t_max, int recursion_de
 	// return (local_color * (1 - reflective) + reflected_color * reflective);
 }
 
+int store_colors(int color, int flag)
+{
+    static int r;
+    static int g;
+    static int b;
+    static int counter;
+    int        c;
+
+    if (!flag)
+    {
+        r += color >> 16 & 255;
+        g += color >> 8 & 255;
+        b += color >> 0 & 255;
+        counter++;
+    }
+    else
+    {
+        c = get_rgb(r / counter, g / counter, b / counter);
+        r = 0;
+        g = 0;
+        b = 0;
+        counter = 0;
+        return (c);
+    }
+    return (0);
+}
+
 int	render(t_mlx_data *data)
 {
 	t_camera	camera;
@@ -197,11 +224,18 @@ int	render(t_mlx_data *data)
 	{
 		while (start_y < IMG_H / 2)
 		{
-			D = canvas_to_viewport(start_x, start_y);
-			color = trace_ray(camera.coord, D, 1, INT_MAX, 3);
+            for (int i = -3; i < 4; ++i)
+            {
+                for (int j = -3; j < 4; ++j)
+                {
+                    D = canvas_to_viewport(start_x + i, start_y + j);
+                    color = trace_ray(camera.coord, D, 1, INT_MAX, 3);
+                    store_colors(color, 0);
+                }
+            }
 			if (convert_point(start_x, 0) >= 0 && convert_point(start_x, 0) < IMG_W && \
 				convert_point(start_y, 1) >= 0 && convert_point(start_y, 1) < IMG_H)
-				my_pixel_put(&mlx()->img, convert_point(start_x, 0), convert_point(start_y, 1), color);
+				my_pixel_put(&mlx()->img, convert_point(start_x, 0), convert_point(start_y, 1), store_colors(0, 1));
 			start_y += 1.0;
 		}
 		start_y = -IMG_H / 2;
