@@ -215,19 +215,8 @@ int	main(int ac, char **av)
 {
 	t_mlx_data	data;
 
-    (void)ac;
-    (void)av;
 	data_init(&data);
 	*mlx() = data;
-
-//	m()->spheres = creat_array();
-//	m()->ambient = (t_ambient_light){1, 0.2, get_rgb(255, 255, 255)};
-//	m()->lights = creat_array();
-//	array(m()->lights)->add((void *)(&(t_light){1, .6, get_rgb(255, 255, 255), (t_coord){6, 1, 4}}));
-//    array(m()->spheres)->add(build("sp 0,-1,3 2     5 1  255,0,0", SPH));
-//    array(m()->spheres)->add(build("sp 2,0,4  1  5 0.1  0,0,255", SPH));
-//    array(m()->spheres)->add(build("sp -2,0,4 1  5 0.1  0,255,0", SPH));
-//    array(m()->spheres)->add(build("sp 0,-5001,0 10000  5 0.1  0,255,0", SPH));
     build_scene(av[ac - 1]);
 	mlx_mouse_hook(mlx()->mlx_win, handle_mouse, &data);
 	mlx_loop_hook(mlx()->mlx, render, &data);
