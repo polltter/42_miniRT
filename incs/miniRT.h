@@ -13,6 +13,7 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 
+# include "get_next_line.h"
 # include "list_utils.h"
 # include "ft_strings.h"
 # include "structs.h"
@@ -24,6 +25,7 @@
 # include "stdlib.h"
 # include <math.h>
 # include <limits.h>
+# include <fcntl.h>
 
 # define IMG_W 1000
 # define IMG_H 1000
@@ -60,6 +62,20 @@ int			handle_mouse(int button, int x, int y, t_mlx_data *data);
 int    error(char *err);
 
 //bodys/build
-void    *build(char *input);
+void    *build(char *input, int id);
+
+//bodys/build_bodys
+t_default_body  **__this_body(void);
+void            build_default_body(char **details);
+void            build_sphere(char *input);
+void            build_plane(char *input);
+void             build_cylinder(char *input);
+
+//bodys/build_butils
+t_default_body	*body(void *obj);
+char            *space_str(void);
+int             get_color(char *color);
+t_coord         get_coord(char *s_coords, float max);
+int             get_id(char *s_id);
 
 #endif

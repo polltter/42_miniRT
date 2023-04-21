@@ -19,7 +19,7 @@ STRS_SRCS_FILES		= ft_split  strings  strings_utils1  strings_utils2
 GNL_SRCS_FILES		= get_next_line  get_next_line_utils
 UTILS_FILES			= mlx_utils draw_utils utils parse_utils
 HANDLES_FILES		= keys mouse
-BODYS_FILES			= build
+BODYS_FILES			= build build_bodys build_utils
 GENERAL_SRC_FILES	= main
 
 LIST_SRCS		= ${addsuffix .c, ${addprefix srcs/utils/list/, ${LIST_SRCS_FILES}}}
