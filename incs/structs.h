@@ -122,9 +122,10 @@ typedef struct s_point
 }	t_point;
 
 struct s_main {
-	void			*spheres;
+	void			*bodys;
 	t_ambient_light	ambient;
 	void			*lights;
+    t_camera        camera;
 };
 
 #endif

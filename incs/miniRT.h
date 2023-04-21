@@ -63,6 +63,7 @@ int    error(char *err);
 
 //bodys/build
 void    *build(char *input, int id);
+void    build_scene(char *file_path);
 
 //bodys/build_bodys
 t_default_body  **__this_body(void);
@@ -76,6 +77,9 @@ t_default_body	*body(void *obj);
 char            *space_str(void);
 int             get_color(char *color);
 t_coord         get_coord(char *s_coords, float max);
-int             get_id(char *s_id);
+int             get_id(char *input);
 
+//bodys/build_lights
+t_ambient_light build_AL(char *input, int id);
+void    *build_light(char *input, int id);
 #endif
