@@ -57,6 +57,7 @@ void        freepp(void **to_free);
 //Handles
 int			handle_keys(int k);
 int			handle_mouse(int button, int x, int y, t_mlx_data *data);
+int	        select_body(int button, int x, int y, t_mlx_data *data);
 
 //error_management/error.c
 int    error(char *err);

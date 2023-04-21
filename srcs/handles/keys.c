@@ -10,11 +10,27 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "../../incs/miniRT.h"
+
+void    **who_movin(void);
+int	render(t_mlx_data *data);
 
 int	handle_keys(int k)
 {
-	if (k == XK_Escape)
+    if (k == XK_Escape)
 		ft_close(mlx());
-	return (1);
+    else if (k == XK_a && (*who_movin()))
+        ((t_default_body *)(*who_movin()))->coord.x -= 0.1;
+    else if (k == XK_d && (*who_movin()))
+        ((t_default_body *)(*who_movin()))->coord.x += 0.1;
+    else if (k == XK_w && (*who_movin()))
+        ((t_default_body *)(*who_movin()))->coord.y += 0.1;
+    else if (k == XK_s && (*who_movin()))
+        ((t_default_body *)(*who_movin()))->coord.y -= 0.1;
+    else if (k == XK_Up && (*who_movin()))
+        ((t_default_body *)(*who_movin()))->coord.z += 0.1;
+    else if (k == XK_Down && (*who_movin()))
+        ((t_default_body *)(*who_movin()))->coord.z -= 0.1;
+    render(NULL);
+    return (1);
 }

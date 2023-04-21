@@ -245,8 +245,10 @@ int	main(int ac, char **av)
 	data_init(&data);
 	*mlx() = data;
     build_scene(av[ac - 1]);
-	mlx_mouse_hook(mlx()->mlx_win, handle_mouse, &data);
-	mlx_loop_hook(mlx()->mlx, render, &data);
+//	mlx_mouse_hook(mlx()->mlx_win, handle_mouse, &data);
+    render(NULL);
+	mlx_mouse_hook(mlx()->mlx_win, select_body, &data);
+//	mlx_loop_hook(mlx()->mlx, render, &data);
 	mlx_key_hook(mlx()->mlx_win, handle_keys, &data);
 	mlx_hook(mlx()->mlx_win, DestroyNotify, 0, ft_close, &data);
 	mlx_loop(data.mlx);
