@@ -208,20 +208,12 @@ int store_colors(int color, int flag)
 
 int	render(t_mlx_data *data)
 {
-//	t_camera	camera;
 	double		start_x;
 	double		start_y;
 	t_coord		D;
     t_point     theta;
 	int			color;
-//    double      dot;
 
-	(void)data;
-//    dot = dot_product((t_coord){0,0,1}, m()->camera.vector);
-//    theta = acos(dot / (vector_length((t_coord){0,0,1}) * vector_length(m()->camera.vector)));
-
-//	camera.coord = (t_coord){0, 0, 0};
-	// camera.coord = set_coord_values(0, 0, 0);
     theta = find_theta();
     m()->camera.id = C;
 	start_x = -IMG_W / 2;
