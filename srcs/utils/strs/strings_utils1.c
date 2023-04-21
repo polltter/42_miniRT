@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_strings.h"
+#include "../../../incs/ft_strings.h"
 
 int	__str_len(const char *str, char c)
 {

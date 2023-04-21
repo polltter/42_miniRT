@@ -4,6 +4,11 @@
 
 #include "../../incs/miniRT.h"
 
+char    *space_str(void)
+{
+    return (" \t\n\v\f\r");
+}
+
 t_default_body  **__this_body(void)
 {
     static t_default_body	*a;
@@ -24,7 +29,7 @@ int get_color(char *color)
     int     g;
     int     b;
 
-    colors = s().split(color, ',');
+    colors = s().split(color, ",");
     if (!*colors || !*(colors + 1) || !*(colors + 2))
 	{
 		freepp((void **)colors);
@@ -47,7 +52,7 @@ t_coord get_coord(char *s_coords, float max)
     char    **coords;
     t_coord coord;
 
-    coords = s().split(s_coords, ',');
+    coords = s().split(s_coords, ",");
     if (!*coords || !*(coords + 1) || !*(coords + 2))
         error("Wrong number of arguments");
     coord.x = ft_atod(coords[0], max);
@@ -86,7 +91,7 @@ void    build_sphere(char *input)
 {
     char    **details;
 
-    details = s().split(input, ' ');
+    details = s().split(input, space_str());
     if (!*(details) || !*(details + 1) || !*(details + 2) || !*(details + 3))
         error("Wrong number of arguments");
     build_default_body(details);
@@ -98,7 +103,7 @@ void    build_plane(char *input)
 {
 	char    **details;
 
-	details = s().split(input, ' ');
+	details = s().split(input, space_str());
 	if (!*(details) || !*(details + 1) || !*(details + 2) || !*(details + 3))
 		error("Wrong number of arguments");
 	build_default_body(details);
@@ -110,7 +115,7 @@ void    build_cylinder(char *input)
 {
 	char    **details;
 
-	details = s().split(input, ' ');
+	details = s().split(input, space_str());
 	if (!*(details) || !*(details + 1) || !*(details + 2) || !*(details + 3) || \
 		!*(details + 4) || !*(details + 5))
 		error("Wrong number of arguments");
@@ -126,7 +131,7 @@ void    *build(char *input)
     int     id;
     void    *b;
 
-    details = s().split(input, ' ');
+    details = s().split(input, space_str());
     id = get_id(*details);
     freepp((void **)details);
     b = NULL;

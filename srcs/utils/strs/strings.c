@@ -10,15 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_strings.h"
+#include "../../../incs/ft_strings.h"
 
-char		**ft_split(const char *str, int sep);
+char		**ft_split(const char *str, char *sep);
 int			__str_len(const char *str, char c);
 int			__strn_cmp(const char *str1, const char *str2, int n);
 int			__strn_str(const char *haystack, const char *needle);
 char		*__str_trim(const char *str);
 int			__isal_num(char *str);
 char		*__append(char *s, char c);
+int     	__strn_c(const char *haystack, char needle);
 
 static char	*__strn_dup(const char *str, int size)
 {
@@ -91,6 +92,7 @@ t_s	s(void)
 		__str_join,
 		__isal_num,
 		__append,
+        __strn_c,
 	};
 
 	return (string);

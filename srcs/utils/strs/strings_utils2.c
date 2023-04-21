@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_strings.h"
+#include "../../../incs/ft_strings.h"
+
+int	__str_len(const char *str, char c);
 
 int	__isalpha(int c)
 {
@@ -55,4 +57,19 @@ char	*__append(char *str, char c)
 	}
 	new[i] = c;
 	return (new);
+}
+
+int	__strn_c(const char *haystack, char needle)
+{
+    int	i;
+    int	size_big;
+
+    if (!haystack)
+        return (0);
+    i = -1;
+    size_big = __str_len(haystack, 0);
+    while (++i <= size_big)
+        if (haystack[i] == needle)
+            return (1);
+    return (0);
 }
