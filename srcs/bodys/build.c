@@ -16,6 +16,24 @@ int check_file(char *file_path)
     return (fd);
 }
 
+t_camera    build_camera(char *input, int id)
+{
+    char        **details;
+    t_camera    camera;
+
+    details = s().split(input, space_str());
+    if (!details[0] || !details[1]|| !details[2]|| !details[3])
+        error("Wrong number of camera inputs!\n");
+    camera.id = id;
+    camera.coord = get_coord(details[1], (float)1000000000);
+    camera.vector = get_coord(details[2], 1);
+    camera.fov = ft_atoi(details[3], 180);
+    freepp((void **)details);
+    if (camera.fov < 0)
+        error("Invalid value for FOV!\n");
+    return (camera);
+}
+
 void    build_scene(char *file_path)
 {
     int     id;
@@ -36,6 +54,8 @@ void    build_scene(char *file_path)
             m()->ambient = build_AL(input, id);
         else if (id == L)
             array(m()->lights)->add(build_light(input, id));
+        else if (id == C)
+            m()->camera = build_camera(input, id);
         free(input);
         input = get_next_line(fd);
     }
