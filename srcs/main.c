@@ -245,10 +245,12 @@ int	render(t_mlx_data *data)
 	return (0);
 }
 
-int	main(void)
+int	main(int ac, char **av)
 {
 	t_mlx_data	data;
 
+    (void)ac;
+    (void)av;
 	data_init(&data);
 	*mlx() = data;
 	m()->spheres = creat_array();
