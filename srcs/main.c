@@ -224,18 +224,11 @@ int	render(t_mlx_data *data)
 	{
 		while (start_y < IMG_H / 2)
 		{
-            for (int i = -3; i < 4; ++i)
-            {
-                for (int j = -3; j < 4; ++j)
-                {
-                    D = canvas_to_viewport(start_x + i, start_y + j);
-                    color = trace_ray(camera.coord, D, 1, INT_MAX, 3);
-                    store_colors(color, 0);
-                }
-            }
+            D = canvas_to_viewport(start_x, start_y);
+            color = trace_ray(camera.coord, D, 1, INT_MAX, 3);
 			if (convert_point(start_x, 0) >= 0 && convert_point(start_x, 0) < IMG_W && \
 				convert_point(start_y, 1) >= 0 && convert_point(start_y, 1) < IMG_H)
-				my_pixel_put(&mlx()->img, convert_point(start_x, 0), convert_point(start_y, 1), store_colors(0, 1));
+				my_pixel_put(&mlx()->img, convert_point(start_x, 0), convert_point(start_y, 1), color);
 			start_y += 1.0;
 		}
 		start_y = -IMG_H / 2;
