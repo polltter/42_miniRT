@@ -4,136 +4,35 @@
 
 #include "../../incs/miniRT.h"
 
-char    *space_str(void)
+//void    build_scene(char *file_path)
+//{
+//    int     id;
+//    int     fd;
+//    char    **details;
+//    char    *input;
+//
+//    fd = open(file_path, O_RDONLY);
+//    if (fd < 0)
+//        error("Invalid file");
+//    input = get_next_line(fd);
+//    m()->bodys = creat_array();
+//    m()->lights = creat_array();
+//    while (input)
+//    {
+//        details = s().split(input, space_str());
+//        id = get_id(*details);
+//
+//        freepp((void **)details);
+//    }
+//
+//
+//}
+
+void    *build(char *input, int id)
 {
-    return (" \t\n\v\f\r");
-}
-
-t_default_body  **__this_body(void)
-{
-    static t_default_body	*a;
-
-    return (&a);
-}
-
-t_default_body	*body(void *obj)
-{
-    *__this_body() = obj;
-    return (*__this_body());
-}
-
-int get_color(char *color)
-{
-    char    **colors;
-    int     r;
-    int     g;
-    int     b;
-
-    colors = s().split(color, ",");
-    if (!*colors || !*(colors + 1) || !*(colors + 2))
-	{
-		freepp((void **)colors);
-		error("Wrong number of arguments");
-	}
-    r = ft_atoi(colors[0], 255);
-    g = ft_atoi(colors[1], 255);
-    b = ft_atoi(colors[2], 255);
-	if (r < 0 || g < 0 || b < 0)
-	{
-		freepp((void **)colors);
-		error("Invalid color");
-	}
-    freepp((void **)colors);
-    return (get_rgb(r, g, b));
-}
-
-t_coord get_coord(char *s_coords, float max)
-{
-    char    **coords;
-    t_coord coord;
-
-    coords = s().split(s_coords, ",");
-    if (!*coords || !*(coords + 1) || !*(coords + 2))
-        error("Wrong number of arguments");
-    coord.x = ft_atod(coords[0], max);
-    coord.y = ft_atod(coords[1], max);
-    coord.z = ft_atod(coords[2], max);
-    freepp((void **)coords);
-    return (coord);
-}
-
-int get_id(char *s_id)
-{
-    if (!s().equal(s_id, "sp"))
-        return (SPH);
-    else if (!s().equal(s_id, "pl"))
-        return (PL);
-    else if (!s().equal(s_id, "cy"))
-        return (CY);
-    error("Not a valid body");
-    return (0);
-}
-
-void    build_default_body(char **details)
-{
-    int i;
-    i = 1;
-    (*__this_body())->id = get_id(*details);
-    (*__this_body())->coord = get_coord(details[i], (float)(1000000000));
-    while (details[i])
-        i++;
-    (*__this_body())->color = get_color(details[--i]);
-    (*__this_body())->reflective = ft_atod(details[--i], 1);
-    (*__this_body())->specular = ft_atod(details[--i], 1000);
-}
-
-void    build_sphere(char *input)
-{
-    char    **details;
-
-    details = s().split(input, space_str());
-    if (!*(details) || !*(details + 1) || !*(details + 2) || !*(details + 3))
-        error("Wrong number of arguments");
-    build_default_body(details);
-    ((t_sphere *)(*__this_body()))->diameter = ft_atod(*(details + 2), (float)(1000000000));
-	freepp((void **)details);
-}
-
-void    build_plane(char *input)
-{
-	char    **details;
-
-	details = s().split(input, space_str());
-	if (!*(details) || !*(details + 1) || !*(details + 2) || !*(details + 3))
-		error("Wrong number of arguments");
-	build_default_body(details);
-	((t_plane *)(*__this_body()))->vector = get_coord(*(details + 2), 1.0);
-	freepp((void **)details);
-}
-
-void    build_cylinder(char *input)
-{
-	char    **details;
-
-	details = s().split(input, space_str());
-	if (!*(details) || !*(details + 1) || !*(details + 2) || !*(details + 3) || \
-		!*(details + 4) || !*(details + 5))
-		error("Wrong number of arguments");
-	build_plane(input);
-	((t_cylinder *)(*__this_body()))->diameter = ft_atod(details[3], (float)INT_MAX);
-	((t_cylinder *)(*__this_body()))->height = ft_atod(details[4], (float)INT_MAX);
-	freepp((void **)details);
-}
-
-void    *build(char *input)
-{
-    char    **details;
-    int     id;
     void    *b;
 
-    details = s().split(input, space_str());
-    id = get_id(*details);
-    freepp((void **)details);
+
     b = NULL;
     if (id == PL)
     {
