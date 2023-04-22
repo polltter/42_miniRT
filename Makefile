@@ -12,12 +12,13 @@
 
 NAME	= miniRT
 CC		= cc
-CFLAGS	= -I incs -Imlx -Wall -Werror -Wextra -g3 -O3 -fsanitize=address -march=native -ffast-math -funsafe-math-optimizations -ffinite-math-only
+CFLAGS	= -I incs -Imlx -Wall -Werror -Wextra -g3 -O3 -fsanitize=address -march=native -ffast-math -funsafe-math-optimizations -ffinite-math-only -pthread
 
 LIST_SRCS_FILES		= list_utils list_utils_2 list_utils_3 list_utils_4
 STRS_SRCS_FILES		= ft_split  strings  strings_utils1  strings_utils2
 GNL_SRCS_FILES		= get_next_line  get_next_line_utils
 UTILS_FILES			= mlx_utils draw_utils utils parse_utils
+THREADS_FILES		= threads
 CAM_FILES		= rotate_camera
 HANDLES_FILES		= keys mouse
 BODYS_FILES			= build build_bodys build_utils build_lights
@@ -30,9 +31,10 @@ UTILS_SRCS		= ${addsuffix .c, ${addprefix srcs/utils/, ${UTILS_FILES}}}
 CAM_SRCS		= ${addsuffix .c, ${addprefix srcs/camera/, ${CAM_FILES}}}
 HANDLES_SRCS	= ${addsuffix .c, ${addprefix srcs/handles/, ${HANDLES_FILES}}}
 BODYS_SRCS		= ${addsuffix .c, ${addprefix srcs/bodys/, ${BODYS_FILES}}}
+THREADS_SRCS		= ${addsuffix .c, ${addprefix srcs/threads/, ${THREADS_FILES}}}
 GENERAL_SRC		= ${addsuffix .c, ${addprefix srcs/, ${GENERAL_SRC_FILES}}}
 
-SRCS	=  ${GENERAL_SRC} ${LIST_SRCS} ${UTILS_SRCS} ${HANDLES_SRCS} ${STRS_SRCS} ${GNL_SRCS} ${BODYS_SRCS} ${CAM_SRCS}
+SRCS	=  ${GENERAL_SRC} ${LIST_SRCS} ${UTILS_SRCS} ${HANDLES_SRCS} ${STRS_SRCS} ${GNL_SRCS} ${BODYS_SRCS} ${CAM_SRCS} ${THREADS_SRCS}
 
 INCS_FILES	= miniRT.h structs.h list_utils.h get_next_line.h
 INCS	= ${addprefix incs/, ${INCS_FILES}}

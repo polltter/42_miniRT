@@ -35,12 +35,10 @@ double	do_op(int op, double a, double b)
 /* Need to check multiplication and division */
 t_coord	do_op_coords(int op, t_coord a, t_coord b)
 {
-	t_coord	new;
-
-	new.x = do_op(op, a.x, b.x);
-	new.y = do_op(op, a.y, b.y);
-	new.z = do_op(op, a.z, b.z);
-	return (new);
+	a.x = do_op(op, a.x, b.x);
+	a.y = do_op(op, a.y, b.y);
+	a.z = do_op(op, a.z, b.z);
+	return (a);
 }
 
 t_coord	set_coord_values(double x, double y, double z)

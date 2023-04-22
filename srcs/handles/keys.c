@@ -13,7 +13,6 @@
 #include "../../incs/miniRT.h"
 
 void    **who_movin(void);
-int	render(t_mlx_data *data);
 
 int	handle_keys(int k)
 {
@@ -31,6 +30,8 @@ int	handle_keys(int k)
         ((t_default_body *)(*who_movin()))->coord.z += 0.1;
     else if (k == XK_Down && (*who_movin()))
         ((t_default_body *)(*who_movin()))->coord.z -= 0.1;
-    render(NULL);
+    array(m()->threads)->for_each(init_threads, 0);
+    array(m()->threads)->for_each(join_for_each, 0);
+    mlx_put_image_to_window(mlx()->mlx, mlx()->mlx_win, mlx()->img.img, 0, 0);
     return (1);
 }

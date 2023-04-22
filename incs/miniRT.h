@@ -26,6 +26,8 @@
 # include <math.h>
 # include <limits.h>
 # include <fcntl.h>
+# include <pthread.h>
+# include <sys/time.h>
 
 # define IMG_W 1000
 # define IMG_H 1000
@@ -33,6 +35,7 @@
 # define SUBTRACT	101
 # define MULTIPLY	102
 # define DIVIDE		103
+# define N_THREADS  2
 
 //MLX utils
 t_mlx_data	*mlx(void);
@@ -87,5 +90,17 @@ void    *build_light(char *input, int id);
 //rotations
 t_point find_theta(void);
 void  rotate_camera(t_point theta, t_coord *D);
+
+//threads
+void    build_threads(void);
+void	join_for_each(t_elems *elem, void *o);
+void	init_threads(t_elems *elem, void *o);
+void	print_threads(t_elems *elem, void *o);
+
+//render
+void    *render(void *thread);
+void	reload_threads(t_elems *elem, void *o);
+
+
 
 #endif

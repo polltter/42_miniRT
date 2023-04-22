@@ -43,7 +43,7 @@ void	*body_to_move(t_coord O, t_coord D) {
 
 int	select_body(int button, int x, int y, t_mlx_data *data)
 {
-    t_coord D;
+
     t_coord O = (t_coord){0,0,0};
 
     (void)button;
@@ -52,10 +52,10 @@ int	select_body(int button, int x, int y, t_mlx_data *data)
     (void)data;
     if (button == 1)
     {
-        D = canvas_to_viewport(x - IMG_W / 2, - y + IMG_H / 2);
-        print_coords(D);
+        canvas_to_viewport(x - IMG_W / 2, - y + IMG_H / 2);
+        print_coords(m()->v_dir);
         printf("antes -- %p\n", *who_movin());
-        (*who_movin()) = body_to_move(O, D);
+        (*who_movin()) = body_to_move(O, m()->v_dir);
         printf("depois -- %p\n", *who_movin());
     }
     return (0);
