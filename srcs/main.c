@@ -19,11 +19,18 @@ void    **who_movin(void);
 
 double	compute_lighting();
 
-void	canvas_to_viewport(double x, double y)
+t_elems **tem(void)
 {
-    m()->v_dir.x = x / IMG_W * m()->viewport.width;
-    m()->v_dir.y = y / IMG_H * m()->viewport.height;
-	m()->v_dir.z = 1;
+    static t_elems *t;
+    return (&t);
+}
+
+t_coord canvas_to_viewport(t_coord D, double x, double y)
+{
+    D.x = x / IMG_W * m()->viewport.width;
+    D.y = y / IMG_H * m()->viewport.height;
+	D.z = 1;
+    return (D);
 }
 
 double	dot_product(t_coord a, t_coord b)
@@ -53,7 +60,7 @@ double	compute_lighting(t_coord point, t_coord normal, t_coord vector, double sp
 	t_coord	reflected;
 
 	i = 0.0;
-	temp = array(m()->lights)->begin;
+	temp = *tem();
 	i += m()->ambient.light_ratio;
 	while (temp)
 	{
@@ -122,7 +129,7 @@ t_sphere	*closest_intersection(t_coord O, t_coord D, double t_min, double t_max,
 	t_point		t;
 	t_sphere	*closest;
 
-	temp = array(m()->bodys)->begin;
+	temp = *tem();
 	closest = NULL;
 	while (temp)
 	{
@@ -202,25 +209,21 @@ void    *render(void *thread)
 	double		start_y;
     t_point     theta;
 	int			color;
+    t_coord     D;
 
     theta = find_theta();
-    m()->camera.id = C;
 	start_x = ((t_threads *)thread)->strat_x;
 	start_y = -IMG_H / 2;
-	while (start_x < (double)((t_threads *)thread)->end_x)
+	while (start_x <= ((t_threads *)thread)->end_x)
 	{
 		while (start_y < IMG_H / 2)
 		{
-            canvas_to_viewport(start_x, start_y);
-            rotate_camera(theta, &m()->v_dir);
-            color = trace_ray(m()->camera.coord, m()->v_dir, 1, INT_MAX, 3);
+            D = canvas_to_viewport(D, start_x, start_y);
+            rotate_camera(theta, &D);
+            color = trace_ray(m()->camera.coord, D, 1, INT_MAX, 3);
 			if (convert_point(start_x, 0) >= 0 && convert_point(start_x, 0) < IMG_W && \
 				convert_point(start_y, 1) >= 0 && convert_point(start_y, 1) < IMG_H)
-            {
-                pthread_mutex_lock(&m()->draw);
-                my_pixel_put(&mlx()->img, convert_point(start_x, 0), convert_point(start_y, 1), color);
-                pthread_mutex_unlock(&m()->draw);
-            }
+                my_pixel_put(&((t_threads *)thread)->img, convert_point(start_x, 0), convert_point(start_y, 1), color);
 			start_y += 1.0;
 		}
 		start_y = -IMG_H / 2;
@@ -234,17 +237,16 @@ int	main(int ac, char **av)
 	t_mlx_data	data;
 
 
+    data_init(&data);
+    *mlx() = data;
     build_threads();
-    array(m()->threads)->for_each(print_threads, NULL);
-	data_init(&data);
-	*mlx() = data;
     build_scene(av[ac - 1]);
-    pthread_mutex_init(&m()->draw, NULL);
+    (*tem()) = array(m()->bodys)->begin;
 //	mlx_mouse_hook(mlx()->mlx_win, handle_mouse, &data);
 //    render(NULL);
     array(m()->threads)->for_each(init_threads, 0);
     array(m()->threads)->for_each(join_for_each, 0);
-    mlx_put_image_to_window(mlx()->mlx, mlx()->mlx_win, mlx()->img.img, 0, 0);
+    array(m()->threads)->for_each(imgs_to_canvas, 0);
 	mlx_mouse_hook(mlx()->mlx_win, select_body, &data);
 //	mlx_loop_hook(mlx()->mlx, render, &data);
 	mlx_key_hook(mlx()->mlx_win, handle_keys, &data);

@@ -96,10 +96,10 @@ void    build_threads(void);
 void	join_for_each(t_elems *elem, void *o);
 void	init_threads(t_elems *elem, void *o);
 void	print_threads(t_elems *elem, void *o);
+void    imgs_to_canvas(t_elems *elem, void *o);
 
 //render
 void    *render(void *thread);
-void	reload_threads(t_elems *elem, void *o);
 
 
 
