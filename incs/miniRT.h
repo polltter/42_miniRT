@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:04:06 by touteiro          #+#    #+#             */
-/*   Updated: 2023/04/19 15:27:04 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/04/22 20:19:00 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,12 @@ int			ft_close(t_mlx_data *data);
 void		my_pixel_put(t_data *img, int x, int y, int color);
 
 //Draw utils
-double		convert_point(double x, double is_Y);
+t_coord		canvas_to_viewport(double x, double y);
+double		vp_to_canvas(double x, double is_Y);
+
+//Color manipulation
 int			get_rgb(int r, int g, int b);
+int			get_color_light(int color, double li);
 
 //Struct utils
 t_coord		set_coord_values(double x, double y, double z);
@@ -53,6 +57,12 @@ double		vector_length(t_coord vector);
 double	    ft_atod(char *str, double max);
 int	        ft_atoi(char *nptr, int max);
 void        freepp(void **to_free);
+
+//Render
+int			render(t_mlx_data *data);
+int			trace_ray(t_coord O, t_coord viewport_pt, double t_min, double t_max, int recursion_depth);
+t_coord		reflect_ray(t_coord light, t_coord normal);
+double		compute_lighting(t_coord point, t_coord normal, t_coord vector, double specular);
 
 //Handles
 int			handle_keys(int k);
@@ -81,11 +91,20 @@ t_coord         get_coord(char *s_coords, float max);
 int             get_id(char *input);
 
 //bodys/build_lights
-t_ambient_light build_AL(char *input, int id);
+t_ambient_light build_ambient_light(char *input, int id);
 void    *build_light(char *input, int id);
 
 //rotations
 t_point find_theta(void);
-void  rotate_camera(t_point theta, t_coord *D);
+void  rotate_camera(t_point theta, t_coord *vp_to_canvasviewport_pt);
+
+//Math
+double	dot_product(t_coord a, t_coord b);
+double	do_op(int op, double a, double b);
+
+//Collisions
+t_sphere	*closest_intersection(t_coord O, t_coord viewport_pt, double t_min, double t_max, double *closest_t);
+t_point		collision(t_coord O, t_coord viewport_pt, t_default_body *body);
+t_point 	sphere_collision(t_coord O, t_coord viewport_pt, t_sphere sphere);
 
 #endif

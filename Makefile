@@ -6,7 +6,7 @@
 #    By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/17 18:45:23 by touteiro          #+#    #+#              #
-#    Updated: 2023/04/19 11:44:38 by touteiro         ###   ########.fr        #
+#    Updated: 2023/04/22 20:18:33 by touteiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,25 +14,33 @@ NAME	= miniRT
 CC		= cc
 CFLAGS	= -I incs -Imlx -Wall -Werror -Wextra -g3 -O3 -fsanitize=address -march=native -ffast-math -funsafe-math-optimizations -ffinite-math-only
 
-LIST_SRCS_FILES		= list_utils list_utils_2 list_utils_3 list_utils_4
-STRS_SRCS_FILES		= ft_split  strings  strings_utils1  strings_utils2
-GNL_SRCS_FILES		= get_next_line  get_next_line_utils
-UTILS_FILES			= mlx_utils draw_utils utils parse_utils
-CAM_FILES		= rotate_camera
-HANDLES_FILES		= keys mouse
 BODYS_FILES			= build build_bodys build_utils build_lights
-GENERAL_SRC_FILES	= main
+CAM_FILES			= rotate_camera
+COLLISION_FILES		= collisions
+HANDLES_FILES		= keys mouse
+RAYTRACER_FILES		= render raytracer lights
+GNL_FILES			= get_next_line  get_next_line_utils
+LIST_FILES			= list_utils list_utils_2 list_utils_3 list_utils_4
+MATH_FILES			= math coords
+STRS_FILES			= ft_split  strings  strings_utils1  strings_utils2
+UTILS_FILES			= mlx_utils viewport_utils utils parse_utils color_utils
+GENERAL_FILES		= main
 
-LIST_SRCS		= ${addsuffix .c, ${addprefix srcs/utils/list/, ${LIST_SRCS_FILES}}}
-STRS_SRCS		= ${addsuffix .c, ${addprefix srcs/utils/strs/, ${STRS_SRCS_FILES}}}
-GNL_SRCS		= ${addsuffix .c, ${addprefix srcs/utils/gnl/, ${GNL_SRCS_FILES}}}
-UTILS_SRCS		= ${addsuffix .c, ${addprefix srcs/utils/, ${UTILS_FILES}}}
-CAM_SRCS		= ${addsuffix .c, ${addprefix srcs/camera/, ${CAM_FILES}}}
-HANDLES_SRCS	= ${addsuffix .c, ${addprefix srcs/handles/, ${HANDLES_FILES}}}
-BODYS_SRCS		= ${addsuffix .c, ${addprefix srcs/bodys/, ${BODYS_FILES}}}
-GENERAL_SRC		= ${addsuffix .c, ${addprefix srcs/, ${GENERAL_SRC_FILES}}}
+BODYS_SRCS			= ${addsuffix .c, ${addprefix srcs/bodys/, ${BODYS_FILES}}}
+CAM_SRCS			= ${addsuffix .c, ${addprefix srcs/camera/, ${CAM_FILES}}}
+COLLISION_SRCS		= ${addsuffix .c, ${addprefix srcs/collisions/, ${COLLISION_FILES}}}
+HANDLES_SRCS		= ${addsuffix .c, ${addprefix srcs/handles/, ${HANDLES_FILES}}}
+RAYTRACER_SRCS		= ${addsuffix .c, ${addprefix srcs/raytracer/, ${RAYTRACER_FILES}}}
+GNL_SRCS			= ${addsuffix .c, ${addprefix srcs/utils/gnl/, ${GNL_FILES}}}
+LIST_SRCS			= ${addsuffix .c, ${addprefix srcs/utils/list/, ${LIST_FILES}}}
+MATH_SRCS			= ${addsuffix .c, ${addprefix srcs/utils/math/, ${MATH_FILES}}}
+STRS_SRCS			= ${addsuffix .c, ${addprefix srcs/utils/strs/, ${STRS_FILES}}}
+UTILS_SRCS			= ${addsuffix .c, ${addprefix srcs/utils/, ${UTILS_FILES}}}
+GENERAL_SRC			= ${addsuffix .c, ${addprefix srcs/, ${GENERAL_FILES}}}
 
-SRCS	=  ${GENERAL_SRC} ${LIST_SRCS} ${UTILS_SRCS} ${HANDLES_SRCS} ${STRS_SRCS} ${GNL_SRCS} ${BODYS_SRCS} ${CAM_SRCS}
+SRCS	=  ${BODYS_SRCS} ${CAM_SRCS} ${COLLISION_SRCS} ${HANDLES_SRCS} \
+			${RAYTRACER_SRCS} ${GNL_SRCS} ${LIST_SRCS} ${MATH_SRCS} \
+			${STRS_SRCS} ${UTILS_SRCS} ${GENERAL_SRC}
 
 INCS_FILES	= miniRT.h structs.h list_utils.h get_next_line.h
 INCS	= ${addprefix incs/, ${INCS_FILES}}
@@ -46,7 +54,7 @@ obj/%.o: %.c ${INCS}
 	@echo "\033[33m[OK]	" $@ "\033[0m"
 
 ${NAME}:  ${OBJ}
-	@make --no-print-directory -C mlx
+	# @make --no-print-directory -C mlx
 	@$(CC) $(CFLAGS) $(OBJ) -Lmlx -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz  -o $(NAME)
 	@echo -n "\033[92m[OK]	 "
 	@echo -n $(NAME)

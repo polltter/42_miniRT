@@ -4,7 +4,7 @@
 
 #include "../../incs/miniRT.h"
 
-t_ambient_light build_AL(char *input, int id)
+t_ambient_light build_ambient_light(char *input, int id)
 {
     t_ambient_light new;
     char            **details;

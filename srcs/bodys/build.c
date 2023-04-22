@@ -53,7 +53,7 @@ void    build_scene(char *file_path)
         if (id >= SPH)
             array(m()->bodys)->add(build(input, id));
         else if (id == AL)
-            m()->ambient = build_AL(input, id);
+            m()->ambient = build_ambient_light(input, id);
         else if (id == L)
             array(m()->lights)->add(build_light(input, id));
         else if (id == C)

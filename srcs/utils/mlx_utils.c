@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:34:39 by touteiro          #+#    #+#             */
-/*   Updated: 2023/04/19 16:28:52 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/04/22 19:36:23 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,7 @@ void	my_pixel_put(t_data *img, int x, int y, int color)
 	*(unsigned int *)pixel = color;
 }
 
-int	get_rgb(int r, int g, int b)
-{
-	return (r << 16 | g << 8 | b);
-}
+
 
 void	data_init(t_mlx_data *data)
 {
