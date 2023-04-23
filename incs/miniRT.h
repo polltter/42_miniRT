@@ -35,7 +35,7 @@
 # define SUBTRACT	101
 # define MULTIPLY	102
 # define DIVIDE		103
-# define N_THREADS  2
+# define N_THREADS  40
 
 //MLX utils
 t_mlx_data	*mlx(void);
@@ -118,8 +118,9 @@ void	print_threads(t_elems *elem, void *o);
 void    imgs_to_canvas(t_elems *elem, void *o);
 
 //render
-void    *render(void *thread);
-
+void    *render_t(void *t);
+t_elems **first(void);
+t_elems **first_l(void);
 
 
 #endif

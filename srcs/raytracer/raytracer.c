@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "../../incs/miniRT.h"
 
 t_sphere	*closest_intersection(t_coord O, t_coord viewport_pt, double t_min, double t_max, double *closest_t)
 {
@@ -18,7 +18,7 @@ t_sphere	*closest_intersection(t_coord O, t_coord viewport_pt, double t_min, dou
 	t_point		t;
 	t_sphere	*closest;
 
-	temp = array(m()->bodys)->begin;
+	temp = *first();
 	closest = NULL;
 	while (temp)
 	{

@@ -43,11 +43,15 @@ void    build_scene(char *file_path)
     char    *input;
 
     fd = check_file(file_path);
-    input = get_next_line(fd);
+    input = ft_calloc(1);
     m()->bodys = creat_array();
     m()->lights = creat_array();
     while (input)
     {
+        free(input);
+        input = get_next_line(fd);
+        if (!s().equal(input,"\n") || !input)
+            continue ;
         id = get_id(input);
         printf("%s\n", input);
         if (id >= SPH)
@@ -58,8 +62,6 @@ void    build_scene(char *file_path)
             array(m()->lights)->add(build_light(input, id));
         else if (id == C)
             m()->camera = build_camera(input, id);
-        free(input);
-        input = get_next_line(fd);
     }
     free(input);
 }

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "../../incs/miniRT.h"
 
 t_coord	reflect_ray(t_coord light, t_coord normal)
 {
@@ -29,7 +29,7 @@ double	compute_lighting(t_coord point, t_coord normal, t_coord vector, double sp
 	t_coord	reflected;
 
 	i = 0.0;
-	temp = array(m()->lights)->begin;
+	temp = *first_l();
 	i += m()->ambient.light_ratio;
 	while (temp)
 	{

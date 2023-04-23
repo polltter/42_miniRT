@@ -7,7 +7,7 @@
 void	init_threads(t_elems *elem, void *o)
 {
     (void)o;
-    pthread_create(&(((t_threads *)(elem->cont))->id), NULL, render, elem->cont);
+    pthread_create(&(((t_threads *)(elem->cont))->id), NULL, render_t, elem->cont);
 }
 
 void	join_for_each(t_elems *elem, void *o)
@@ -27,7 +27,8 @@ void	print_threads(t_elems *elem, void *o)
 void    imgs_to_canvas(t_elems *elem, void *o)
 {
     (void)o;
-    mlx_put_image_to_window(mlx()->mlx, mlx()->mlx_win, ((t_threads *)elem->cont)->img.img, ((t_threads *)elem->cont)->strat_x + IMG_W / 2, 0);
+    mlx_put_image_to_window(mlx()->mlx, mlx()->mlx_win, \
+        ((t_threads *)elem->cont)->img.img, ((t_threads *)elem->cont)->strat_x + IMG_W / 2, 0);
 
 }
 

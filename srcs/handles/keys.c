@@ -32,8 +32,13 @@ int	handle_keys(int k)
         ((t_default_body *)(*who_movin()))->coord.z -= 0.1;
     else
         return (0);
-    array(m()->threads)->for_each(init_threads, 0);
-    array(m()->threads)->for_each(join_for_each, 0);
-    array(m()->threads)->for_each(imgs_to_canvas, 0);
+    if (N_THREADS == 1)
+        render(NULL);
+    else if (N_THREADS > 1)
+    {
+        array(m()->threads)->for_each(init_threads, 0);
+        array(m()->threads)->for_each(join_for_each, 0);
+        array(m()->threads)->for_each(imgs_to_canvas, 0);
+    }
     return (1);
 }

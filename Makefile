@@ -12,12 +12,13 @@
 
 NAME	= miniRT
 CC		= cc
-CFLAGS	= -I incs -Imlx -Wall -Werror -Wextra -g3 -O3 -fsanitize=address -march=native -ffast-math -funsafe-math-optimizations -ffinite-math-only
+CFLAGS	= -I incs -Imlx -Wall -Werror -Wextra -g3 -O3 -march=native -ffast-math -funsafe-math-optimizations -ffinite-math-only #-fsanitize=thread
 
 BODYS_FILES			= build build_bodys build_utils build_lights
 CAM_FILES			= rotate_camera
 COLLISION_FILES		= collisions
 HANDLES_FILES		= keys mouse
+THREADS_FILES		= threads
 RAYTRACER_FILES		= render raytracer lights
 GNL_FILES			= get_next_line  get_next_line_utils
 LIST_FILES			= list_utils list_utils_2 list_utils_3 list_utils_4
@@ -28,6 +29,7 @@ GENERAL_FILES		= main
 
 BODYS_SRCS			= ${addsuffix .c, ${addprefix srcs/bodys/, ${BODYS_FILES}}}
 CAM_SRCS			= ${addsuffix .c, ${addprefix srcs/camera/, ${CAM_FILES}}}
+THREADS_SRCS			= ${addsuffix .c, ${addprefix srcs/threads/, ${THREADS_FILES}}}
 COLLISION_SRCS		= ${addsuffix .c, ${addprefix srcs/collisions/, ${COLLISION_FILES}}}
 HANDLES_SRCS		= ${addsuffix .c, ${addprefix srcs/handles/, ${HANDLES_FILES}}}
 RAYTRACER_SRCS		= ${addsuffix .c, ${addprefix srcs/raytracer/, ${RAYTRACER_FILES}}}
@@ -40,7 +42,7 @@ GENERAL_SRC			= ${addsuffix .c, ${addprefix srcs/, ${GENERAL_FILES}}}
 
 SRCS	=  ${BODYS_SRCS} ${CAM_SRCS} ${COLLISION_SRCS} ${HANDLES_SRCS} \
 			${RAYTRACER_SRCS} ${GNL_SRCS} ${LIST_SRCS} ${MATH_SRCS} \
-			${STRS_SRCS} ${UTILS_SRCS} ${GENERAL_SRC}
+			${STRS_SRCS} ${UTILS_SRCS} ${GENERAL_SRC} ${THREADS_SRCS}
 
 INCS_FILES	= miniRT.h structs.h list_utils.h get_next_line.h
 INCS	= ${addprefix incs/, ${INCS_FILES}}

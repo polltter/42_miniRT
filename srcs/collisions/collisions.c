@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "../../incs/miniRT.h"
 
 t_point sphere_collision(t_coord O, t_coord viewport_pt, t_sphere sphere)
 {
