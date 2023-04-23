@@ -26,6 +26,8 @@
 # include <math.h>
 # include <limits.h>
 # include <fcntl.h>
+# include <pthread.h>
+# include <sys/time.h>
 
 # define IMG_W 1000
 # define IMG_H 1000
@@ -33,6 +35,7 @@
 # define SUBTRACT	101
 # define MULTIPLY	102
 # define DIVIDE		103
+# define N_THREADS  2
 
 //MLX utils
 t_mlx_data	*mlx(void);
@@ -106,5 +109,17 @@ double	do_op(int op, double a, double b);
 t_sphere	*closest_intersection(t_coord O, t_coord viewport_pt, double t_min, double t_max, double *closest_t);
 t_point		collision(t_coord O, t_coord viewport_pt, t_default_body *body);
 t_point 	sphere_collision(t_coord O, t_coord viewport_pt, t_sphere sphere);
+
+//threads
+void    build_threads(void);
+void	join_for_each(t_elems *elem, void *o);
+void	init_threads(t_elems *elem, void *o);
+void	print_threads(t_elems *elem, void *o);
+void    imgs_to_canvas(t_elems *elem, void *o);
+
+//render
+void    *render(void *thread);
+
+
 
 #endif

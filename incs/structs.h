@@ -18,6 +18,7 @@ typedef struct s_default_body	t_default_body;
 typedef struct s_mlx_data		t_mlx_data;
 typedef struct s_cylinder		t_cylinder;
 typedef struct s_viewport       t_viewport;
+typedef struct s_threads        t_threads;
 typedef struct s_camera			t_camera;
 typedef struct s_sphere			t_sphere;
 typedef struct s_coord			t_coord;
@@ -26,6 +27,7 @@ typedef struct s_plane			t_plane;
 typedef struct s_point			t_point;
 typedef struct s_data			t_data;
 typedef struct s_main			t_main;
+
 
 enum e_types {
 	AL,
@@ -132,6 +134,16 @@ struct s_main {
 	void			*lights;
     t_camera        camera;
     t_viewport      viewport;
+    t_coord         v_dir;
+    void            *threads;
+    pthread_mutex_t draw;
+};
+
+struct s_threads {
+    pthread_t   id;
+    int         strat_x;
+    int         end_x;
+    t_data      img;
 };
 
 #endif
