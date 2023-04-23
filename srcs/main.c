@@ -51,9 +51,9 @@ void    *render_t(void *t)
             viewport_pt = canvas_to_viewport(x + thread->strat_x, y);
             rotate_camera(theta, &viewport_pt);
             color = trace_ray(m()->camera.coord, viewport_pt, 1, INT_MAX, 3);
-            if (vp_to_canvas(x + thread->strat_x, 0) >= 0 && vp_to_canvas(x + thread->strat_x, 0) < IMG_W && \
+            if (vp_to_canvas(x, 0) >= 0 && vp_to_canvas(x, 0) < IMG_W && \
 				vp_to_canvas(y, 1) >= 0 && vp_to_canvas(y, 1) < IMG_H)
-                my_pixel_put(&thread->img, vp_to_canvas(x, 0), \
+                my_pixel_put(&thread->img, vp_to_canvas(x - IMG_W / 2, 0), \
 					vp_to_canvas(y, 1), color);
             y += 1.0;
         }
@@ -77,6 +77,7 @@ int	main(int ac, char **av)
     else if (N_THREADS > 1)
     {
         build_threads();
+//        array(m()->threads)->for_each(print_threads, 0);
         array(m()->threads)->for_each(init_threads, 0);
         array(m()->threads)->for_each(join_for_each, 0);
         array(m()->threads)->for_each(imgs_to_canvas, 0);
