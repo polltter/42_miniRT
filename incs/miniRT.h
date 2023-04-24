@@ -96,7 +96,7 @@ t_coord         get_coord(char *s_coords, float max);
 int             get_id(char *input);
 
 //bodys/build_lights
-t_ambient_light build_ambient_light(char *input, int id);
+t_ambient_light *build_ambient_light(char *input, int id);
 void    *build_light(char *input, int id);
 
 //rotations

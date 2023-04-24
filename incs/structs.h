@@ -130,9 +130,9 @@ typedef struct s_point
 
 struct s_main {
 	void			*bodys;
-	t_ambient_light	ambient;
+	t_ambient_light	*ambient;
 	void			*lights;
-    t_camera        camera;
+    t_camera        *camera;
     t_viewport      viewport;
     t_coord         v_dir;
     void            *threads;

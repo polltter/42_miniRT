@@ -4,17 +4,18 @@
 
 #include "../../incs/miniRT.h"
 
-t_ambient_light build_ambient_light(char *input, int id)
+t_ambient_light *build_ambient_light(char *input, int id)
 {
-    t_ambient_light new;
+    t_ambient_light *new;
     char            **details;
 
     details = s().split(input, space_str());
     if (!*details || !details[0] || !details[2])
         error("Wrong number of inputs for ambient light\n");
-    new.id = id;
-    new.light_ratio = ft_atod(details[1], 1.0);
-    new.color = get_color(details[2]);
+    new = ft_calloc(sizeof(t_ambient_light));
+    new->id = id;
+    new->light_ratio = ft_atod(details[1], 1.0);
+    new->color = get_color(details[2]);
     freepp((void **)details);
     return (new);
 }

@@ -50,7 +50,7 @@ void    *render_t(void *t)
         {
             viewport_pt = canvas_to_viewport(x + thread->strat_x, y);
             rotate_camera(theta, &viewport_pt);
-            color = trace_ray(m()->camera.coord, viewport_pt, 1, INT_MAX, 3);
+            color = trace_ray(m()->camera->coord, viewport_pt, 1, INT_MAX, 3);
             if (vp_to_canvas(x, 0) >= 0 && vp_to_canvas(x, 0) < IMG_W && \
 				vp_to_canvas(y, 1) >= 0 && vp_to_canvas(y, 1) < IMG_H)
                 my_pixel_put(&thread->img, vp_to_canvas(x - IMG_W / 2, 0), \
@@ -66,8 +66,6 @@ int	main(int ac, char **av)
 {
 	t_mlx_data	data;
 
-    printf("%d\n", s().end_with("t", ".rt"));
-    exit(0);
 	data_init(&data);
 	*mlx() = data;
     build_scene(av[ac - 1]);

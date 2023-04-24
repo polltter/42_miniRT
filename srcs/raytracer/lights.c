@@ -61,7 +61,7 @@ t_coord	compute_lighting(t_coord point, t_coord normal, t_coord vector, double s
 
     combined = set_coord_values(0, 0, 0);
     temp = *first_l();
-    calc_combined(&combined, m()->ambient.color, m()->ambient.light_ratio);
+    calc_combined(&combined, m()->ambient->color, m()->ambient->light_ratio);
     while (temp)
     {
         light = do_op_coords(SUBTRACT, (*(t_light *)temp->cont).coord, point);

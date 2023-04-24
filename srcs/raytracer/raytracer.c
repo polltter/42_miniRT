@@ -69,7 +69,7 @@ int	trace_ray(t_coord O, t_coord viewport_pt, double t_min, double t_max, int re
     closest = closest_intersection(O, viewport_pt, t_min, t_max, &closest_t);
     if (!closest)
         // return (multiply_color(m()->ambient.color, m()->ambient.light_ratio));
-        return (m()->ambient.color);
+        return (m()->ambient->color);
 
     t_coord	point = do_op_coords(ADD, O, coord_constant_op(MULTIPLY, viewport_pt, closest_t));
     t_coord normal = do_op_coords(SUBTRACT, point, closest->coord);

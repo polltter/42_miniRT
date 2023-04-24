@@ -30,7 +30,7 @@ int	render(t_mlx_data *data)
 		{
 			viewport_pt = canvas_to_viewport(x, y);
 			rotate_camera(theta, &viewport_pt);
-			color = trace_ray(m()->camera.coord, viewport_pt, 1, INT_MAX, 3);
+			color = trace_ray(m()->camera->coord, viewport_pt, 1, INT_MAX, 3);
 			if (vp_to_canvas(x, 0) >= 0 && vp_to_canvas(x, 0) < IMG_W && \
 				vp_to_canvas(y, 1) >= 0 && vp_to_canvas(y, 1) < IMG_H)
 				my_pixel_put(&mlx()->img, vp_to_canvas(x, 0), \
