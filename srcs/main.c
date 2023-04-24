@@ -66,6 +66,8 @@ int	main(int ac, char **av)
 {
 	t_mlx_data	data;
 
+    printf("%d\n", s().end_with("t", ".rt"));
+    exit(0);
 	data_init(&data);
 	*mlx() = data;
     build_scene(av[ac - 1]);

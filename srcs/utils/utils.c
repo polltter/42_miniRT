@@ -19,8 +19,6 @@ t_main	*m(void)
 	return (&data);
 }
 
-
-
 t_coord	set_coord_values(double x, double y, double z)
 {
 	t_coord	coord;

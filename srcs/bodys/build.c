@@ -8,7 +8,7 @@ int check_file(char *file_path)
 {
     int fd;
 
-    if (!s().contains(file_path, ".rt"))
+    if (!s().end_with(file_path, ".rt"))
         error("Invalid file");
     fd = open(file_path, O_RDONLY);
     if (fd < 0)

@@ -23,7 +23,7 @@ RAYTRACER_FILES		= render raytracer lights
 GNL_FILES			= get_next_line  get_next_line_utils
 LIST_FILES			= list_utils list_utils_2 list_utils_3 list_utils_4
 MATH_FILES			= math coords
-STRS_FILES			= ft_split  strings  strings_utils1  strings_utils2
+STRS_FILES			= ft_split  strings  strings_utils1  strings_utils2 strings_utils3
 UTILS_FILES			= mlx_utils viewport_utils utils parse_utils color_utils
 GENERAL_FILES		= main
 

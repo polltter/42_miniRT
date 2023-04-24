@@ -32,6 +32,7 @@ typedef struct s_s
 	int		(*alnum)(char *);
 	char	*(*append)(char *s, char c);
 	int		(*contains_char)(const char *s, char c);
+    int     (*end_with)(char *, char *);
 }			t_s;
 
 t_s	s(void);
