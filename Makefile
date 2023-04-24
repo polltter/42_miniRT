@@ -6,13 +6,13 @@
 #    By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/17 18:45:23 by touteiro          #+#    #+#              #
-#    Updated: 2023/04/22 20:27:34 by touteiro         ###   ########.fr        #
+#    Updated: 2023/04/24 12:46:51 by touteiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= miniRT
 CC		= cc
-CFLAGS	= -I incs -Imlx -Wall -Werror -Wextra -g3 -O3 -march=native -ffast-math -funsafe-math-optimizations -ffinite-math-only #-fsanitize=thread
+CFLAGS	= -I incs -Imlx -Wall -Werror -Wextra -g3 -O3 -pthread -march=native -ffast-math -funsafe-math-optimizations -ffinite-math-only #-fsanitize=thread
 
 BODYS_FILES			= build build_bodys build_utils build_lights
 CAM_FILES			= rotate_camera
@@ -29,7 +29,7 @@ GENERAL_FILES		= main
 
 BODYS_SRCS			= ${addsuffix .c, ${addprefix srcs/bodys/, ${BODYS_FILES}}}
 CAM_SRCS			= ${addsuffix .c, ${addprefix srcs/camera/, ${CAM_FILES}}}
-THREADS_SRCS			= ${addsuffix .c, ${addprefix srcs/threads/, ${THREADS_FILES}}}
+THREADS_SRCS		= ${addsuffix .c, ${addprefix srcs/threads/, ${THREADS_FILES}}}
 COLLISION_SRCS		= ${addsuffix .c, ${addprefix srcs/collisions/, ${COLLISION_FILES}}}
 HANDLES_SRCS		= ${addsuffix .c, ${addprefix srcs/handles/, ${HANDLES_FILES}}}
 RAYTRACER_SRCS		= ${addsuffix .c, ${addprefix srcs/raytracer/, ${RAYTRACER_FILES}}}
