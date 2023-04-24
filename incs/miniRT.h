@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:04:06 by touteiro          #+#    #+#             */
-/*   Updated: 2023/04/24 13:00:13 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/04/24 14:26:59 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 # define SUBTRACT	101
 # define MULTIPLY	102
 # define DIVIDE		103
-# define N_THREADS  25
+# define N_THREADS  13
 
 //MLX utils
 t_mlx_data	*mlx(void);
@@ -50,7 +50,7 @@ double		vp_to_canvas(double x, double is_Y);
 
 //Color manipulation
 int			get_rgb(int r, int g, int b);
-int			get_color_light(int color, double li);
+int			get_color_light(int color, t_coord li);
 
 //Struct utils
 t_coord		set_coord_values(double x, double y, double z);
@@ -65,7 +65,7 @@ void        freepp(void **to_free);
 int			render(t_mlx_data *data);
 int			trace_ray(t_coord O, t_coord viewport_pt, double t_min, double t_max, int recursion_depth);
 t_coord		reflect_ray(t_coord light, t_coord normal);
-double		compute_lighting(t_coord point, t_coord normal, t_coord vector, double specular);
+t_coord		compute_lighting(t_coord point, t_coord normal, t_coord vector, double specular);
 
 //Handles
 int			handle_keys(int k);

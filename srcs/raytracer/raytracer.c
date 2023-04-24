@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 19:43:23 by touteiro          #+#    #+#             */
-/*   Updated: 2023/04/24 12:59:57 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/04/24 14:55:29 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,6 @@ int	trace_ray(t_coord O, t_coord viewport_pt, double t_min, double t_max, int re
 		return (local_color);
 	mirror = reflect_ray(coord_constant_op(MULTIPLY, viewport_pt, -1), normal);
 	reflected_color = trace_ray(point, mirror, .001, INT_MAX, recursion_depth - 1);
-	return (get_color_light(local_color, (1 - reflective)) + get_color_light(reflected_color, reflective));
+	return (get_color_light(local_color, set_coord_values(1 - reflective, 1 - reflective, 1 - reflective)) + get_color_light(reflected_color, set_coord_values(reflective, reflective, reflective)));
 	// return (local_color * (1 - reflective) + reflected_color * reflective);
 }

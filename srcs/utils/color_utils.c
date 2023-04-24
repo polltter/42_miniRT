@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 19:34:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/04/22 19:41:17 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/04/24 14:26:38 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@ int	get_rgb(int r, int g, int b)
 	return (r << 16 | g << 8 | b);
 }
 
-int	get_color_light(int color, double li)
+int	get_color_light(int color, t_coord li)
 {
 	int	r;
 	int	g;
 	int	b;
 
-	r = (color >> 16 & 255) * li;
-	g = (color >> 8 & 255) * li;
-	b = (color >> 0 & 255) * li;
+	r = ((color >> 16 & 255)) * li.x;
+	g = ((color >> 8 & 255)) * li.y;
+	b = ((color >> 0 & 255)) * li.z;
 	return (get_rgb(r, g, b));
 }
 
