@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 19:34:45 by touteiro          #+#    #+#             */
-/*   Updated: 2023/04/24 14:26:38 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/04/24 16:01:49 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,18 @@
 int	get_rgb(int r, int g, int b)
 {
 	return (r << 16 | g << 8 | b);
+}
+
+double	multiply_component(int color, int shift, double brightness)
+{
+	return ((color >> shift & 255) * brightness);
+}
+
+int	multiply_color(int color, double brightness)
+{
+	return (get_rgb(multiply_component(color, 16, brightness), \
+			multiply_component(color, 8, brightness), \
+			multiply_component(color, 0, brightness)));
 }
 
 int	get_color_light(int color, t_coord li)

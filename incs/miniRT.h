@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:04:06 by touteiro          #+#    #+#             */
-/*   Updated: 2023/04/24 14:26:59 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/04/24 17:09:25 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ double		vp_to_canvas(double x, double is_Y);
 //Color manipulation
 int			get_rgb(int r, int g, int b);
 int			get_color_light(int color, t_coord li);
+int			multiply_color(int color, double brightness);
+double		multiply_component(int color, int shift, double brightness);
 
 //Struct utils
 t_coord		set_coord_values(double x, double y, double z);
@@ -122,6 +124,9 @@ void    imgs_to_canvas(t_elems *elem, void *o);
 void    *render_t(void *t);
 t_elems **first(void);
 t_elems **first_l(void);
+
+//debugging
+void	print_coords(t_coord coord);
 
 
 #endif
