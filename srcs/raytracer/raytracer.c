@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 19:43:23 by touteiro          #+#    #+#             */
-/*   Updated: 2023/04/22 20:19:55 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/04/24 12:59:57 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,24 @@ t_sphere	*closest_intersection(t_coord O, t_coord viewport_pt, double t_min, dou
 		temp = temp->next;
 	}
 	return (closest);
+}
+
+int	in_shadow(t_coord O, t_coord viewport_pt, double t_min, double t_max)
+{
+	t_elems		*temp;
+	t_point		t;
+
+	temp = *first();
+	while (temp)
+	{
+		t = collision(O, viewport_pt, (t_default_body *)temp->cont);
+		if (t.x > t_min && t.x < t_max)
+			return (1);
+		if (t.y > t_min && t.y < t_max)
+			return (1);
+		temp = temp->next;
+	}
+	return (0);
 }
 
 int	trace_ray(t_coord O, t_coord viewport_pt, double t_min, double t_max, int recursion_depth)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ligths.c                                           :+:      :+:    :+:   */
+/*   lights.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 19:46:14 by touteiro          #+#    #+#             */
-/*   Updated: 2023/04/22 19:46:55 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/04/24 13:01:21 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ double	compute_lighting(t_coord point, t_coord normal, t_coord vector, double sp
 	double 	i;
 	double	n_dot_l;
 	double	r_dot_v;
-	double		shadow_t;
-	t_sphere	*shadow_sphere;
 	t_elems *temp;
 	t_coord	light;
 	t_coord	reflected;
@@ -35,9 +33,7 @@ double	compute_lighting(t_coord point, t_coord normal, t_coord vector, double sp
 	{
 		light = do_op_coords(SUBTRACT, (*(t_light *)temp->cont).coord, point);
 		//Shadow check
-		shadow_t = INT_MAX;
-		shadow_sphere = closest_intersection(point, light, .001, INT_MAX, &shadow_t);
-		if (shadow_sphere)
+		if (in_shadow(point, light, .001, INT_MAX))
 		{
 			temp = temp->next;
 			continue ;
@@ -58,5 +54,5 @@ double	compute_lighting(t_coord point, t_coord normal, t_coord vector, double sp
 	}
 	if (i > 1) // Incorrect, needs to be improved
 		i = 1;
-	return(i);
+	return (i);
 }

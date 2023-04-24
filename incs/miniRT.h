@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:04:06 by touteiro          #+#    #+#             */
-/*   Updated: 2023/04/22 20:19:00 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/04/24 13:00:13 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ double	do_op(int op, double a, double b);
 
 //Collisions
 t_sphere	*closest_intersection(t_coord O, t_coord viewport_pt, double t_min, double t_max, double *closest_t);
+int			in_shadow(t_coord O, t_coord viewport_pt, double t_min, double t_max);
 t_point		collision(t_coord O, t_coord viewport_pt, t_default_body *body);
 t_point 	sphere_collision(t_coord O, t_coord viewport_pt, t_sphere sphere);
 
