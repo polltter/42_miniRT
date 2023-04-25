@@ -14,23 +14,55 @@
 
 void    **who_movin(void);
 
+int move_body(int k)
+{
+    if (k == XK_a)
+        ((t_default_body *)(*who_movin()))->coord.x -= 0.1;
+    else if (k == XK_d)
+        ((t_default_body *)(*who_movin()))->coord.x += 0.1;
+    else if (k == XK_w)
+        ((t_default_body *)(*who_movin()))->coord.y += 0.1;
+    else if (k == XK_s)
+        ((t_default_body *)(*who_movin()))->coord.y -= 0.1;
+    else if (k == XK_Up)
+        ((t_default_body *)(*who_movin()))->coord.z += 0.1;
+    else if (k == XK_Down)
+        ((t_default_body *)(*who_movin()))->coord.z -= 0.1;
+    else
+        return (0);
+    return (1);
+}
+
+int move_camera(int k)
+{
+    if (k == XK_a)
+        m()->camera->coord.x -= 0.1;
+    else if (k == XK_d)
+        m()->camera->coord.x += 0.1;
+    else if (k == XK_w)
+        m()->camera->coord.y += 0.1;
+    else if (k == XK_s)
+        m()->camera->coord.y -= 0.1;
+    else if (k == XK_Up)
+        m()->camera->vector.y += 0.1;
+    else if (k == XK_Down)
+        m()->camera->vector.y -= 0.1;
+    else if (k == XK_Left)
+        m()->camera->vector.x -= 0.1;
+    else if (k == XK_Right)
+        m()->camera->vector.x += 0.1;
+    else
+        return (0);
+    return (1);
+}
+
 int	handle_keys(int k)
 {
     if (k == XK_Escape)
 		ft_close(mlx());
-    else if (k == XK_a && (*who_movin()))
-        ((t_default_body *)(*who_movin()))->coord.x -= 0.1;
-    else if (k == XK_d && (*who_movin()))
-        ((t_default_body *)(*who_movin()))->coord.x += 0.1;
-    else if (k == XK_w && (*who_movin()))
-        ((t_default_body *)(*who_movin()))->coord.y += 0.1;
-    else if (k == XK_s && (*who_movin()))
-        ((t_default_body *)(*who_movin()))->coord.y -= 0.1;
-    else if (k == XK_Up && (*who_movin()))
-        ((t_default_body *)(*who_movin()))->coord.z += 0.1;
-    else if (k == XK_Down && (*who_movin()))
-        ((t_default_body *)(*who_movin()))->coord.z -= 0.1;
-    else
+    if (*who_movin() && !move_body(k))
+        return (0);
+    else if (!*who_movin() && !move_camera(k))
         return (0);
     if (N_THREADS == 1)
         render(NULL);

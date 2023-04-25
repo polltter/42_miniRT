@@ -37,26 +37,26 @@ void	*body_to_move(t_coord O, t_coord viewport_pt) {
     void *closest;
 
     closest_t = INT_MAX;
-    closest = closest_intersection(O, viewport_pt, 0.00001, INT_MAX, &closest_t);
+    closest = closest_intersection(O, viewport_pt, 1, INT_MAX, &closest_t);
     return (closest);
 }
 
 int	select_body(int button, int x, int y, t_mlx_data *data)
 {
     t_coord viewport_pt;
-    t_coord O = (t_coord){0,0,0};
+    t_point theta;
 
-    (void)button;
-    (void)x;
-    (void)y;
     (void)data;
     if (button == 1)
     {
+        theta = find_theta();
         viewport_pt = canvas_to_viewport(x - IMG_W / 2, - y + IMG_H / 2);
-        print_coords(viewport_pt);
+        rotate_camera(theta, &viewport_pt);
         printf("antes -- %p\n", *who_movin());
-        (*who_movin()) = body_to_move(O, viewport_pt);
+        (*who_movin()) = body_to_move(m()->camera->coord, viewport_pt);
         printf("depois -- %p\n", *who_movin());
     }
+    else if (button == 3)
+        (*who_movin()) = NULL;
     return (0);
 }
