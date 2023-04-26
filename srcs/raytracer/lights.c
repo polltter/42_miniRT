@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 19:46:14 by touteiro          #+#    #+#             */
-/*   Updated: 2023/04/26 14:00:47 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/04/26 14:14:44 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ t_coord	compute_lighting(t_coord point, t_coord normal, t_coord vector, double s
 	combined = set_coord_values(0, 0, 0);
 	temp = *first_l();
 	max_bright = 0;
-	calc_combined(&combined, m()->ambient.color, m()->ambient.light_ratio);
+	calc_combined(&combined, m()->ambient->color, m()->ambient->light_ratio);
 	while (temp)
 	{
 		light = do_op_coords(SUBTRACT, (*(t_light *)temp->cont).coord, point);
