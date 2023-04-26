@@ -21,7 +21,7 @@ void    build_default_body(char **details)
         i++;
     (*__this_body())->color = get_color(details[--i]);
     (*__this_body())->reflective = ft_atod(details[--i], 1);
-    (*__this_body())->specular = ft_atod(details[--i], 1000);
+    (*__this_body())->specular = ft_atod(details[--i], 10000);
 }
 
 void    build_sphere(char *input)
