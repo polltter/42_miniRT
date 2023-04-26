@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:04:06 by touteiro          #+#    #+#             */
-/*   Updated: 2023/04/24 17:09:25 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/04/26 17:55:29 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ t_ambient_light *build_ambient_light(char *input, int id);
 void    *build_light(char *input, int id);
 
 //rotations
-t_point find_theta(void);
+t_point find_theta(t_coord original, t_coord new_vector);
 void  rotate_camera(t_point theta, t_coord *vp_to_canvasviewport_pt);
 
 //Math

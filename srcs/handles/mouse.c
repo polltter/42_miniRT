@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:31:35 by touteiro          #+#    #+#             */
-/*   Updated: 2023/04/22 19:28:10 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/04/26 14:57:48 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@ void	*body_to_move(t_coord O, t_coord viewport_pt) {
 int	select_body(int button, int x, int y, t_mlx_data *data)
 {
     t_coord viewport_pt;
-    t_point theta;
+    // t_point theta;
 
     (void)data;
     if (button == 1)
     {
-        theta = find_theta();
+        // theta = find_theta();
         viewport_pt = canvas_to_viewport(x - IMG_W / 2, - y + IMG_H / 2);
-        rotate_camera(theta, &viewport_pt);
+        rotate_camera(m()->camera->theta, &viewport_pt);
         printf("antes -- %p\n", *who_movin());
         (*who_movin()) = body_to_move(m()->camera->coord, viewport_pt);
         printf("depois -- %p\n", *who_movin());

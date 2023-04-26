@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:33:05 by touteiro          #+#    #+#             */
-/*   Updated: 2023/04/17 20:33:30 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/04/26 17:59:47 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,10 @@ int move_camera(int k)
     else if (k == XK_Right)
         m()->camera->vector.x += 0.1;
     else
+	{
         return (0);
+	}
+	m()->camera->theta = find_theta((t_coord){0, 0, 1}, m()->camera->vector);
     return (1);
 }
 

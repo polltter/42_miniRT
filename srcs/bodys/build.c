@@ -57,6 +57,7 @@ void    build_scene_helper(char *input)
         if (m()->camera)
             error("Scene can only have one camera!\n");
         m()->camera = build_camera(input, id);
+		m()->camera->theta = find_theta((t_coord){0, 0, 1}, m()->camera->vector);
     }
 }
 

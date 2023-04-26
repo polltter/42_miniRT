@@ -35,19 +35,20 @@ double len2(t_point vector)
 }
 
 
-t_point find_theta(void)
+t_point find_theta(t_coord original, t_coord new_vector)
 {
     t_point theta;
 
-    theta.x = dot(0, 1, m()->camera->vector.y, m()->camera->vector.z);
-    theta.x = acos(theta.x / len2((t_point){m()->camera->vector.y, m()->camera->vector.z}));
-    theta.y = dot(0, 1, m()->camera->vector.x, m()->camera->vector.z);
-    theta.y = acos(theta.y / len2((t_point){m()->camera->vector.x, m()->camera->vector.z}));
+    theta.x = dot(original.y, original.z, new_vector.y, new_vector.z);
+    theta.x = acos(theta.x / len2((t_point){new_vector.y, new_vector.z}));
+    theta.y = dot(original.x, original.z, new_vector.x, new_vector.z);
+    theta.y = acos(theta.y / len2((t_point){new_vector.x, new_vector.z}));
     return (theta);
 }
 
 void  rotate_camera(t_point theta, t_coord *viewport_pt)
 {
+	// m()->camera->theta = find_theta(m());
     if (m()->camera->vector.x < 0)
         theta.y *= -1;
     if (m()->camera->vector.y < 0)

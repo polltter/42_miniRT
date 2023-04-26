@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:04:27 by touteiro          #+#    #+#             */
-/*   Updated: 2023/04/20 18:20:08 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/04/26 14:29:05 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@ enum e_types {
 	PL,
 	CY,
 };
+
+typedef struct s_point
+{
+	double	x;
+	double	y;
+}	t_point;
 
 struct s_viewport {
     double  width;
@@ -83,6 +89,7 @@ struct s_camera {
 	t_coord coord;
 	t_coord vector;
 	int		fov;
+	t_point	theta;
 };
 
 struct s_default_body {
@@ -122,11 +129,6 @@ struct s_cylinder {
 	double  height;
 };
 
-typedef struct s_point
-{
-	double	x;
-	double	y;
-}	t_point;
 
 struct s_main {
 	void			*bodys;
