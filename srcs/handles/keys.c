@@ -14,6 +14,8 @@
 
 void    **who_movin(void);
 
+
+
 int move_body(int k)
 {
     if (k == XK_a)
@@ -28,6 +30,8 @@ int move_body(int k)
         ((t_default_body *)(*who_movin()))->coord.z += 0.1;
     else if (k == XK_Down)
         ((t_default_body *)(*who_movin()))->coord.z -= 0.1;
+    else if (k == XK_r)
+        ((t_sphere *)(*who_movin()))->diameter *= 1.1;
     else
         return (0);
     return (1);

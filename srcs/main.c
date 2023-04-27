@@ -46,7 +46,7 @@ void    *render_t(void *t)
         y = -IMG_H / 2;
         while (y < IMG_H / 2)
         {
-            viewport_pt = canvas_to_viewport(x + thread->strat_x, y);
+            viewport_pt = canvas_to_viewport(x - 1 + thread->strat_x, y);
             rotate_camera(m()->camera->theta, &viewport_pt);
             color = trace_ray(m()->camera->coord, viewport_pt, 1, INT_MAX, 3);
             if (vp_to_canvas(x, 0) >= 0 && vp_to_canvas(x, 0) < IMG_W && \

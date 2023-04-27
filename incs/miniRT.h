@@ -124,6 +124,7 @@ void    imgs_to_canvas(t_elems *elem, void *o);
 void    *render_t(void *t);
 t_elems **first(void);
 t_elems **first_l(void);
+int	store_colors(int color, int flag);
 
 //debugging
 void	print_coords(t_coord coord);
