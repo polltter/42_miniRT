@@ -31,9 +31,26 @@ t_point sphere_collision(t_coord O, t_coord viewport_pt, t_sphere sphere)
 	return (new);
 }
 
+t_point plane_collision(t_coord viewport_pt, t_plane *plane)
+{
+    double  numerator;
+    t_point t;
+
+    numerator = 0;
+    numerator += plane->vector.x * (m()->camera->coord.x - plane->coord.x);
+    numerator += plane->vector.y * (m()->camera->coord.y - plane->coord.y);
+    numerator += plane->vector.z * (m()->camera->coord.z - plane->coord.z);
+    numerator *= -1;
+    t.x = numerator / (viewport_pt.x + viewport_pt.y + viewport_pt.z);
+    t.y = 0;
+    return (t);
+}
+
 t_point	collision(t_coord O, t_coord viewport_pt, t_default_body *body)
 {
-	if (body->id == SPH)
+    if (body->id == SPH)
 		return (sphere_collision(O, viewport_pt, *((t_sphere*)body)));
-	return ((t_point){INT_MAX, INT_MAX});
+    else if (body->id == PL)
+        return (plane_collision(viewport_pt, ((t_plane *)body)));
+    return ((t_point){INT_MAX, INT_MAX});
 }

@@ -35,7 +35,7 @@
 # define SUBTRACT	101
 # define MULTIPLY	102
 # define DIVIDE		103
-# define N_THREADS  13
+# define N_THREADS  40
 
 //MLX utils
 t_mlx_data	*mlx(void);
