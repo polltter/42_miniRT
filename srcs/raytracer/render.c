@@ -27,7 +27,12 @@ int	render(t_mlx_data *data)
 		while (y < IMG_H / 2)
 		{
 			viewport_pt = canvas_to_viewport(x, y);
-			rotate_camera(m()->camera->theta, &viewport_pt);
+//            printf("len: %f\n", vector_length(viewport_pt));
+//            print_coords(viewport_pt);
+            rotate_camera(m()->camera->theta, &viewport_pt);
+//            printf("theta: %f, %f\n", m()->camera->theta.x, m()->camera->theta.y);
+//            printf("len: %f\n", vector_length(viewport_pt));
+//            print_coords(viewport_pt);
 			color = trace_ray(m()->camera->coord, viewport_pt, 1, INT_MAX, 3);
 			if (vp_to_canvas(x, 0) >= 0 && vp_to_canvas(x, 0) < IMG_W && \
 				vp_to_canvas(y, 1) >= 0 && vp_to_canvas(y, 1) < IMG_H)

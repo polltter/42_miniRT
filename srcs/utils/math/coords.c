@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "../../../incs/miniRT.h"
 
 /* Need to check multiplication and division */
 t_coord	do_op_coords(int op, t_coord a, t_coord b)

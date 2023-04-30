@@ -41,12 +41,19 @@ void	*body_to_move(t_coord O, t_coord viewport_pt) {
     return (closest);
 }
 
+void    zoom(int op)
+{
+    m()->camera->coord = do_op_coords(op, \
+                                    m()->camera->coord, \
+                                    m()->camera->vector);
+}
+
 int	select_body(int button, int x, int y, t_mlx_data *data)
 {
     t_coord viewport_pt;
-    // t_point theta;
 
     (void)data;
+    printf("%d\n", button);
     if (button == 1)
     {
         // theta = find_theta();
@@ -58,5 +65,15 @@ int	select_body(int button, int x, int y, t_mlx_data *data)
     }
     else if (button == 3)
         (*who_movin()) = NULL;
+    else if (button == 5 || button == 4)
+        zoom(96 + button);
+    if (N_THREADS == 1)
+        render(NULL);
+    else if (N_THREADS > 1)
+    {
+        array(m()->threads)->for_each(init_threads, 0);
+        array(m()->threads)->for_each(join_for_each, 0);
+        array(m()->threads)->for_each(imgs_to_canvas, 0);
+    }
     return (0);
 }
