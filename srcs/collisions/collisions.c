@@ -31,18 +31,40 @@ t_point sphere_collision(t_coord O, t_coord viewport_pt, t_sphere sphere)
 	return (new);
 }
 
+void normalize(t_coord *v)
+{
+    double len;
+
+    len = vector_length(*v);
+    v->x /= len;
+    v->y /= len;
+    v->z /= len;
+}
+
 t_point plane_collision(t_coord viewport_pt, t_plane *plane)
 {
     double  numerator;
     t_point t;
 
     numerator = 0;
+//    normalize(&viewport_pt);
     numerator += plane->vector.x * (m()->camera->coord.x - plane->coord.x);
     numerator += plane->vector.y * (m()->camera->coord.y - plane->coord.y);
     numerator += plane->vector.z * (m()->camera->coord.z - plane->coord.z);
     numerator *= -1;
-    t.x = numerator / (viewport_pt.x + viewport_pt.y + viewport_pt.z);
+    t.x = numerator / (viewport_pt.x * plane->vector.x +\
+                        viewport_pt.y * plane->vector.y +\
+                        viewport_pt.z * plane->vector.z);
     t.y = 0;
+//    printf("=====Viewport=====\n");
+//    print_coords(viewport_pt);
+//    printf("=====Viewport=====\n");
+//    printf("=====PLANE =====\n");
+//    print_coords(plane->vector);
+//    printf("=====PLANE=====\n");
+//    printf("=====t=====\n");
+//    printf("%f\n", t.x);
+//    printf("=====t=====\n\n");
     return (t);
 }
 
