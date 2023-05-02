@@ -4,9 +4,9 @@
 
 #include "../../incs/miniRT.h"
 
-t_default_body  **__this_body(void)
+t_body  **__this_body(void)
 {
-    static t_default_body	*a;
+    static t_body	*a;
 
     return (&a);
 }

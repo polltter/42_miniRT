@@ -4,7 +4,7 @@
 
 #include "../../incs/miniRT.h"
 
-t_default_body	*body(void *obj)
+t_body	*body(void *obj)
 {
     *__this_body() = obj;
     return (*__this_body());

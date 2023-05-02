@@ -6,17 +6,20 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 19:46:14 by touteiro          #+#    #+#             */
-/*   Updated: 2023/04/26 14:14:44 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/02 15:15:49 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/miniRT.h"
 
+/*
+2 * N * dot(N, R) - R
+*/
 t_coord	reflect_ray(t_coord light, t_coord normal)
 {
     return (do_op_coords(SUBTRACT, \
-		coord_constant_op(MULTIPLY, coord_constant_op(MULTIPLY, normal, 2), \
-		dot_product(normal, light)), light));
+		coord_constant_op(MULTIPLY, normal, \
+		dot_product(normal, light) * 2), light));
 }
 
 void	clamp_combined(t_coord *combined, double max_light)
