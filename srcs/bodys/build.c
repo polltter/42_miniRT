@@ -84,7 +84,7 @@ void    build_scene(char *file_path)
     {
         free(input);
         input = get_next_line(fd);
-        if (!s().equal(input,"\n") || !input)
+        if (!s().equal(input,"\n") || !s().equal_n(input, "#", 1) || !input)
             continue ;
         build_scene_helper(input);
     }
