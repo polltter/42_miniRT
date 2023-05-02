@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:33:05 by touteiro          #+#    #+#             */
-/*   Updated: 2023/04/26 17:59:47 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/02 14:34:52 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@ void    **who_movin(void);
 int move_body(int k)
 {
     if (k == XK_a)
-        ((t_default_body *)(*who_movin()))->coord.x -= 0.1;
+        ((t_body *)(*who_movin()))->coord.x -= 0.1;
     else if (k == XK_d)
-        ((t_default_body *)(*who_movin()))->coord.x += 0.1;
+        ((t_body *)(*who_movin()))->coord.x += 0.1;
     else if (k == XK_w)
-        ((t_default_body *)(*who_movin()))->coord.y += 0.1;
+        ((t_body *)(*who_movin()))->coord.y += 0.1;
     else if (k == XK_s)
-        ((t_default_body *)(*who_movin()))->coord.y -= 0.1;
+        ((t_body *)(*who_movin()))->coord.y -= 0.1;
     else if (k == XK_Up)
-        ((t_default_body *)(*who_movin()))->coord.z += 0.1;
+        ((t_body *)(*who_movin()))->coord.z += 0.1;
     else if (k == XK_Down)
-        ((t_default_body *)(*who_movin()))->coord.z -= 0.1;
+        ((t_body *)(*who_movin()))->coord.z -= 0.1;
     else if (k == XK_r)
         ((t_sphere *)(*who_movin()))->diameter *= 1.1;
     else

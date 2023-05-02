@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 19:44:31 by touteiro          #+#    #+#             */
-/*   Updated: 2023/04/22 20:15:30 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/02 14:34:52 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_point plane_collision(t_coord viewport_pt, t_plane *plane)
     return (t);
 }
 
-t_point	collision(t_coord O, t_coord viewport_pt, t_default_body *body)
+t_point	collision(t_coord O, t_coord viewport_pt, t_body *body)
 {
     if (body->id == SPH)
 		return (sphere_collision(O, viewport_pt, *((t_sphere*)body)));

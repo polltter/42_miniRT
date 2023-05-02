@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:04:27 by touteiro          #+#    #+#             */
-/*   Updated: 2023/04/26 14:29:05 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/02 14:34:52 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define STRUCTS_H
 
 typedef struct s_ambient_light	t_ambient_light;
-typedef struct s_default_body	t_default_body;
+typedef struct s_default_body	t_body;
 typedef struct s_mlx_data		t_mlx_data;
 typedef struct s_cylinder		t_cylinder;
 typedef struct s_viewport       t_viewport;

@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:04:06 by touteiro          #+#    #+#             */
-/*   Updated: 2023/04/26 17:55:29 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/02 15:54:41 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,14 +82,14 @@ void    *build(char *input, int id);
 void    build_scene(char *file_path);
 
 //bodys/build_bodys
-t_default_body  **__this_body(void);
+t_body  **__this_body(void);
 void            build_default_body(char **details);
 void            build_sphere(char *input);
 void            build_plane(char *input);
 void             build_cylinder(char *input);
 
 //bodys/build_butils
-t_default_body	*body(void *obj);
+t_body	*body(void *obj);
 char            *space_str(void);
 int             get_color(char *color);
 t_coord         get_coord(char *s_coords, float max);
@@ -108,9 +108,9 @@ double	dot_product(t_coord a, t_coord b);
 double	do_op(int op, double a, double b);
 
 //Collisions
-t_sphere	*closest_intersection(t_coord O, t_coord viewport_pt, double t_min, double t_max, double *closest_t);
+t_body		*closest_intersection(t_coord O, t_coord viewport_pt, double t_min, double t_max, double *closest_t);
 int			in_shadow(t_coord O, t_coord viewport_pt, double t_min, double t_max);
-t_point		collision(t_coord O, t_coord viewport_pt, t_default_body *body);
+t_point		collision(t_coord O, t_coord viewport_pt, t_body *body);
 t_point 	sphere_collision(t_coord O, t_coord viewport_pt, t_sphere sphere);
 
 //threads
