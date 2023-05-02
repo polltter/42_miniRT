@@ -82,7 +82,6 @@ int	main(int ac, char **av)
         mlx_put_image_to_window(mlx()->mlx, mlx()->mlx_win, mlx()->img.img, 0, 0);
     }
 	mlx_mouse_hook(mlx()->mlx_win, select_body, &data);
-//	mlx_loop_hook(mlx()->mlx, render, &data);
 	mlx_key_hook(mlx()->mlx_win, handle_keys, &data);
 	mlx_hook(mlx()->mlx_win, DestroyNotify, 0, ft_close, &data);
 	mlx_loop(data.mlx);
