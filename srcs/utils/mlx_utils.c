@@ -19,6 +19,14 @@ t_mlx_data	*mlx(void)
 	return (&data);
 }
 
+int	my_mlx_pixel_get(t_data *data, int x, int y)
+{
+    char	*dst;
+
+    dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+    return(*(unsigned int *)dst);
+}
+
 void	my_pixel_put(t_data *img, int x, int y, int color)
 {
 	char	*pixel;
@@ -26,8 +34,6 @@ void	my_pixel_put(t_data *img, int x, int y, int color)
     pixel = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
 	*(unsigned int *)pixel = color;
 }
-
-
 
 void	data_init(t_mlx_data *data)
 {

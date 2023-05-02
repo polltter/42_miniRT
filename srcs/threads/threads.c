@@ -27,8 +27,19 @@ void	print_threads(t_elems *elem, void *o)
 void    imgs_to_canvas(t_elems *elem, void *o)
 {
     (void)o;
-    mlx_put_image_to_window(mlx()->mlx, mlx()->mlx_win, \
-        ((t_threads *)elem->cont)->img.img, ((t_threads *)elem->cont)->strat_x + IMG_W / 2, 0);
+    int x;
+    int y = -1;
+    t_threads *thread = ((t_threads *)elem->cont);
+    while (++y < IMG_H)
+    {
+        x = -1;
+        while (++x < IMG_W / N_THREADS)
+        {
+            my_pixel_put(&mlx()->img, thread->strat_x  + IMG_W / 2 + x, y, \
+            my_mlx_pixel_get(&thread->img, x, y));
+        }
+    }
+//    mlx_put_image_to_window(mlx()->mlx, mlx()->mlx_win,((t_threads *)elem->cont)->img.img, ((t_threads *)elem->cont)->strat_x + IMG_W / 2, 0);
 
 }
 

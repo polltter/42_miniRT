@@ -74,6 +74,7 @@ int	select_body(int button, int x, int y, t_mlx_data *data)
         array(m()->threads)->for_each(init_threads, 0);
         array(m()->threads)->for_each(join_for_each, 0);
         array(m()->threads)->for_each(imgs_to_canvas, 0);
+        mlx_put_image_to_window(mlx()->mlx, mlx()->mlx_win, mlx()->img.img, 0, 0);
     }
     return (0);
 }

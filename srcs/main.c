@@ -79,6 +79,7 @@ int	main(int ac, char **av)
         array(m()->threads)->for_each(init_threads, 0);
         array(m()->threads)->for_each(join_for_each, 0);
         array(m()->threads)->for_each(imgs_to_canvas, 0);
+        mlx_put_image_to_window(mlx()->mlx, mlx()->mlx_win, mlx()->img.img, 0, 0);
     }
 	mlx_mouse_hook(mlx()->mlx_win, select_body, &data);
 //	mlx_loop_hook(mlx()->mlx, render, &data);
