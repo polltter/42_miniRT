@@ -47,6 +47,7 @@ int	in_shadow(t_coord O, t_coord viewport_pt, double t_min, double t_max)
     while (temp)
     {
         t = collision(O, viewport_pt, (t_body *)temp->cont);
+//        printf("%f %f %f\n", t.x, t.y, vector_length(viewport_pt));
         if (t.x > t_min && t.x < t_max)
             return (1);
         if (t.y > t_min && t.y < t_max)
@@ -71,15 +72,18 @@ int	trace_ray(t_coord O, t_coord viewport_pt, double t_min, double t_max, int re
     if (!closest)
         return (multiply_color(m()->ambient->color, m()->ambient->light_ratio));
         // return (m()->ambient->color);
-
     t_coord	point = do_op_coords(ADD, O, coord_constant_op(MULTIPLY, viewport_pt, closest_t));
 	if (closest->id == SPH)
 	{
 		normal = do_op_coords(SUBTRACT, point, closest->coord);
 		normal = coord_constant_op(DIVIDE, normal, vector_length(normal));
-	}
+    }
 	else
-		normal = ((t_plane *)closest)->vector;
+    {
+        normal = ((t_plane *)closest)->vector;
+    }
+    if (dot_product(normal, viewport_pt) > 0)
+        normal = coord_constant_op(MULTIPLY, normal, -1);
     local_color = get_color_light(closest->color, compute_lighting(point, normal, coord_constant_op(MULTIPLY, viewport_pt, -1), closest->specular));
 
     reflective = closest->reflective;

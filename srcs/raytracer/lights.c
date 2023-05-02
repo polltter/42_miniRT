@@ -77,11 +77,12 @@ t_coord	compute_lighting(t_coord point, t_coord normal, t_coord vector, double s
 	{
 		light = do_op_coords(SUBTRACT, (*(t_light *)temp->cont).coord, point);
 		//Shadow check
-		if (in_shadow(point, light, .001, INT_MAX))
+		if (in_shadow(point, light, .001, 1))
 		{
 			temp = temp->next;
 			continue ;
 		}
+
 		//Compute diffusion
 		diffusion(&combined, normal, light, *(t_light *)temp->cont);
 		//Compute reflection - need to make it into self-contained function

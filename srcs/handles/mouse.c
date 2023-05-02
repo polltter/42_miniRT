@@ -12,7 +12,6 @@
 
 #include "../../incs/miniRT.h"
 
-t_sphere	*closest_intersection(t_coord O, t_coord viewport_pt, double t_min, double t_max, double *closest_t);
 t_coord	canvas_to_viewport(double x, double y);
 void	print_coords(t_coord coord);
 
