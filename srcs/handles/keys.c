@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:33:05 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/02 14:34:52 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/03 16:57:21 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,17 @@
 
 void    **who_movin(void);
 
-
+void	rotate_plane(int k)
+{
+	if (k == XK_Left)
+		((t_plane *)(*who_movin()))->vector.x += 0.3;
+	else if (k == XK_Right)
+		((t_plane *)(*who_movin()))->vector.x -= 0.3;
+	else if (k == XK_Down)
+		((t_plane *)(*who_movin()))->vector.y += 0.3;
+	else if (k == XK_Up)
+		((t_plane *)(*who_movin()))->vector.y -= 0.3;
+}
 
 int move_body(int k)
 {
@@ -30,6 +40,8 @@ int move_body(int k)
         ((t_body *)(*who_movin()))->coord.z += 0.1;
     else if (k == XK_Down)
         ((t_body *)(*who_movin()))->coord.z -= 0.1;
+	else if (((t_body *)(*who_movin()))->id == PL)
+        rotate_plane(k);
     else if (k == XK_r)
         ((t_sphere *)(*who_movin()))->diameter *= 1.1;
     else
