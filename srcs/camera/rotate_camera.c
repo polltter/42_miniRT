@@ -73,16 +73,16 @@ void	rotate_plane(int k)
 	else if (k == XK_Right)
 		plane->vector.x += 0.1;
 	else if (k == XK_Down)
-		plane->vector.y -= 0.1;
+		plane->vector.z -= 0.1;
 	else if (k == XK_Up)
-		plane->vector.y += 0.1;
-	plane->theta = find_theta((t_coord){0, 0, 1}, plane->vector);
-	if (plane->vector.x < 0)
-        plane->theta.y *= -1;
-	if (plane->vector.y < 0)
-        plane->theta.x *= -1;
-	rotate_x(plane->theta.x, &plane->vector);
-    rotate_y(plane->theta.y, &plane->vector);
-    rotate_y(plane->theta.z, &plane->vector);
+		plane->vector.z += 0.1;
+	// plane->theta = find_theta((t_coord){0, 0, 1}, plane->vector);
+	// if (plane->vector.x < 0)
+    //     plane->theta.y *= -1;
+	// if (plane->vector.y < 0)
+    //     plane->theta.x *= -1;
+	// rotate_x(plane->theta.x, &plane->vector);
+    // rotate_y(plane->theta.y, &plane->vector);
+    // rotate_y(plane->theta.z, &plane->vector);
 	// print_coords(plane->vector);
 } 
