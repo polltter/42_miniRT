@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:04:27 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/02 14:34:52 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/03 20:07:11 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ struct s_camera {
 	t_coord coord;
 	t_coord vector;
 	int		fov;
-	t_point	theta;
+	t_coord	theta;
 };
 
 struct s_default_body {
@@ -115,6 +115,7 @@ struct s_plane {
     t_coord coord;
     double	specular;
     double	reflective;
+	t_coord	theta;
 	t_coord vector;
 };
 

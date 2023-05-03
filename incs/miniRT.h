@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:04:06 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/02 15:54:41 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/03 19:10:51 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ t_coord		reflect_ray(t_coord light, t_coord normal);
 t_coord		compute_lighting(t_coord point, t_coord normal, t_coord vector, double specular);
 
 //Handles
+void   		 **who_movin(void);
 int			handle_keys(int k);
 int			handle_mouse(int button, int x, int y, t_mlx_data *data);
 int	        select_body(int button, int x, int y, t_mlx_data *data);
@@ -101,8 +102,9 @@ t_ambient_light *build_ambient_light(char *input, int id);
 void    *build_light(char *input, int id);
 
 //rotations
-t_point find_theta(t_coord original, t_coord new_vector);
-void  rotate_camera(t_point theta, t_coord *vp_to_canvasviewport_pt);
+t_coord find_theta(t_coord original, t_coord new_vector);
+void  rotate_camera(t_coord theta, t_coord *vp_to_canvasviewport_pt);
+void	rotate_plane(int k);
 
 //Math
 double	dot_product(t_coord a, t_coord b);
