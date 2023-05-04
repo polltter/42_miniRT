@@ -48,7 +48,7 @@ void    *render_t(void *t)
         {
             viewport_pt = canvas_to_viewport(x - 1 + thread->strat_x, y);
             rotate_camera(m()->camera->theta, &viewport_pt);
-            color = trace_ray(m()->camera->coord, viewport_pt, 1, INT_MAX, 3);
+            color = trace_ray(m()->camera->coord, viewport_pt, 1, INT_MAX, 5);
             if (vp_to_canvas(x, 0) >= 0 && vp_to_canvas(x, 0) < IMG_W && \
 				vp_to_canvas(y, 1) >= 0 && vp_to_canvas(y, 1) < IMG_H)
                 my_pixel_put(&thread->img, vp_to_canvas(x - IMG_W / 2, 0), \

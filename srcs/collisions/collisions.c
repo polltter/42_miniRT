@@ -41,16 +41,16 @@ void normalize(t_coord *v)
     v->z /= len;
 }
 
-t_point plane_collision(t_coord viewport_pt, t_plane *plane)
+t_point plane_collision(t_coord viewport_pt, t_plane *plane, t_coord origin)
 {
     double  numerator;
     t_point t;
 
     numerator = 0;
 //    normalize(&viewport_pt);
-    numerator += plane->vector.x * (m()->camera->coord.x - plane->coord.x);
-    numerator += plane->vector.y * (m()->camera->coord.y - plane->coord.y);
-    numerator += plane->vector.z * (m()->camera->coord.z - plane->coord.z);
+    numerator += plane->vector.x * (origin.x - plane->coord.x);
+    numerator += plane->vector.y * (origin.y - plane->coord.y);
+    numerator += plane->vector.z * (origin.z - plane->coord.z);
     numerator *= -1;
     t.x = numerator / (viewport_pt.x * plane->vector.x +\
                         viewport_pt.y * plane->vector.y +\
@@ -73,6 +73,6 @@ t_point	collision(t_coord O, t_coord viewport_pt, t_body *body)
     if (body->id == SPH)
 		return (sphere_collision(O, viewport_pt, *((t_sphere*)body)));
     else if (body->id == PL)
-        return (plane_collision(viewport_pt, ((t_plane *)body)));
+        return (plane_collision(viewport_pt, ((t_plane *)body), O));
     return ((t_point){INT_MAX, INT_MAX});
 }
