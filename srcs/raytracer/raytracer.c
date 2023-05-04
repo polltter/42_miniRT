@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 19:43:23 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/02 15:48:25 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/04 20:14:01 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,12 @@ int	trace_ray(t_coord O, t_coord viewport_pt, double t_min, double t_max, int re
         normal = ((t_plane *)closest)->vector;
     }
     if (dot_product(normal, viewport_pt) > 0)
-        normal = coord_constant_op(MULTIPLY, normal, -1);
-    local_color = get_color_light(closest->color, compute_lighting(point, normal, coord_constant_op(MULTIPLY, viewport_pt, -1), closest->specular));
+		normal = coord_constant_op(MULTIPLY, normal, -1);
+	if (closest->id == PL)
+    	local_color = get_color_light(square_at(do_op_coords(ADD, normal, coord_constant_op(MULTIPLY, viewport_pt, closest_t)), \
+				((t_plane *)closest)->pattern), compute_lighting(point, normal, coord_constant_op(MULTIPLY, viewport_pt, -1), closest->specular));
+	else
+		local_color = get_color_light(closest->color, compute_lighting(point, normal, coord_constant_op(MULTIPLY, viewport_pt, -1), closest->specular));
 
     reflective = closest->reflective;
     if (recursion_depth <= 0 || reflective <= 0)

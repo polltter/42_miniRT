@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:56:14 by touteiro          #+#    #+#             */
-/*   Updated: 2023/04/26 14:37:52 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/04 19:56:56 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,28 +62,42 @@ void    *render_t(void *t)
 
 int	main(int ac, char **av)
 {
-	t_mlx_data	data;
+	{ 
+		t_mlx_data	data;
 
-	data_init(&data);
-	*mlx() = data;
-    build_scene(av[ac - 1]);
-//	mlx_mouse_hook(mlx()->mlx_win, handle_mouse, &data);
-    *first() = array(m()->bodys)->begin;
-    *first_l() = array(m()->lights)->begin;
-    if (N_THREADS == 1)
-        render(NULL);
-    else if (N_THREADS > 1)
-    {
-        build_threads();
-//        array(m()->threads)->for_each(print_threads, 0);
-        array(m()->threads)->for_each(init_threads, 0);
-        array(m()->threads)->for_each(join_for_each, 0);
-        array(m()->threads)->for_each(imgs_to_canvas, 0);
-        mlx_put_image_to_window(mlx()->mlx, mlx()->mlx_win, mlx()->img.img, 0, 0);
-    }
-	mlx_mouse_hook(mlx()->mlx_win, select_body, &data);
-	mlx_key_hook(mlx()->mlx_win, handle_keys, &data);
-	mlx_hook(mlx()->mlx_win, DestroyNotify, 0, ft_close, &data);
-	mlx_loop(data.mlx);
-	return (0);
+		data_init(&data);
+		*mlx() = data;
+		build_scene(av[ac - 1]);
+	//	mlx_mouse_hook(mlx()->mlx_win, handle_mouse, &data);
+		*first() = array(m()->bodys)->begin;
+		*first_l() = array(m()->lights)->begin;
+		if (N_THREADS == 1)
+			render(NULL);
+		else if (N_THREADS > 1)
+		{
+			build_threads();
+	//        array(m()->threads)->for_each(print_threads, 0);
+			array(m()->threads)->for_each(init_threads, 0);
+			array(m()->threads)->for_each(join_for_each, 0);
+			array(m()->threads)->for_each(imgs_to_canvas, 0);
+			mlx_put_image_to_window(mlx()->mlx, mlx()->mlx_win, mlx()->img.img, 0, 0);
+		}
+		mlx_mouse_hook(mlx()->mlx_win, select_body, &data);
+		// mlx_key_hook(mlx()->mlx_win, handle_keys, &data);
+		mlx_hook(mlx()->mlx_win, 2, 1L << 0, handle_keys, &data);
+		mlx_hook(mlx()->mlx_win, DestroyNotify, 0, ft_close, &data);
+		mlx_loop(data.mlx);
+		return (0);
+	}
+	/* {
+		(void)ac;
+		(void)av;
+		t_pattern pattern;
+
+		pattern.a = get_rgb(255, 255, 255);
+		pattern.b = get_rgb(0, 0, 0);
+		
+		int white = get_rgb(255, 255, 255)*.75;
+		pattern_at((t_coord){.25, 0, 0}, pattern) == white ? printf("white\n") : printf("%d\n", pattern_at((t_coord){.25, 0, 0}, pattern));
+	} */
 }

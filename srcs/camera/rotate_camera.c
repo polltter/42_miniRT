@@ -24,7 +24,7 @@ void rotate_y(double theta, t_coord *viewport_pt)
 void rotate_z(double theta, t_coord *viewport_pt)
 {
     viewport_pt->x = viewport_pt->x * cos(theta) - viewport_pt->y * sin(theta);
-    viewport_pt->z = viewport_pt->x * sin(theta) + viewport_pt->y * cos(theta);
+    viewport_pt->y = viewport_pt->x * sin(theta) + viewport_pt->y * cos(theta);
 }
 
 double dot(double v1, double v2, double t1, double t2)
@@ -78,6 +78,6 @@ void	rotate_plane(int k)
         rotate_y(-0.02, &plane->vector);
     else if (k == XK_m)
         rotate_z(0.02, &plane->vector);
-    else if (k == XK_l)
+    else if (k == XK_k)
         rotate_z(-0.02, &plane->vector);
 } 

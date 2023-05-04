@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:04:27 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/03 20:07:11 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/04 19:55:51 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ typedef struct s_mlx_data		t_mlx_data;
 typedef struct s_cylinder		t_cylinder;
 typedef struct s_viewport       t_viewport;
 typedef struct s_threads        t_threads;
+typedef struct s_pattern		t_pattern;
 typedef struct s_camera			t_camera;
 typedef struct s_sphere			t_sphere;
 typedef struct s_coord			t_coord;
@@ -84,6 +85,11 @@ struct s_light {
 	t_coord	coord;
 };
 
+struct s_pattern {
+	int	a;
+	int	b;
+};
+
 struct s_camera {
 	int     id;
 	t_coord coord;
@@ -107,16 +113,18 @@ struct s_sphere {
     double	specular;
     double	reflective;
     double  diameter;
+	t_pattern	pattern;
 };
 
 struct s_plane {
-    int     id;
-    int     color;
-    t_coord coord;
-    double	specular;
-    double	reflective;
-	t_coord	theta;
-	t_coord vector;
+    int     	id;
+    int     	color;
+    t_coord 	coord;
+    double		specular;
+    double		reflective;
+	t_coord		theta;
+	t_coord 	vector;
+	t_pattern	pattern;
 };
 
 struct s_cylinder {
@@ -129,7 +137,6 @@ struct s_cylinder {
 	double  diameter;
 	double  height;
 };
-
 
 struct s_main {
 	void			*bodys;
@@ -148,5 +155,6 @@ struct s_threads {
     int         end_x;
     t_data      img;
 };
+
 
 #endif
