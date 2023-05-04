@@ -4,7 +4,7 @@
 
 #include "../../incs/miniRT.h"
 
-int	ft_atoi(char *nptr, int max)
+int	ft_atoi(char *nptr, long int max)
 {
     int	sign;
     int	i;
@@ -28,8 +28,8 @@ int	ft_atoi(char *nptr, int max)
         i++;
         if (nb > max)
         {
-            printf("%d\n", max);
-            error("Argument to big.\n");
+            printf("%ld\n", max);
+            error("Argument to big (in atoi).\n");
         }
     }
     return (sign * nb);

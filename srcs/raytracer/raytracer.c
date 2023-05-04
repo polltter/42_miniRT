@@ -78,9 +78,10 @@ int	trace_ray(t_coord O, t_coord viewport_pt, double t_min, double t_max, int re
 		normal = do_op_coords(SUBTRACT, point, closest->coord);
 		normal = coord_constant_op(DIVIDE, normal, vector_length(normal));
     }
-	else
-    {
+	else if (closest->id == PL)
         normal = ((t_plane *)closest)->vector;
+    else if (closest->id == CY){
+
     }
     if (dot_product(normal, viewport_pt) > 0)
         normal = coord_constant_op(MULTIPLY, normal, -1);

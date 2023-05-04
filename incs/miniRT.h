@@ -61,7 +61,7 @@ t_coord		coord_constant_op(int op, t_coord coord, double constant);
 t_coord		do_op_coords(int op, t_coord a, t_coord b);
 double		vector_length(t_coord vector);
 double	    ft_atod(char *str, double max);
-int	        ft_atoi(char *nptr, int max);
+int	        ft_atoi(char *nptr, long int max);
 void        freepp(void **to_free);
 
 //Render

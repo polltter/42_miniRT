@@ -12,7 +12,7 @@
 
 NAME	= miniRT
 CC		= cc
-CFLAGS	= -I incs -Imlx -Wall -Werror -Wextra -g3 -O3 -pthread -march=native -ffast-math -funsafe-math-optimizations -ffinite-math-only #-fsanitize=thread
+CFLAGS	= -I incs -Imlx -Wall -Werror -Wextra -g3 -O3 -pthread -march=native -ffast-math -funsafe-math-optimizations -ffinite-math-only #-fsanitize=address
 
 BODYS_FILES			= build build_bodys build_utils build_lights
 CAM_FILES			= rotate_camera

@@ -115,7 +115,6 @@ struct s_plane {
     t_coord coord;
     double	specular;
     double	reflective;
-	t_coord	theta;
 	t_coord vector;
 };
 
