@@ -33,6 +33,8 @@ void    build_sphere(char *input)
         error("Wrong number of arguments");
     build_default_body(details);
     ((t_sphere *)(*__this_body()))->diameter = ft_atod(*(details + 2), (float)(1000000000));
+	((t_sphere *)(*__this_body()))->pattern.a = ((t_sphere *)(*__this_body()))->color;
+    ((t_sphere *)(*__this_body()))->pattern.b = get_rgb(0, 0, 0);
     freepp((void **)details);
 }
 
@@ -45,6 +47,8 @@ void    build_plane(char *input)
         error("Wrong number of arguments");
     build_default_body(details);
     ((t_plane *)(*__this_body()))->vector = get_coord(*(details + 2), 1.0);
+    ((t_plane *)(*__this_body()))->pattern.a = ((t_plane *)(*__this_body()))->color;
+    ((t_plane *)(*__this_body()))->pattern.b = get_rgb(0, 0, 0);
     freepp((void **)details);
 }
 
