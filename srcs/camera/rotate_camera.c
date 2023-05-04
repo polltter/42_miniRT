@@ -23,8 +23,8 @@ void rotate_y(double theta, t_coord *viewport_pt)
 
 void rotate_z(double theta, t_coord *viewport_pt)
 {
-    viewport_pt->x = viewport_pt->x * cos(theta * M_PI / 180) - viewport_pt->y * sin(theta * M_PI / 180);
-    viewport_pt->z = viewport_pt->x * sin(theta * M_PI / 180) + viewport_pt->y * cos(theta * M_PI / 180);
+    viewport_pt->x = viewport_pt->x * cos(theta) - viewport_pt->y * sin(theta);
+    viewport_pt->z = viewport_pt->x * sin(theta) + viewport_pt->y * cos(theta);
 }
 
 double dot(double v1, double v2, double t1, double t2)
@@ -68,21 +68,16 @@ void	rotate_plane(int k)
 	t_plane	*plane;
 
 	plane = (t_plane *)(*who_movin());
-	if (k == XK_Left)
-		plane->vector.x -= 0.1;
-	else if (k == XK_Right)
-		plane->vector.x += 0.1;
-	else if (k == XK_Down)
-		plane->vector.z -= 0.1;
-	else if (k == XK_Up)
-		plane->vector.z += 0.1;
-	// plane->theta = find_theta((t_coord){0, 0, 1}, plane->vector);
-	// if (plane->vector.x < 0)
-    //     plane->theta.y *= -1;
-	// if (plane->vector.y < 0)
-    //     plane->theta.x *= -1;
-	// rotate_x(plane->theta.x, &plane->vector);
-    // rotate_y(plane->theta.y, &plane->vector);
-    // rotate_y(plane->theta.z, &plane->vector);
-	// print_coords(plane->vector);
+	if (k == XK_b)
+        rotate_x(0.02, &plane->vector);
+	else if (k == XK_h)
+        rotate_x(-0.02, &plane->vector);
+    else if (k == XK_n)
+        rotate_y(0.02, &plane->vector);
+    else if (k == XK_j)
+        rotate_y(-0.02, &plane->vector);
+    else if (k == XK_m)
+        rotate_z(0.02, &plane->vector);
+    else if (k == XK_l)
+        rotate_z(-0.02, &plane->vector);
 } 
