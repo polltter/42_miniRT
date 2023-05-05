@@ -17,14 +17,20 @@ void rotate_x(double theta, t_coord *viewport_pt)
 
 void rotate_y(double theta, t_coord *viewport_pt)
 {
+    double temp;
+
+    temp = viewport_pt->x;
     viewport_pt->x = viewport_pt->x * cos(theta) + viewport_pt->z * sin(theta);
-    viewport_pt->z = -viewport_pt->x * sin(theta) + viewport_pt->z * cos(theta);
+    viewport_pt->z = -temp * sin(theta) + viewport_pt->z * cos(theta);
 }
 
 void rotate_z(double theta, t_coord *viewport_pt)
 {
+    double temp;
+
+    temp = viewport_pt->x;
     viewport_pt->x = viewport_pt->x * cos(theta) - viewport_pt->y * sin(theta);
-    viewport_pt->y = viewport_pt->x * sin(theta) + viewport_pt->y * cos(theta);
+    viewport_pt->y = temp * sin(theta) + viewport_pt->y * cos(theta);
 }
 
 double dot(double v1, double v2, double t1, double t2)
