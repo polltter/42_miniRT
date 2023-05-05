@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:04:06 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/04 20:19:10 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/05 15:42:19 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int			get_color_light(int color, t_coord li);
 int			multiply_color(int color, double brightness);
 double		multiply_component(int color, int shift, double brightness);
 int	stripe_at(t_coord point, t_pattern pattern);
-int	square_at(t_coord point, t_pattern pattern);
+int	square_at(t_coord normal, t_coord point, t_pattern pattern);
 
 //Struct utils
 t_coord		set_coord_values(double x, double y, double z);

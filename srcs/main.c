@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:56:14 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/04 19:56:56 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/05 15:57:16 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void    *render_t(void *t)
         {
             viewport_pt = canvas_to_viewport(x - 1 + thread->strat_x, y);
             rotate_camera(m()->camera->theta, &viewport_pt);
-            color = trace_ray(m()->camera->coord, viewport_pt, 1, INT_MAX, 5);
+            color = trace_ray(m()->camera->coord, viewport_pt, 1, INT_MAX, 3);
             if (vp_to_canvas(x, 0) >= 0 && vp_to_canvas(x, 0) < IMG_W && \
 				vp_to_canvas(y, 1) >= 0 && vp_to_canvas(y, 1) < IMG_H)
                 my_pixel_put(&thread->img, vp_to_canvas(x - IMG_W / 2, 0), \
