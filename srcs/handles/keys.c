@@ -51,18 +51,24 @@ int move_camera(int k)
     else if (k == XK_s)
         m()->camera->coord.y -= 0.1;
     else if (k == XK_Up)
-        m()->camera->vector.y += 0.1;
+        rotate_x(0.02, &m()->camera->vector);
+//        m()->camera->vector.y += 0.1;
     else if (k == XK_Down)
-        m()->camera->vector.y -= 0.1;
+        rotate_x(-0.02, &m()->camera->vector);
+//        m()->camera->vector.y -= 0.1;
     else if (k == XK_Left)
-        m()->camera->vector.x -= 0.1;
+        rotate_y(-0.2, &m()->camera->vector);
+//        m()->camera->vector.x -= 0.1;
     else if (k == XK_Right)
-        m()->camera->vector.x += 0.1;
+        rotate_y(0.2, &m()->camera->vector);
+//        m()->camera->vector.x += 0.1;
     else
-	{
         return (0);
-	}
+    printf("======CAm======\n");
+    print_coords(m()->camera->vector);
 	m()->camera->theta = find_theta((t_coord){0, 0, 1}, m()->camera->vector);
+    printf("======theta======\n");
+    print_coords(m()->camera->theta);
     return (1);
 }
 

@@ -43,6 +43,12 @@ double len2(t_point vector)
     return (sqrt((pow(vector.x, 2) + pow(vector.y, 2))));
 }
 
+//t_coord find_projection(t_coord original, t_coord new_vector, t_coord plane)
+//{
+//    double c;
+//
+//    c = dot_product(new_vector, original) /
+//}
 
 t_coord find_theta(t_coord original, t_coord new_vector)
 {
@@ -54,6 +60,7 @@ t_coord find_theta(t_coord original, t_coord new_vector)
     theta.y = acos(theta.y / len2((t_point){new_vector.x, new_vector.z}));
 	theta.z = dot(original.x, original.y, new_vector.x, new_vector.y);
     theta.z = acos(theta.z / len2((t_point){new_vector.x, new_vector.y}));
+
     return (theta);
 }
 
@@ -62,8 +69,10 @@ void  rotate_camera(t_coord theta, t_coord *viewport_pt)
 	theta.z = 0;
     if (m()->camera->vector.x < 0)
         theta.y *= -1;
-    if (m()->camera->vector.y < 0)
-        theta.x *= -1;
+//    if (m()->camera->vector.z < 0)
+//        theta.y *= -1;
+//    if (m()->camera->vector.y < 0)
+//        theta.x *= -1;
     rotate_x(theta.x, viewport_pt);
     rotate_y(theta.y, viewport_pt);
     rotate_y(theta.z, viewport_pt);

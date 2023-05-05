@@ -105,6 +105,9 @@ void    *build_light(char *input, int id);
 t_coord find_theta(t_coord original, t_coord new_vector);
 void  rotate_camera(t_coord theta, t_coord *vp_to_canvasviewport_pt);
 void	rotate_plane(int k);
+void rotate_x(double theta, t_coord *viewport_pt);
+void rotate_y(double theta, t_coord *viewport_pt);
+void rotate_z(double theta, t_coord *viewport_pt);
 
 //Math
 double	dot_product(t_coord a, t_coord b);
