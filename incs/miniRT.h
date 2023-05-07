@@ -35,7 +35,7 @@
 # define SUBTRACT	101
 # define MULTIPLY	102
 # define DIVIDE		103
-# define N_THREADS  100
+# define N_THREADS  50
 
 //MLX utils
 t_mlx_data	*mlx(void);
@@ -48,6 +48,7 @@ int	my_mlx_pixel_get(t_data *data, int x, int y);
 //Draw utils
 t_coord		canvas_to_viewport(double x, double y);
 double		vp_to_canvas(double x, double is_Y);
+void normalize(t_coord *v);
 
 //Color manipulation
 int			get_rgb(int r, int g, int b);

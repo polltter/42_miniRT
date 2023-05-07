@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:33:05 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/03 19:16:47 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/05 17:57:02 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/miniRT.h"
-
-
-
 
 int move_body(int k)
 {
@@ -51,22 +48,29 @@ int move_camera(int k)
     else if (k == XK_s)
         m()->camera->coord.y -= 0.1;
     else if (k == XK_Up)
-        rotate_x(0.02, &m()->camera->vector);
-//        m()->camera->vector.y += 0.1;
+    {
+        rotate_x(0.2, &m()->camera->vector);
+        m()->camera->theta.x += 0.2;
+    }
     else if (k == XK_Down)
-        rotate_x(-0.02, &m()->camera->vector);
-//        m()->camera->vector.y -= 0.1;
+    {
+        rotate_x(-0.2, &m()->camera->vector);
+        m()->camera->theta.x -= 0.2;
+    }
     else if (k == XK_Left)
+    {
         rotate_y(-0.2, &m()->camera->vector);
-//        m()->camera->vector.x -= 0.1;
+        m()->camera->theta.y -= 0.2;
+    }
     else if (k == XK_Right)
+    {
         rotate_y(0.2, &m()->camera->vector);
+        m()->camera->theta.y += 0.2;
+    }
 //        m()->camera->vector.x += 0.1;
     else
         return (0);
-    printf("======CAm======\n");
-    print_coords(m()->camera->vector);
-	m()->camera->theta = find_theta((t_coord){0, 0, 1}, m()->camera->vector);
+//    m()->camera->theta = find_theta((t_coord){0, 0, 1}, m()->camera->vector);
     printf("======theta======\n");
     print_coords(m()->camera->theta);
     return (1);
