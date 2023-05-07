@@ -16,7 +16,7 @@ CFLAGS	= -I incs -Imlx -Wall -Werror -Wextra -g3 -pthread -march=native -ffast-m
 
 BODYS_FILES			= build build_bodys build_utils build_lights
 CAM_FILES			= rotate_camera
-COLLISION_FILES		= collisions
+COLLISION_FILES		= collisions collisions_cy
 HANDLES_FILES		= keys mouse
 THREADS_FILES		= threads
 RAYTRACER_FILES		= render raytracer lights

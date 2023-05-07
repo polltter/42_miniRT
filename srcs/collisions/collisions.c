@@ -59,33 +59,6 @@ t_point plane_collision(t_coord viewport_pt, t_plane *plane, t_coord origin)
 }
 
 
-
-t_point cylinder_collision(t_coord origin, t_coord ray, t_body *body)
-{
-    t_point new;
-    t_coord B;
-    double a;
-    double b;
-    double c;
-    double sqr_mod_eixo;
-
-    sqr_mod_eixo = pow(vector_length(((t_cylinder *)body)->vector), 2);
-    B = do_op_coords(MULTIPLY, origin, ((t_cylinder *)body)->coord);
-    a = dot_product(ray, ray) \
-        * sqr_mod_eixo \
-        - pow(dot_product(ray, ((t_cylinder *)body)->vector), 2);
-    b = 2 * dot_product(B, ray) * sqr_mod_eixo \
-            - pow(dot_product(B, ((t_cylinder *)body)->vector), 2);
-    c = (dot_product(B, B) - pow(((t_cylinder *)body)->diameter / 2, 2)) * sqr_mod_eixo \
-        - pow(dot_product(B, ((t_cylinder *)body)->vector), 2);
-    double discriminant = (b * b) - (4*a*c);
-    if (discriminant < 0)
-        return ((t_point){INT_MAX, INT_MAX});
-    new.x = (-b + sqrt(discriminant)) / (2 * a);
-    new.y = (-b - sqrt(discriminant)) / (2 * a);
-    return (new);
-}
-
 t_point	collision(t_coord O, t_coord viewport_pt, t_body *body)
 {
     if (body->id == SPH)
@@ -93,6 +66,6 @@ t_point	collision(t_coord O, t_coord viewport_pt, t_body *body)
     else if (body->id == PL)
         return (plane_collision(viewport_pt, ((t_plane *)body), O));
     else if (body->id == CY)
-        return (cylinder_collision(O, viewport_pt, body));
+        return (cylinder_collision(O, viewport_pt, (t_cylinder *)body));
     return ((t_point){INT_MAX, INT_MAX});
 }

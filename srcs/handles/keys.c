@@ -67,12 +67,9 @@ int move_camera(int k)
         rotate_y(0.2, &m()->camera->vector);
         m()->camera->theta.y += 0.2;
     }
-//        m()->camera->vector.x += 0.1;
     else
         return (0);
-//    m()->camera->theta = find_theta((t_coord){0, 0, 1}, m()->camera->vector);
-    printf("======theta======\n");
-    print_coords(m()->camera->theta);
+
     return (1);
 }
 
