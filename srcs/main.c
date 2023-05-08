@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:56:14 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/08 16:48:08 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/08 18:41:26 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,12 @@ void    *render_t(void *t)
     int			color;
 
     x = 0;
-    while (x < thread->end_x - thread->strat_x)
+    while (x < thread->end_x - thread->start_x)
     {
         y = -IMG_H / 2;
         while (y < IMG_H / 2)
         {
-            viewport_pt = canvas_to_viewport(x - 1 + thread->strat_x, y);
+            viewport_pt = canvas_to_viewport(x - 1 + thread->start_x, y);
             rotate_camera(m()->camera->theta, &viewport_pt);
             color = trace_ray(m()->camera->coord, viewport_pt, 1, INT_MAX, 2);
             if (vp_to_canvas(x, 0) >= 0 && vp_to_canvas(x, 0) < IMG_W && \

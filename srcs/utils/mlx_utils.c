@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:34:39 by touteiro          #+#    #+#             */
-/*   Updated: 2023/04/22 19:36:23 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/08 18:54:21 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,16 @@ void	data_init(t_mlx_data *data)
 
 int	ft_close(t_mlx_data *data)
 {
+	array(m()->threads)->for_each(delete_images, 0);
 	mlx_destroy_image(data->mlx, data->img.img);
 	mlx_destroy_window(data->mlx, data->mlx_win);
 	mlx_destroy_display(data->mlx);
+	free(m()->ambient);
+	free(m()->camera);
+	array(m()->lights)->destroy();
 	array(m()->bodys)->destroy();
+	array(m()->threads)->destroy();
 	free(data->mlx);
+	
 	exit(0);
 }

@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:04:06 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/08 16:02:30 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/08 18:44:49 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ void	join_for_each(t_elems *elem, void *o);
 void	init_threads(t_elems *elem, void *o);
 void	print_threads(t_elems *elem, void *o);
 void    imgs_to_canvas(t_elems *elem, void *o);
+void	delete_images(t_elems *elem, void *o);
 
 //render
 void    *render_t(void *t);

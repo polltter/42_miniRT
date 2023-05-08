@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:04:27 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/03 20:07:11 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/08 18:41:26 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ struct s_main {
 
 struct s_threads {
     pthread_t   id;
-    int         strat_x;
+    int         start_x;
     int         end_x;
     t_data      img;
 };
