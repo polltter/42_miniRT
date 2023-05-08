@@ -127,6 +127,8 @@ struct s_cylinder {
 	t_coord vector;
 	double  diameter;
 	double  height;
+    t_plane top;
+    t_plane bottom;
 };
 
 

@@ -116,15 +116,15 @@ void	rotate_plane(int k)
 
 	plane = (t_plane *)(*who_movin());
 	if (k == XK_b)
-        rotate_x(0.02, &plane->vector);
+        rotate_x(0.2, &plane->vector);
 	else if (k == XK_h)
-        rotate_x(-0.02, &plane->vector);
+        rotate_x(-0.2, &plane->vector);
     else if (k == XK_n)
-        rotate_y(0.02, &plane->vector);
+        rotate_y(0.2, &plane->vector);
     else if (k == XK_j)
-        rotate_y(-0.02, &plane->vector);
+        rotate_y(-0.2, &plane->vector);
     else if (k == XK_m)
         rotate_z(0.02, &plane->vector);
     else if (k == XK_k)
         rotate_z(-0.02, &plane->vector);
-} 
+}

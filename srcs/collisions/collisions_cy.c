@@ -28,9 +28,10 @@ double cylinder_collision_surface(t_coord origin, t_coord ray, t_cylinder *body)
         return (INT_MAX);
     c = (-b + sqrt(discriminant)) / (2 * a);
     a = (-b - sqrt(discriminant)) / (2 * a);
-    c += in_cylinder(c, (t_cylinder *)body, ray) * INT_MAX;
-    c += in_cylinder(c, (t_cylinder *)body, ray) * INT_MAX;
-    a += in_cylinder(a, (t_cylinder *)body, ray) * INT_MAX;
+    c += in_cylinder(c, (t_cylinder *)body, ray) * (INT_MAX + fabs(c) + 1);
+    a += in_cylinder(a, (t_cylinder *)body, ray) * (INT_MAX + fabs(a) + 1);
+	// if (c < INT_MAX || a < INT_MAX)
+	// 	printf("oi\n");
     return (c * (c < a) + a * (a < c));
 }
 
@@ -40,10 +41,12 @@ double find_distance_in_axis(double t, t_cylinder *cy, t_coord ray)
     t_coord center_to_coord;
     double  angle;
 
-    cross = coord_constant_op(MULTIPLY, ray, t);
-    center_to_coord = do_op_coords(SUBTRACT, cross, cy->coord);
+    cross = do_op_coords(ADD, m()->camera->coord, coord_constant_op(MULTIPLY, ray, t));
+    center_to_coord = do_op_coords(SUBTRACT, cy->coord, cross);
     angle = dot_product(center_to_coord, cy->vector);
     angle = acos(angle / (vector_length(center_to_coord) * vector_length(cy->vector)));
+	// if (fabs(vector_length(center_to_coord) * cos(angle))  < (cy->height / 2))
+	// 	printf("oi\n");
     return (fabs(vector_length(center_to_coord) * cos(angle)));
 }
 
@@ -70,11 +73,16 @@ t_coord find_normal(double t, t_cylinder *cy, t_coord ray)
 t_point cylinder_collision(t_coord origin, t_coord ray, t_cylinder *body)
 {
     t_point new;
+    // t_coord x;
     double surface;
 
     surface = cylinder_collision_surface(origin, ray, body);
-    surface += in_cylinder(surface, (t_cylinder *)body, ray) * INT_MAX;
     new.x = surface;
+	// if (new.x < INT_MAX)
+	// 	printf("oi\n");
+    // x = coord_constant_op(MULTIPLY, ray, surface);
+    // if (ray.x == 0 && !ray.y && ray.z)
+    //     print_coords(x);
     new.y = 0;
     return (new);
 }

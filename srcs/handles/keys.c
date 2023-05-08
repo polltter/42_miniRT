@@ -14,7 +14,6 @@
 
 int move_body(int k)
 {
-    printf("%d, X: %d,x: %d\n", k, XK_X, XK_x);
     if (k == XK_a)
         ((t_body *)(*who_movin()))->coord.x -= 0.1;
     else if (k == XK_d)
@@ -23,7 +22,8 @@ int move_body(int k)
         ((t_body *)(*who_movin()))->coord.y += 0.1;
     else if (k == XK_s)
         ((t_body *)(*who_movin()))->coord.y -= 0.1;
-	else if (((t_body *)(*who_movin()))->id == PL && \
+	else if ((((t_body *)(*who_movin()))->id == PL || \
+            ((t_body *)(*who_movin()))->id == CY )&& \
 		(k == XK_b || k == XK_h || k == XK_n || k == XK_j || k == XK_m || k == XK_k))
         rotate_plane(k);
     else if (k == XK_Up)

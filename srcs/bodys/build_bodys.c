@@ -60,4 +60,5 @@ void    build_cylinder(char *input)
     ((t_cylinder *)(*__this_body()))->diameter = ft_atod(details[3], (float)INT_MAX);
     ((t_cylinder *)(*__this_body()))->height = ft_atod(details[4], (float)INT_MAX);
     freepp((void **)details);
+    print_coords(((t_cylinder *)(*__this_body()))->vector);
 }
