@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:56:14 by touteiro          #+#    #+#             */
-/*   Updated: 2023/04/26 14:37:52 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/08 16:48:08 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int	main(int ac, char **av)
 //	mlx_mouse_hook(mlx()->mlx_win, handle_mouse, &data);
     *first() = array(m()->bodys)->begin;
     *first_l() = array(m()->lights)->begin;
+	print_info();
     if (N_THREADS == 1)
         render(NULL);
     else if (N_THREADS > 1)

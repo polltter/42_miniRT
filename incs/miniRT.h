@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:04:06 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/03 19:10:51 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/08 16:02:30 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ t_coord		compute_lighting(t_coord point, t_coord normal, t_coord vector, double 
 
 //Handles
 void   		 **who_movin(void);
+t_elems	    **which_light(void);
+int			toggle_select_light(void);
 int			handle_keys(int k);
 int			handle_mouse(int button, int x, int y, t_mlx_data *data);
 int	        select_body(int button, int x, int y, t_mlx_data *data);
@@ -136,5 +138,7 @@ int	store_colors(int color, int flag);
 //debugging
 void	print_coords(t_coord coord);
 
+//usage
+void	print_info(void);
 
 #endif

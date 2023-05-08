@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+         #
+#    By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/17 18:45:23 by touteiro          #+#    #+#              #
-#    Updated: 2023/05/07 19:52:03 by mvenanci         ###   ########.fr        #
+#    Updated: 2023/05/08 13:25:10 by touteiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ GNL_FILES			= get_next_line  get_next_line_utils
 LIST_FILES			= list_utils list_utils_2 list_utils_3 list_utils_4
 MATH_FILES			= math coords
 STRS_FILES			= ft_split  strings  strings_utils1  strings_utils2 strings_utils3
-UTILS_FILES			= mlx_utils viewport_utils utils parse_utils color_utils
+UTILS_FILES			= mlx_utils viewport_utils utils parse_utils color_utils print_info
 GENERAL_FILES		= main
 
 BODYS_SRCS			= ${addsuffix .c, ${addprefix srcs/bodys/, ${BODYS_FILES}}}
@@ -50,7 +50,7 @@ INCS	= ${addprefix incs/, ${INCS_FILES}}
 OBJ		= ${addprefix objs/, ${SRCS:.c=.o}}
 OBJ	= ${addprefix obj/, ${SRCS:.c=.o}}
 
-obj/%.o: %.c ${INCS}
+obj/%.o: %.c ${INCS} Makefile
 	@mkdir -p ${@D}
 	$(CC) ${CFLAGS} -I/usr/include -Imlx -c $< -o $@
 	@echo "\033[33m[OK]	" $@ "\033[0m"

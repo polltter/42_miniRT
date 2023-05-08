@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:31:35 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/02 16:27:15 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/08 16:02:36 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,13 @@ void    **who_movin(void)
     return (&who);
 }
 
+t_elems    **which_light(void)
+{
+    static t_elems *which;
+
+    return (&which);
+}
+
 void	*body_to_move(t_coord O, t_coord viewport_pt) {
     double closest_t;
     void *closest;
@@ -52,18 +59,24 @@ int	select_body(int button, int x, int y, t_mlx_data *data)
     t_coord viewport_pt;
 
     (void)data;
-    printf("%d\n", button);
+    // printf("%d\n", button);
     if (button == 1)
     {
         // theta = find_theta();
         viewport_pt = canvas_to_viewport(x - IMG_W / 2, - y + IMG_H / 2);
         rotate_camera(m()->camera->theta, &viewport_pt);
-        printf("antes -- %p\n", *who_movin());
+        // printf("antes -- %p\n", *who_movin());
         (*who_movin()) = body_to_move(m()->camera->coord, viewport_pt);
-        printf("depois -- %p\n", *who_movin());
+		(*which_light()) = NULL;
+        // printf("depois -- %p\n", *who_movin());
     }
     else if (button == 3)
+	{
         (*who_movin()) = NULL;
+		if (*which_light())
+			toggle_select_light();
+		// (*which_light()) = NULL;
+	}
     else if (button == 5 || button == 4)
         zoom(96 + button);
     if (N_THREADS == 1)
