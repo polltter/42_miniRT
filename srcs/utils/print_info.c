@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 12:07:34 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/08 16:55:54 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/08 20:19:24 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,5 @@ void	print_info(void)
 	printf("Move camera:			W A S D\n");
 	printf("Look left/right:		Left / Right\n");
 	printf("Look up/down: 			Up / Down\n");
+	printf("Change ambient brightness:	Plus / Minus\n");
 }

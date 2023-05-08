@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:31:35 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/08 16:02:36 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/08 20:11:30 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	*body_to_move(t_coord O, t_coord viewport_pt) {
 
     closest_t = INT_MAX;
     closest = closest_intersection(O, viewport_pt, 1, INT_MAX, &closest_t);
+	((t_body *)closest)->color = get_rgb(220, 220, 220);
     return (closest);
 }
 
@@ -67,15 +68,22 @@ int	select_body(int button, int x, int y, t_mlx_data *data)
         rotate_camera(m()->camera->theta, &viewport_pt);
         // printf("antes -- %p\n", *who_movin());
         (*who_movin()) = body_to_move(m()->camera->coord, viewport_pt);
-		(*which_light()) = NULL;
+		if (*who_movin())
+			printf("selected body\n");
+		if (*which_light())
+			toggle_select_light();
         // printf("depois -- %p\n", *who_movin());
     }
     else if (button == 3)
 	{
-        (*who_movin()) = NULL;
+		if (*who_movin())
+		{
+			((t_body *)(*who_movin()))->color = ((t_body *)(*who_movin()))->original_color;
+			printf("deselected body\n");
+        	(*who_movin()) = NULL;
+		}
 		if (*which_light())
 			toggle_select_light();
-		// (*which_light()) = NULL;
 	}
     else if (button == 5 || button == 4)
         zoom(96 + button);

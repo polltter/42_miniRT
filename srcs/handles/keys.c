@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:33:05 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/08 16:55:30 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/08 20:17:07 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@ int		toggle_select_light(void)
 	
 	if (!selected)
 	{
+		if (*who_movin())
+		{
+			((t_body *)(*who_movin()))->color = ((t_body *)(*who_movin()))->original_color;
+			printf("deselected body\n");
+        	(*who_movin()) = NULL;
+		}
 		printf("selected light 1\n");
 		// printf("original light ratio is %f\n", ((t_light *)m()->lights)->light_ratio);
 		(*which_light()) = array(m()->lights)->begin;
@@ -30,14 +36,24 @@ int		toggle_select_light(void)
 		(*which_light()) = NULL;
 		selected = 0;
 	}
-	return (1);
+	return (selected);
 }
 
 int	move_light(int k)
 {
-	static int	selected;
-
-	t_light *temp = (*which_light())->cont;
+	t_light		*temp;
+	t_elems		*list;
+	int			selected;
+	
+	selected = 0;
+	temp = (*which_light())->cont;
+	list = array(m()->lights)->begin;
+	/* Transform in indexOf */
+	while (list && list->next && temp != list->cont)
+	{
+		selected++;
+		list = list->next;
+	}
 	if ((k == XK_minus || k == 65453) && temp->light_ratio > .1)
 		temp->light_ratio -= .1;
 	else if ((k == XK_plus || k == 65451) && temp->light_ratio < 1)
@@ -146,7 +162,10 @@ int move_camera(int k)
         rotate_y(0.2, &m()->camera->vector);
         m()->camera->theta.y += 0.2;
     }
-//        m()->camera->vector.x += 0.1;
+	else if (!(*who_movin()) && !(*which_light()) && (k == XK_minus || k == 65453) && m()->ambient->light_ratio > .1)
+		m()->ambient->light_ratio -= .1;
+	else if (!(*who_movin()) && !(*which_light()) && (k == XK_plus || k == 65451) && m()->ambient->light_ratio < .9)
+		m()->ambient->light_ratio += .1;
     else
         return (0);
 //    m()->camera->theta = find_theta((t_coord){0, 0, 1}, m()->camera->vector);
@@ -157,13 +176,16 @@ int move_camera(int k)
 
 int	handle_keys(int k)
 {
-    if (k == XK_Escape)
+	int	to_render;
+	
+	to_render = 0;
+	if (k == XK_Escape)
 		ft_close(mlx());
 	if (k == XK_l && toggle_select_light())
-		return (1);
+		to_render = 1;
     if ((*who_movin()) && !move_body(k))
 		return (0);
-	if ((*which_light()) && !move_light(k))
+	if ((*which_light()) && !to_render && !move_light(k))
 		return (0);
     if ((!*who_movin() && !*which_light()) && !move_camera(k))
 		return (0);

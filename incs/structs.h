@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:04:27 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/08 18:41:26 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/08 20:01:17 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ struct s_camera {
 struct s_default_body {
     int     id;
     int     color;
+    int     original_color;
     t_coord coord;
     double	specular;
     double	reflective;
@@ -103,6 +104,7 @@ struct s_default_body {
 struct s_sphere {
     int     id;
     int     color;
+    int     original_color;
     t_coord coord;
     double	specular;
     double	reflective;
@@ -112,6 +114,7 @@ struct s_sphere {
 struct s_plane {
     int     id;
     int     color;
+    int     original_color;
     t_coord coord;
     double	specular;
     double	reflective;
@@ -121,6 +124,7 @@ struct s_plane {
 struct s_cylinder {
     int     id;
     int     color;
+    int     original_color;
     t_coord coord;
     double	specular;
     double	reflective;

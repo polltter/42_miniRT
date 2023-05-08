@@ -6,13 +6,13 @@
 #    By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/17 18:45:23 by touteiro          #+#    #+#              #
-#    Updated: 2023/05/08 13:25:10 by touteiro         ###   ########.fr        #
+#    Updated: 2023/05/08 19:52:56 by touteiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= miniRT
 CC		= cc
-CFLAGS	= -I incs -Imlx -Wall -Werror -Wextra -g3 -pthread -march=native -ffast-math -funsafe-math-optimizations -ffinite-math-only #-fsanitize=address -O3
+CFLAGS	= -I incs -Imlx -Wall -Werror -Wextra -g3 -pthread -march=native -ffast-math -funsafe-math-optimizations -ffinite-math-only #-fsanitize=address #-O3
 
 BODYS_FILES			= build build_bodys build_utils build_lights
 CAM_FILES			= rotate_camera
