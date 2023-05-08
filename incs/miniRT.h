@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:04:06 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/08 18:44:49 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/08 20:50:51 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int	        select_body(int button, int x, int y, t_mlx_data *data);
 int    error(char *err);
 
 //bodys/build
+int		check_file(char *file_path);
 void    *build(char *input, int id);
 void    build_scene(char *file_path);
 

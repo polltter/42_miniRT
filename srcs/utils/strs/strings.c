@@ -19,8 +19,8 @@ int			__strn_str(const char *haystack, const char *needle);
 char		*__str_trim(const char *str);
 int			__isal_num(char *str);
 char		*__append(char *s, char c);
-int     	__strn_c(const char *haystack, char needle);
-int         __ends_with(char *src, char *end);
+int			__strn_c(const char *haystack, char needle);
+int			__ends_with(char *src, char *end);
 
 static char	*__strn_dup(const char *str, int size)
 {
@@ -93,8 +93,8 @@ t_s	s(void)
 		__str_join,
 		__isal_num,
 		__append,
-        __strn_c,
-        __ends_with,
+		__strn_c,
+		__ends_with,
 	};
 
 	return (string);

@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:34:39 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/08 18:54:21 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/08 20:41:56 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,17 @@ t_mlx_data	*mlx(void)
 
 int	my_mlx_pixel_get(t_data *data, int x, int y)
 {
-    char	*dst;
+	char	*dst;
 
-    dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-    return(*(unsigned int *)dst);
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	return (*(unsigned int *)dst);
 }
 
 void	my_pixel_put(t_data *img, int x, int y, int color)
 {
 	char	*pixel;
 
-    pixel = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
+	pixel = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
 	*(unsigned int *)pixel = color;
 }
 
@@ -46,7 +46,7 @@ void	data_init(t_mlx_data *data)
 
 int	ft_close(t_mlx_data *data)
 {
-	array(m()->threads)->for_each(delete_images, 0);
+	(array(m()->threads))->for_each(delete_images, 0);
 	mlx_destroy_image(data->mlx, data->img.img);
 	mlx_destroy_window(data->mlx, data->mlx_win);
 	mlx_destroy_display(data->mlx);
@@ -56,6 +56,5 @@ int	ft_close(t_mlx_data *data)
 	array(m()->bodys)->destroy();
 	array(m()->threads)->destroy();
 	free(data->mlx);
-	
 	exit(0);
 }

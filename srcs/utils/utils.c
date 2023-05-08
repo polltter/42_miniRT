@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 19:57:55 by touteiro          #+#    #+#             */
-/*   Updated: 2023/04/22 20:18:44 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/08 20:40:30 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,3 @@ t_coord	set_coord_values(double x, double y, double z)
 	coord.z = z;
 	return (coord);
 }
-
-
-
-

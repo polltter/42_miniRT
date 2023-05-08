@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   viewport_utils.c                                   :+:      :+:    :+:   */
+/*   join_and_delete.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/18 15:54:15 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/08 20:40:41 by touteiro         ###   ########.fr       */
+/*   Created: 2023/05/08 20:28:19 by touteiro          #+#    #+#             */
+/*   Updated: 2023/05/08 20:28:42 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/miniRT.h"
+#include "miniRT.h"
 
-double	vp_to_canvas(double x, double is_Y)
+void	join_for_each(t_elems *elem, void *o)
 {
-	if (!is_Y)
-		return (IMG_W / 2 + x);
-	else
-		return (IMG_H / 2 - x);
+	(void)o;
+	pthread_join(((t_threads *)(elem->cont))->id, NULL);
 }
 
-t_coord	canvas_to_viewport(double x, double y)
+void	delete_images(t_elems *elem, void *o)
 {
-	t_coord	new;
-
-	new.x = x / IMG_W * m()->viewport.width;
-	new.y = y / IMG_H * m()->viewport.height;
-	new.z = 1;
-	return (new);
+	(void)o;
+	mlx_destroy_image(mlx()->mlx, ((t_threads *)(elem->cont))->img.img);
 }

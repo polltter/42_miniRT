@@ -61,15 +61,15 @@ char	*__append(char *str, char c)
 
 int	__strn_c(const char *haystack, char needle)
 {
-    int	i;
-    int	size_big;
+	int	i;
+	int	size_big;
 
-    if (!haystack)
-        return (0);
-    i = -1;
-    size_big = __str_len(haystack, 0);
-    while (++i <= size_big)
-        if (haystack[i] == needle)
-            return (1);
-    return (0);
+	if (!haystack)
+		return (0);
+	i = -1;
+	size_big = __str_len(haystack, 0);
+	while (++i <= size_big)
+		if (haystack[i] == needle)
+			return (1);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 12:07:34 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/08 20:19:24 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/08 20:40:59 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,12 @@ void	print_info(void)
 	printf("Rotate Y-Axis:			N J\n");
 	printf("Rotate Z-Axis:			M K\n");
 	printf("Change sphere diameter:		R T\n");
-
 	print_blue();
 	printf("\nSelect lights with L\n");
 	reset_color();
 	printf("Change selected:		Left / Right\n");
 	printf("Move light:			W A S D Up Down\n");
 	printf("Change brightness:		Plus / Minus\n");
-
 	print_blue();
 	printf("\nIf no objects or lights are selected, camera is selected\n");
 	reset_color();

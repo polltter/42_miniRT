@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   viewport_utils.c                                   :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/18 15:54:15 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/08 20:40:41 by touteiro         ###   ########.fr       */
+/*   Created: 2023/05/08 20:48:53 by touteiro          #+#    #+#             */
+/*   Updated: 2023/05/08 20:53:29 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/miniRT.h"
+#include "miniRT.h"
 
-double	vp_to_canvas(double x, double is_Y)
+int	check_file(char *file_path)
 {
-	if (!is_Y)
-		return (IMG_W / 2 + x);
-	else
-		return (IMG_H / 2 - x);
+	int	fd;
+
+	if (!s().end_with(file_path, ".rt"))
+		error("Invalid file");
+	fd = open(file_path, O_RDONLY);
+	if (fd < 0)
+		error("Invalid file");
+	return (fd);
 }
 
-t_coord	canvas_to_viewport(double x, double y)
+char	*space_str(void)
 {
-	t_coord	new;
-
-	new.x = x / IMG_W * m()->viewport.width;
-	new.y = y / IMG_H * m()->viewport.height;
-	new.z = 1;
-	return (new);
+	return (" \t\n\v\f\r");
 }

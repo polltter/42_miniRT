@@ -1,86 +1,89 @@
-//
-// Created by miguel on 21-04-2023.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   build_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/08 20:52:23 by touteiro          #+#    #+#             */
+/*   Updated: 2023/05/08 20:53:36 by touteiro         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../incs/miniRT.h"
 
 t_body	*body(void *obj)
 {
-    *__this_body() = obj;
-    return (*__this_body());
+	*__this_body() = obj;
+	return (*__this_body());
 }
 
-char    *space_str(void)
+int	get_color(char *color)
 {
-    return (" \t\n\v\f\r");
+	char	**colors;
+	int		r;
+	int		g;
+	int		b;
+
+	colors = s().split(color, ",");
+	if (!*colors || !*(colors + 1) || !*(colors + 2))
+	{
+		freepp((void **)colors);
+		error("Wrong number of arguments for colors");
+	}
+	r = ft_atoi(colors[0], 255);
+	g = ft_atoi(colors[1], 255);
+	b = ft_atoi(colors[2], 255);
+	if (r < 0 || g < 0 || b < 0)
+	{
+		freepp((void **)colors);
+		error("Invalid color");
+	}
+	freepp((void **)colors);
+	return (get_rgb(r, g, b));
 }
 
-int get_color(char *color)
+t_coord	get_coord(char *s_coords, float max)
 {
-    char    **colors;
-    int     r;
-    int     g;
-    int     b;
+	char	**coords;
+	t_coord	coord;
 
-    colors = s().split(color, ",");
-    if (!*colors || !*(colors + 1) || !*(colors + 2))
-    {
-        freepp((void **)colors);
-        error("Wrong number of arguments for colors");
-    }
-    r = ft_atoi(colors[0], 255);
-    g = ft_atoi(colors[1], 255);
-    b = ft_atoi(colors[2], 255);
-    if (r < 0 || g < 0 || b < 0)
-    {
-        freepp((void **)colors);
-        error("Invalid color");
-    }
-    freepp((void **)colors);
-    return (get_rgb(r, g, b));
+	coords = s().split(s_coords, ",");
+	if (!*coords || !*(coords + 1) || !*(coords + 2))
+		error("Wrong number of arguments");
+	coord.x = ft_atod(coords[0], max);
+	coord.y = ft_atod(coords[1], max);
+	coord.z = ft_atod(coords[2], max);
+	freepp((void **)coords);
+	return (coord);
 }
 
-t_coord get_coord(char *s_coords, float max)
+int	clean_id(char **s_id)
 {
-    char    **coords;
-    t_coord coord;
-
-    coords = s().split(s_coords, ",");
-    if (!*coords || !*(coords + 1) || !*(coords + 2))
-        error("Wrong number of arguments");
-    coord.x = ft_atod(coords[0], max);
-    coord.y = ft_atod(coords[1], max);
-    coord.z = ft_atod(coords[2], max);
-    freepp((void **)coords);
-    return (coord);
+	freepp((void **)s_id);
+	return (1);
 }
 
-int clean_id(char **s_id)
+int	get_id(char *input)
 {
-    freepp((void **)s_id);
-    return (1);
-}
+	char	**s_id;
 
-int get_id(char *input)
-{
-    char    **s_id;
-
-    s_id = s().split(input, space_str());
-    if (!*s_id)
-        error("Wrong number of inputs");
-    if (!s().equal(*s_id, "sp") && clean_id(s_id))
-        return (SPH);
-    else if (!s().equal(*s_id, "pl") && clean_id(s_id))
-        return (PL);
-    else if (!s().equal(*s_id, "cy") && clean_id(s_id))
-        return (CY);
-    else if (!s().equal(*s_id, "A") && clean_id(s_id))
-        return (AL);
-    else if (!s().equal(*s_id, "L") && clean_id(s_id))
-        return (L);
-    else if (!s().equal(*s_id, "C") && clean_id(s_id))
-        return (C);
-    clean_id(s_id);
-    error("Not a valid identifier!");
-    return (0);
+	s_id = s().split(input, space_str());
+	if (!*s_id)
+		error("Wrong number of inputs");
+	if (!s().equal(*s_id, "sp") && clean_id(s_id))
+		return (SPH);
+	else if (!s().equal(*s_id, "pl") && clean_id(s_id))
+		return (PL);
+	else if (!s().equal(*s_id, "cy") && clean_id(s_id))
+		return (CY);
+	else if (!s().equal(*s_id, "A") && clean_id(s_id))
+		return (AL);
+	else if (!s().equal(*s_id, "L") && clean_id(s_id))
+		return (L);
+	else if (!s().equal(*s_id, "C") && clean_id(s_id))
+		return (C);
+	clean_id(s_id);
+	error("Not a valid identifier!");
+	return (0);
 }
