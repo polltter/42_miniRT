@@ -4,6 +4,8 @@
 
 #include "../../incs/miniRT.h"
 
+int in_cylinder(double t, t_cylinder *cy, t_coord ray);
+
 double cylinder_collision_surface(t_coord origin, t_coord ray, t_cylinder *body)
 {
     t_coord B;
@@ -26,6 +28,9 @@ double cylinder_collision_surface(t_coord origin, t_coord ray, t_cylinder *body)
         return (INT_MAX);
     c = (-b + sqrt(discriminant)) / (2 * a);
     a = (-b - sqrt(discriminant)) / (2 * a);
+    c += in_cylinder(c, (t_cylinder *)body, ray) * INT_MAX;
+    c += in_cylinder(c, (t_cylinder *)body, ray) * INT_MAX;
+    a += in_cylinder(a, (t_cylinder *)body, ray) * INT_MAX;
     return (c * (c < a) + a * (a < c));
 }
 

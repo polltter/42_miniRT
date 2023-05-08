@@ -85,7 +85,6 @@ int	trace_ray(t_coord O, t_coord viewport_pt, double t_min, double t_max, int re
     if (dot_product(normal, viewport_pt) > 0)
         normal = coord_constant_op(MULTIPLY, normal, -1);
     local_color = get_color_light(closest->color, compute_lighting(point, normal, coord_constant_op(MULTIPLY, viewport_pt, -1), closest->specular));
-
     reflective = closest->reflective;
     if (recursion_depth <= 0 || reflective <= 0)
         return (local_color);
