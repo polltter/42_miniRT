@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 20:42:35 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/08 20:44:38 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/09 12:42:21 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,11 @@ void	freepp(void **to_free)
 
 int	error(char *err)
 {
+	if (m()->ambient)
+		free(m()->ambient);
+	if (m()->camera)
+		free(m()->camera);
+	array(m()->lights)->destroy();
+	array(m()->bodys)->destroy();
 	exit(write(2, err, s().len(err, 0)));
 }

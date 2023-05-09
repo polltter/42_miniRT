@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:56:14 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/08 20:56:59 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/09 12:38:45 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ int	main(int ac, char **av)
 {
 	t_mlx_data	data;
 
+    build_scene(av[ac - 1]);
 	data_init(&data);
 	*mlx() = data;
-    build_scene(av[ac - 1]);
 //	mlx_mouse_hook(mlx()->mlx_win, handle_mouse, &data);
     *first() = array(m()->bodys)->begin;
     *first_l() = array(m()->lights)->begin;
