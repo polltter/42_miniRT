@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:33:05 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/09 12:50:09 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/09 19:29:43 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,7 +190,7 @@ int	handle_keys(int k)
     if ((!*who_movin() && !*which_light()) && !move_camera(k))
 		return (0);
     if (N_THREADS == 1)
-        render(NULL);
+        render();
     else if (N_THREADS > 1)
     {
         array(m()->threads)->for_each(init_threads, 0);

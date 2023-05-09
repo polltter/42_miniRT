@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 19:04:26 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/09 19:05:24 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/09 19:28:59 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int ac, char **av)
 	*first_l() = array(m()->lights)->begin;
 	print_info();
 	if (N_THREADS == 1)
-		render(NULL);
+		render();
 	else if (N_THREADS > 1)
 	{
 		build_threads();

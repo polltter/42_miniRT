@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:04:06 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/09 18:41:20 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/09 19:30:28 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_main		*m(void);
 void		data_init(t_mlx_data *data);
 int			ft_close(t_mlx_data *data);
 void		my_pixel_put(t_data *img, int x, int y, int color);
-int	my_mlx_pixel_get(t_data *data, int x, int y);
+int			my_mlx_pixel_get(t_data *data, int x, int y);
 
 //Draw utils
 t_coord		canvas_to_viewport(double x, double y);
@@ -67,7 +67,7 @@ void        freepp(void **to_free);
 int			arr_size(void **array);
 
 //Render
-int			render(t_mlx_data *data);
+void		render(void);
 int			trace_ray(t_coord O, t_coord viewport_pt, double t_min, double t_max, int recursion_depth);
 t_coord		reflect_ray(t_coord light, t_coord normal);
 t_coord		compute_lighting(t_coord point, t_coord normal, t_coord vector, double specular);

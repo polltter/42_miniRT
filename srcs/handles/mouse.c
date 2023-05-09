@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:31:35 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/09 12:50:23 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/09 19:29:51 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	select_body(int button, int x, int y, t_mlx_data *data)
     else if (button == 5 || button == 4)
         zoom(96 + button);
     if (N_THREADS == 1)
-        render(NULL);
+        render();
     else if (N_THREADS > 1)
     {
         array(m()->threads)->for_each(init_threads, 0);
