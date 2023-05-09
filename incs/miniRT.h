@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:04:06 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/09 13:15:28 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/09 18:41:20 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 # include <pthread.h>
 # include <sys/time.h>
 
-# define IMG_W 1000
-# define IMG_H 1000
+# define IMG_W 		1000
+# define IMG_H 		1000
 # define ADD		100
 # define SUBTRACT	101
 # define MULTIPLY	102
@@ -64,6 +64,7 @@ double		vector_length(t_coord vector);
 double	    ft_atod(char *str, double max);
 int	        ft_atoi(char *nptr, long int max);
 void        freepp(void **to_free);
+int			arr_size(void **array);
 
 //Render
 int			render(t_mlx_data *data);
@@ -84,17 +85,21 @@ int    error(char *err);
 
 //bodys/build
 int		check_file(char *file_path);
+void	check_scene(void);
 void    *build(char *input, int id);
 void    build_scene(char *file_path);
+void	build_scene_helper(char *input);
+void	build_error(char *input, void *b, char*str);
 
 //bodys/build_bodys
 t_body  **__this_body(void);
+t_camera	*build_camera(char *input, int id);
 int            build_default_body(char **details);
 int            build_sphere(char *input);
-void            build_plane(char *input);
-void             build_cylinder(char *input);
+int            build_plane(char *input);
+int             build_cylinder(char *input);
 
-//bodys/build_butils
+//bodys/build_utils
 t_body	*body(void *obj);
 char            *space_str(void);
 int             get_color(char *color);

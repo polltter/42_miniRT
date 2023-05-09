@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:04:27 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/08 20:01:17 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/09 15:16:55 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ typedef struct s_ambient_light	t_ambient_light;
 typedef struct s_default_body	t_body;
 typedef struct s_mlx_data		t_mlx_data;
 typedef struct s_cylinder		t_cylinder;
-typedef struct s_viewport       t_viewport;
-typedef struct s_threads        t_threads;
+typedef struct s_viewport		t_viewport;
+typedef struct s_threads		t_threads;
 typedef struct s_camera			t_camera;
 typedef struct s_sphere			t_sphere;
 typedef struct s_coord			t_coord;

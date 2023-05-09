@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 20:42:35 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/09 13:39:23 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/09 19:01:49 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,13 @@ int	ft_atoi(char *nptr, long int max)
 		nb *= 10;
 		nb += nptr[i] - '0';
 		i++;
-		if (nb > max && printf("%ld\n", max))
-		{
-			printf("Argument too big (in atoi).\n");
+		if (nb > max && printf("Max: %ld\nArgument %s too big.\n", max, nptr))
 			return (INT_MAX);
-		}
 	}
 	return (sign * nb);
 }
 
-double	ft_atod(char *str, double max)
+double	ft_atod(char *str, double m)
 {
 	int		i;
 	double	d;
@@ -53,7 +50,7 @@ double	ft_atod(char *str, double max)
 	sign = 1;
 	d = 0;
 	j = 0;
-	i = ft_atoi(str, ceil(max));
+	i = ft_atoi(str, ceil(m));
 	if (i == INT_MAX)
 		return (INT_MAX);
 	if (!s().contains(str, "."))
@@ -67,11 +64,8 @@ double	ft_atod(char *str, double max)
 		d += str[j] - '0';
 		d /= 10.0;
 	}
-	if ((sign * d + i) > max)
-	{
-		printf("Argument too big.\n");
+	if ((sign * d + i) > m && printf("Max: %f\nArgument %s too big.\n", m, str))
 		return (INT_MAX);
-	}
 	return (sign * d + i);
 }
 
@@ -85,13 +79,27 @@ void	freepp(void **to_free)
 	free(to_free);
 }
 
+int	arr_size(void **array)
+{
+	int	i;
+
+	i = 0;
+	if (!array)
+		return (0);
+	while (array[i])
+		i++;
+	return (i);
+}
+
 int	error(char *err)
 {
 	if (m()->ambient)
 		free(m()->ambient);
 	if (m()->camera)
 		free(m()->camera);
-	array(m()->lights)->destroy();
-	array(m()->bodys)->destroy();
+	if (array(m()->lights))
+		array(m()->lights)->destroy();
+	if (array(m()->bodys))
+		array(m()->bodys)->destroy();
 	exit(write(2, err, s().len(err, 0)));
 }

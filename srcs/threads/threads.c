@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 20:25:25 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/08 20:29:51 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/09 18:56:32 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	imgs_to_canvas(t_elems *elem, void *o)
 			my_mlx_pixel_get(&thread->img, x, y));
 		}
 	}
-//	mlx_put_image_to_window(mlx()->mlx, mlx()->mlx_win,((t_threads *)elem->cont)->img.img, ((t_threads *)elem->cont)->start_x + IMG_W / 2, 0);
 }
 
 void	build_threads(void)
