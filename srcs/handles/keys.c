@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:33:05 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/08 20:17:07 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/09 12:50:09 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	move_light(int k)
 		{
 			(*which_light()) = array(m()->lights)->end;
 			selected = array(m()->lights)->size - 1;
-			printf("last: selected light %d\n", selected + 1);
+			printf("selected light %d\n", selected + 1);
 		}
 	}
 	else if (k == XK_a)

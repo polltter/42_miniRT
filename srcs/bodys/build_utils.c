@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 20:52:23 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/08 20:53:36 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/09 13:05:27 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,16 @@ t_coord	get_coord(char *s_coords, float max)
 
 	coords = s().split(s_coords, ",");
 	if (!*coords || !*(coords + 1) || !*(coords + 2))
+	{
+		freepp((void **)coords);
 		error("Wrong number of arguments");
+	}
 	coord.x = ft_atod(coords[0], max);
 	coord.y = ft_atod(coords[1], max);
 	coord.z = ft_atod(coords[2], max);
 	freepp((void **)coords);
+	if (coord.x == INT_MAX || coord.y == INT_MAX || coord.z == INT_MAX)
+		return ((t_coord){INT_MAX, INT_MAX, INT_MAX});
 	return (coord);
 }
 

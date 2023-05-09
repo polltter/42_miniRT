@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:31:35 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/08 20:11:30 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/09 12:50:23 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ int	select_body(int button, int x, int y, t_mlx_data *data)
         // printf("antes -- %p\n", *who_movin());
         (*who_movin()) = body_to_move(m()->camera->coord, viewport_pt);
 		if (*who_movin())
-			printf("selected body\n");
 		if (*which_light())
 			toggle_select_light();
         // printf("depois -- %p\n", *who_movin());
@@ -79,7 +78,6 @@ int	select_body(int button, int x, int y, t_mlx_data *data)
 		if (*who_movin())
 		{
 			((t_body *)(*who_movin()))->color = ((t_body *)(*who_movin()))->original_color;
-			printf("deselected body\n");
         	(*who_movin()) = NULL;
 		}
 		if (*which_light())

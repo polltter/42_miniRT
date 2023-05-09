@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 20:47:14 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/08 20:51:52 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/09 13:15:21 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ void	build_scene_helper(char *input)
 	else if (id == AL)
 	{
 		if (m()->ambient)
+		{
+			free(input);
 			error("Scene can only have one ambient light!\n");
+		}
 		(m()->ambient) = build_ambient_light(input, id);
 	}
 	else if (id == L)
@@ -51,7 +54,10 @@ void	build_scene_helper(char *input)
 	else if (id == C)
 	{
 		if (m()->camera)
+		{
+			free(input);
 			error("Scene can only have one camera!\n");
+		}
 		(m()->camera) = build_camera(input, id);
 		(m()->camera)->theta = find_theta((t_coord){0, 0, 1}, \
 								m()->camera->vector);
@@ -104,7 +110,11 @@ void	*build(char *input, int id)
 	{
 		b = ft_calloc(sizeof(t_sphere));
 		body(b);
-		build_sphere(input);
+		if (!build_sphere(input))
+		{
+			free(b);
+			error("");
+		}
 	}
 	else if (id == CY)
 	{

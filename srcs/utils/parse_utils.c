@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 20:42:35 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/09 12:42:21 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/09 13:39:23 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,10 @@ int	ft_atoi(char *nptr, long int max)
 		nb += nptr[i] - '0';
 		i++;
 		if (nb > max && printf("%ld\n", max))
-			error("Argument too big (in atoi).\n");
+		{
+			printf("Argument too big (in atoi).\n");
+			return (INT_MAX);
+		}
 	}
 	return (sign * nb);
 }
@@ -51,6 +54,8 @@ double	ft_atod(char *str, double max)
 	d = 0;
 	j = 0;
 	i = ft_atoi(str, ceil(max));
+	if (i == INT_MAX)
+		return (INT_MAX);
 	if (!s().contains(str, "."))
 		return (i * 1.0);
 	if (*str == '-')
@@ -62,8 +67,12 @@ double	ft_atod(char *str, double max)
 		d += str[j] - '0';
 		d /= 10.0;
 	}
-	return ((sign * d + i) * (((sign * d + i) <= max) \
-		|| error("Argument too big.\n")));
+	if ((sign * d + i) > max)
+	{
+		printf("Argument too big.\n");
+		return (INT_MAX);
+	}
+	return (sign * d + i);
 }
 
 void	freepp(void **to_free)

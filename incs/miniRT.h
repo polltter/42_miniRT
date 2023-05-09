@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:04:06 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/08 20:50:51 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/09 13:15:28 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ void    build_scene(char *file_path);
 
 //bodys/build_bodys
 t_body  **__this_body(void);
-void            build_default_body(char **details);
-void            build_sphere(char *input);
+int            build_default_body(char **details);
+int            build_sphere(char *input);
 void            build_plane(char *input);
 void             build_cylinder(char *input);
 
