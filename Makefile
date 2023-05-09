@@ -6,7 +6,7 @@
 #    By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/17 18:45:23 by touteiro          #+#    #+#              #
-#    Updated: 2023/05/09 18:53:38 by touteiro         ###   ########.fr        #
+#    Updated: 2023/05/09 19:15:28 by touteiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME	= miniRT
 CC		= cc
 CFLAGS	= -I incs -Imlx -Wall -Werror -Wextra -g3 -pthread -march=native -ffast-math -funsafe-math-optimizations -ffinite-math-only #-fsanitize=address #-O3
 
-BODYS_FILES		= build helper function_calls bodies utils lights camera parse
+BODYS_FILES			= build build_helper build_function_calls build_bodys build_utils build_lights build_camera parse
 CAM_FILES			= rotate_camera
 COLLISION_FILES		= collisions
 HANDLES_FILES		= keys mouse
