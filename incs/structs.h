@@ -140,7 +140,6 @@ struct s_main {
     t_viewport      viewport;
     t_coord         v_dir;
     void            *threads;
-    pthread_mutex_t draw;
 };
 
 struct s_threads {

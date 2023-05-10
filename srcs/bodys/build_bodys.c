@@ -48,6 +48,16 @@ void    build_plane(char *input)
     freepp((void **)details);
 }
 
+void    build_cylinder_caps(t_plane *plane, t_coord center, t_coord vector)
+{
+    plane->vector = vector;
+    normalize(&vector);
+    plane->coord = do_op_coords(ADD, center, coord_constant_op(MULTIPLY, vector, ((t_cylinder *)(*__this_body()))->height / 2));
+    plane->color = ((t_cylinder *)(*__this_body()))->color;
+    plane->specular = ((t_cylinder *)(*__this_body()))->specular;
+    plane->reflective = ((t_cylinder *)(*__this_body()))->reflective;
+}
+
 void    build_cylinder(char *input)
 {
     char    **details;
@@ -60,5 +70,6 @@ void    build_cylinder(char *input)
     ((t_cylinder *)(*__this_body()))->diameter = ft_atod(details[3], (float)INT_MAX);
     ((t_cylinder *)(*__this_body()))->height = ft_atod(details[4], (float)INT_MAX);
     freepp((void **)details);
-    print_coords(((t_cylinder *)(*__this_body()))->vector);
+    build_cylinder_caps(&((t_cylinder *)(*__this_body()))->top, ((t_cylinder *)(*__this_body()))->coord, ((t_cylinder *)(*__this_body()))->vector);
+    build_cylinder_caps(&((t_cylinder *)(*__this_body()))->bottom, ((t_cylinder *)(*__this_body()))->coord, coord_constant_op(MULTIPLY,((t_cylinder *)(*__this_body()))->vector, -1));
 }

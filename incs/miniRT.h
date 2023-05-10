@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:04:06 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/08 18:09:11 by mvenanci         ###   ########.fr       */
+/*   Updated: 2023/05/10 20:03:32 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ t_point 	sphere_collision(t_coord O, t_coord viewport_pt, t_sphere sphere);
 t_point cylinder_collision(t_coord origin, t_coord ray, t_cylinder *body);
 t_coord find_projection(t_coord new_vector, t_coord plane);
 t_coord find_normal(double t, t_cylinder *cy, t_coord ray);
+t_point plane_collision(t_coord viewport_pt, t_plane *plane, t_coord origin);
 
 //threads
 void    build_threads(void);
