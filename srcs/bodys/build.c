@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 20:47:14 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/09 18:38:55 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/11 16:24:20 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,13 @@ t_body	*body(void *obj)
 {
 	*__this_body() = obj;
 	return (*__this_body());
+}
+
+t_body	**__this_body(void)
+{
+	static t_body	*a;
+
+	return (&a);
 }
 
 void	build_scene(char *file_path)

@@ -6,7 +6,7 @@
 #    By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/17 18:45:23 by touteiro          #+#    #+#              #
-#    Updated: 2023/05/09 19:15:28 by touteiro         ###   ########.fr        #
+#    Updated: 2023/05/11 16:52:24 by touteiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,8 @@ NAME	= miniRT
 CC		= cc
 CFLAGS	= -I incs -Imlx -Wall -Werror -Wextra -g3 -pthread -march=native -ffast-math -funsafe-math-optimizations -ffinite-math-only #-fsanitize=address #-O3
 
-BODYS_FILES			= build build_helper build_function_calls build_bodys build_utils build_lights build_camera parse
-CAM_FILES			= rotate_camera
+BODYS_FILES			= build build_helper build_function_calls build_bodys build_cylinder build_utils build_lights build_camera parse
+ROTATE_FILES		= rotate theta
 COLLISION_FILES		= collisions collisions_cy
 HANDLES_FILES		= keys mouse
 THREADS_FILES		= threads join_and_delete
@@ -28,7 +28,7 @@ UTILS_FILES			= mlx_utils viewport_utils utils parse_utils color_utils print_inf
 GENERAL_FILES		= main
 
 BODYS_SRCS			= ${addsuffix .c, ${addprefix srcs/bodys/, ${BODYS_FILES}}}
-CAM_SRCS			= ${addsuffix .c, ${addprefix srcs/camera/, ${CAM_FILES}}}
+ROTATE_SRCS			= ${addsuffix .c, ${addprefix srcs/rotate/, ${ROTATE_FILES}}}
 THREADS_SRCS		= ${addsuffix .c, ${addprefix srcs/threads/, ${THREADS_FILES}}}
 COLLISION_SRCS		= ${addsuffix .c, ${addprefix srcs/collisions/, ${COLLISION_FILES}}}
 HANDLES_SRCS		= ${addsuffix .c, ${addprefix srcs/handles/, ${HANDLES_FILES}}}
@@ -40,7 +40,7 @@ STRS_SRCS			= ${addsuffix .c, ${addprefix srcs/utils/strs/, ${STRS_FILES}}}
 UTILS_SRCS			= ${addsuffix .c, ${addprefix srcs/utils/, ${UTILS_FILES}}}
 GENERAL_SRC			= ${addsuffix .c, ${addprefix srcs/, ${GENERAL_FILES}}}
 
-SRCS	=  ${BODYS_SRCS} ${CAM_SRCS} ${COLLISION_SRCS} ${HANDLES_SRCS} \
+SRCS	=  ${BODYS_SRCS} ${ROTATE_SRCS} ${COLLISION_SRCS} ${HANDLES_SRCS} \
 			${RAYTRACER_SRCS} ${GNL_SRCS} ${LIST_SRCS} ${MATH_SRCS} \
 			${STRS_SRCS} ${UTILS_SRCS} ${GENERAL_SRC} ${THREADS_SRCS}
 
@@ -56,7 +56,7 @@ obj/%.o: %.c ${INCS} Makefile
 	@echo "\033[33m[OK]	" $@ "\033[0m"
 
 ${NAME}:  ${OBJ}
-	@make --no-print-directory -C mlx
+	# @make --no-print-directory -C mlx
 	@$(CC) $(CFLAGS) $(OBJ) -Lmlx -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz  -o $(NAME)
 	@echo -n "\033[92m[OK]	 "
 	@echo -n $(NAME)

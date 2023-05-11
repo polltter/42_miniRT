@@ -5,19 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/08 20:54:35 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/11 16:10:38 by touteiro         ###   ########.fr       */
+/*   Created: 2023/05/11 16:22:47 by touteiro          #+#    #+#             */
+/*   Updated: 2023/05/11 16:38:33 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/miniRT.h"
-
-t_body	**__this_body(void)
-{
-	static t_body	*a;
-
-	return (&a);
-}
 
 int	build_default_body(char **details)
 {
@@ -94,44 +87,5 @@ int	build_plane(char *input)
 	vector = ((t_plane *)(*__this_body()))->vector;
 	if (vector.x == INT_MAX || vector.y == INT_MAX || vector.z == INT_MAX)
 		return (0);
-	return (1);
-}
-
-void    build_cylinder_caps(t_plane *plane, t_coord center, t_coord vector)
-{
-    plane->vector = vector;
-    normalize(&vector);
-    plane->coord = do_op_coords(ADD, center, coord_constant_op(MULTIPLY, vector, ((t_cylinder *)(*__this_body()))->height / 2));
-    plane->color = ((t_cylinder *)(*__this_body()))->color;
-    plane->specular = ((t_cylinder *)(*__this_body()))->specular;
-    plane->reflective = ((t_cylinder *)(*__this_body()))->reflective;
-}
-
-int    build_cylinder(char *input)
-{
-	char	**details;
-
-	details = s().split(input, space_str());
-	if (!*(details) || !*(details + 1) || !*(details + 2) || !*(details + 3) || \
-		!*(details + 4) || !*(details + 5))
-	{
-		freepp((void **)details);
-		error("Wrong number of arguments");
-	}
-	if (!build_plane(input))
-	{
-		freepp((void **)details);
-		return (0);
-	}
-	((t_cylinder *)(*__this_body()))->diameter = \
-			ft_atod(details[3], (float)1000000000);
-	((t_cylinder *)(*__this_body()))->height = \
-			ft_atod(details[4], (float)1000000000);
-	freepp((void **)details);
-	if (((t_cylinder *)(*__this_body()))->diameter == INT_MAX || \
-		((t_cylinder *)(*__this_body()))->height == INT_MAX)
-		return (0);
-    build_cylinder_caps(&((t_cylinder *)(*__this_body()))->top, ((t_cylinder *)(*__this_body()))->coord, ((t_cylinder *)(*__this_body()))->vector);
-    build_cylinder_caps(&((t_cylinder *)(*__this_body()))->bottom, ((t_cylinder *)(*__this_body()))->coord, coord_constant_op(MULTIPLY,((t_cylinder *)(*__this_body()))->vector, -1));
 	return (1);
 }
