@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 19:43:23 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/11 20:05:32 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/11 20:27:36 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,16 @@ t_coord	calc_normal(t_body *closest, t_coord point, double t, t_coord vp_pt)
 	return (normal);
 }
 
+t_coord	to_coord(double value)
+{
+	t_coord	new;
+
+	new.x = value;
+	new.y = value;
+	new.z = value;
+	return (new);
+}
+
 int	trace_ray(t_coord origin, t_coord vp_pt, t_point limits, int rec_depth)
 {
 	double		t;
@@ -93,11 +103,9 @@ int	trace_ray(t_coord origin, t_coord vp_pt, t_point limits, int rec_depth)
 		normal, coord_constant_op(MULTIPLY, vp_pt, -1), closest->specular));
 	if (rec_depth <= 0 || closest->reflective <= 0)
 		return (local_color);
-	return (get_color_light(local_color, (t_coord){1 - closest->reflective, \
-		1 - closest->reflective, 1 - closest->reflective}) + \
+	return (get_color_light(local_color, to_coord(1 - closest->reflective)) + \
 		get_color_light(trace_ray(point, \
 		reflect_ray(coord_constant_op(MULTIPLY, vp_pt, -1), normal), \
 		(t_point){.001, INT_MAX}, rec_depth - 1), \
-		(t_coord){closest->reflective, closest->reflective, \
-		closest->reflective}));
+		to_coord(closest->reflective)));
 }
