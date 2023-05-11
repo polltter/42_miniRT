@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 17:51:43 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/11 18:12:00 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/11 18:18:23 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	select_left(int selected)
 	}
 }
 
-void	select(int k, t_light *temp)
+void	select_light(int k, t_light *temp)
 {
 	t_elems		*list;
 	int			selected;
@@ -109,7 +109,7 @@ int	move_light(int k)
 	else if ((k == XK_plus || k == 65451) && temp->light_ratio < 1)
 		temp->light_ratio += .1;
 	else if (k == XK_Right || k == XK_Left)
-		select(k, temp);
+		select_light(k, temp);
 	else if (k == XK_a)
 		temp->coord.x -= .1;
 	else if (k == XK_d)
