@@ -99,7 +99,7 @@ t_coord find_normal(double t, t_cylinder *cy, t_coord ray)
     double  dist;
 
     point_in_surface = do_op_coords(ADD, m()->camera->coord, coord_constant_op(MULTIPLY, ray, t));
-    if (in_plane(point_in_axis, cy))
+    if (in_plane(point_in_surface, cy))
         return (cy->vector);
     dist = find_distance_in_axis(t, cy, ray) / vector_length(cy->vector);
     point_in_axis = coord_constant_op(MULTIPLY, cy->vector, dist);
