@@ -6,7 +6,7 @@
 #    By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/17 18:45:23 by touteiro          #+#    #+#              #
-#    Updated: 2023/05/11 16:52:24 by touteiro         ###   ########.fr        #
+#    Updated: 2023/05/11 17:24:31 by touteiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CFLAGS	= -I incs -Imlx -Wall -Werror -Wextra -g3 -pthread -march=native -ffast-m
 
 BODYS_FILES			= build build_helper build_function_calls build_bodys build_cylinder build_utils build_lights build_camera parse
 ROTATE_FILES		= rotate theta
-COLLISION_FILES		= collisions collisions_cy
+COLLISION_FILES		= collisions collisions_cy cylinder_plane cylinder_surface utils
 HANDLES_FILES		= keys mouse
 THREADS_FILES		= threads join_and_delete
 RAYTRACER_FILES		= render raytracer lights
