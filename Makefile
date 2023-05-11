@@ -6,7 +6,7 @@
 #    By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/17 18:45:23 by touteiro          #+#    #+#              #
-#    Updated: 2023/05/11 19:07:16 by touteiro         ###   ########.fr        #
+#    Updated: 2023/05/11 20:11:50 by touteiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,7 @@ obj/%.o: %.c ${INCS} Makefile
 	@echo "\033[33m[OK]	" $@ "\033[0m"
 
 ${NAME}:  ${OBJ}
-	# @make --no-print-directory -C mlx
+	@make --no-print-directory -C mlx
 	@$(CC) $(CFLAGS) $(OBJ) -Lmlx -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz  -o $(NAME)
 	@echo -n "\033[92m[OK]	 "
 	@echo -n $(NAME)
