@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 17:22:32 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/11 17:23:31 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/11 17:28:10 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	update_caps(t_cylinder *cy, t_coord normal)
 					coord_constant_op(MULTIPLY, normal, cy->height / 2));
 }
 
-double	collision_plane(t_coord origin, t_coord ray, t_cylinder *body)
+double	collision_cy_plane(t_coord origin, t_coord ray, t_cylinder *body)
 {
 	t_point	top;
 	t_point	bottom;

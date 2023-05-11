@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 17:21:59 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/11 17:22:20 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/11 17:27:32 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ double	surface_calc(t_coord ray, double sqr_mod, t_cylinder *body, t_coord t)
 	return (c * (c < a) + a * (a < c));
 }
 
-double	collision_surface(t_coord origin, t_coord ray, t_cylinder *body)
+double	collision_cy_surface(t_coord origin, t_coord ray, t_cylinder *body)
 {
 	t_coord	t;
 	double	sqr_mod_eixo;
