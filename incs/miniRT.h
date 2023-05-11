@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:04:06 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/11 18:17:44 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/11 19:10:08 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ void		render(void);
 int			trace_ray(t_coord O, t_coord viewport_pt, double t_min, double t_max, int recursion_depth);
 t_coord		reflect_ray(t_coord light, t_coord normal);
 t_coord		compute_lighting(t_coord point, t_coord normal, t_coord vector, double specular);
+double	compute_refl(t_coord data, t_coord reflected, t_coord vect);
+double	to_reflect(t_coord light, t_coord n, t_coord vect, t_coord *reflected);
 
 //Handles
 void   		 **who_movin(void);
