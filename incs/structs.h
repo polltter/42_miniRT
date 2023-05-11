@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:04:27 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/09 15:16:55 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/11 19:18:53 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ typedef struct s_point			t_point;
 typedef struct s_data			t_data;
 typedef struct s_main			t_main;
 
-
 enum e_types {
 	AL,
 	L,
@@ -45,8 +44,8 @@ typedef struct s_point
 }	t_point;
 
 struct s_viewport {
-    double  width;
-    double  height;
+	double	width;
+	double	height;
 };
 
 struct s_coord {
@@ -85,72 +84,71 @@ struct s_light {
 };
 
 struct s_camera {
-	int     id;
-	t_coord coord;
-	t_coord vector;
+	int		id;
+	t_coord	coord;
+	t_coord	vector;
 	int		fov;
 	t_coord	theta;
 };
 
 struct s_default_body {
-    int     id;
-    int     color;
-    int     original_color;
-    t_coord coord;
-    double	specular;
-    double	reflective;
+	int		id;
+	int		color;
+	int		original_color;
+	t_coord	coord;
+	double	specular;
+	double	reflective;
 };
 
 struct s_sphere {
-    int     id;
-    int     color;
-    int     original_color;
-    t_coord coord;
-    double	specular;
-    double	reflective;
-    double  diameter;
+	int		id;
+	int		color;
+	int		original_color;
+	t_coord	coord;
+	double	specular;
+	double	reflective;
+	double	diameter;
 };
 
 struct s_plane {
-    int     id;
-    int     color;
-    int     original_color;
-    t_coord coord;
-    double	specular;
-    double	reflective;
-	t_coord vector;
+	int		id;
+	int		color;
+	int		original_color;
+	t_coord	coord;
+	double	specular;
+	double	reflective;
+	t_coord	vector;
 };
 
 struct s_cylinder {
-    int     id;
-    int     color;
-    int     original_color;
-    t_coord coord;
-    double	specular;
-    double	reflective;
-	t_coord vector;
-	double  diameter;
-	double  height;
-    t_plane top;
-    t_plane bottom;
+	int		id;
+	int		color;
+	int		original_color;
+	t_coord	coord;
+	double	specular;
+	double	reflective;
+	t_coord	vector;
+	double	diameter;
+	double	height;
+	t_plane	top;
+	t_plane	bottom;
 };
-
 
 struct s_main {
 	void			*bodys;
 	t_ambient_light	*ambient;
 	void			*lights;
-    t_camera        *camera;
-    t_viewport      viewport;
-    t_coord         v_dir;
-    void            *threads;
+	t_camera		*camera;
+	t_viewport		viewport;
+	t_coord			v_dir;
+	void			*threads;
 };
 
 struct s_threads {
-    pthread_t   id;
-    int         start_x;
-    int         end_x;
-    t_data      img;
+	pthread_t	id;
+	int			start_x;
+	int			end_x;
+	t_data		img;
 };
 
 #endif
