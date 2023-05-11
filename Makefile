@@ -6,7 +6,7 @@
 #    By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/17 18:45:23 by touteiro          #+#    #+#              #
-#    Updated: 2023/05/11 17:54:14 by touteiro         ###   ########.fr        #
+#    Updated: 2023/05/11 19:07:16 by touteiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ ROTATE_FILES		= rotate theta
 COLLISION_FILES		= collisions collisions_cy cylinder_plane cylinder_surface utils
 HANDLES_FILES		= keys mouse control_lights utils
 THREADS_FILES		= threads join_and_delete
-RAYTRACER_FILES		= render raytracer lights
+RAYTRACER_FILES		= render raytracer lights calc_reflection
 GNL_FILES			= get_next_line  get_next_line_utils
 LIST_FILES			= list_utils list_utils_2 list_utils_3 list_utils_4
 MATH_FILES			= math coords
