@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 18:05:34 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/11 18:15:01 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/11 20:09:24 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	*body_to_move(t_coord origin, t_coord viewport_pt)
 	void	*closest;
 
 	closest_t = INT_MAX;
-	closest = closest_intersection(origin, viewport_pt, 1, INT_MAX, &closest_t);
+	closest = closest_intersection(origin, viewport_pt, \
+			(t_point){1, INT_MAX}, &closest_t);
 	((t_body *)closest)->color = get_rgb(220, 220, 220);
 	return (closest);
 }
