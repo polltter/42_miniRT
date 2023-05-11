@@ -131,6 +131,8 @@ struct s_cylinder {
 	t_coord vector;
 	double  diameter;
 	double  height;
+    t_plane top;
+    t_plane bottom;
 };
 
 
@@ -142,7 +144,6 @@ struct s_main {
     t_viewport      viewport;
     t_coord         v_dir;
     void            *threads;
-    pthread_mutex_t draw;
 };
 
 struct s_threads {

@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:04:06 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/09 19:30:28 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/11 16:07:39 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 # define SUBTRACT	101
 # define MULTIPLY	102
 # define DIVIDE		103
-# define N_THREADS  50
+# define N_THREADS  100
 
 //MLX utils
 t_mlx_data	*mlx(void);
@@ -127,6 +127,10 @@ t_body		*closest_intersection(t_coord O, t_coord viewport_pt, double t_min, doub
 int			in_shadow(t_coord O, t_coord viewport_pt, double t_min, double t_max);
 t_point		collision(t_coord O, t_coord viewport_pt, t_body *body);
 t_point 	sphere_collision(t_coord O, t_coord viewport_pt, t_sphere sphere);
+t_point cylinder_collision(t_coord origin, t_coord ray, t_cylinder *body);
+t_coord find_projection(t_coord new_vector, t_coord plane);
+t_coord find_normal(double t, t_cylinder *cy, t_coord ray);
+t_point plane_collision(t_coord viewport_pt, t_plane *plane, t_coord origin);
 
 //threads
 void    build_threads(void);

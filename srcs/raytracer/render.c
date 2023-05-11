@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 19:19:37 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/09 19:28:55 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/11 16:12:27 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,7 @@ void	render(void)
 		while (y < IMG_H / 2)
 		{
 			viewport_pt = canvas_to_viewport(x, y);
-//			printf("len: %f\n", vector_length(viewport_pt));
-//			print_coords(viewport_pt);
-			rotate_camera(m()->camera->theta, &viewport_pt);
-//			printf("theta: %f, %f\n", m()->camera->theta.x, m()->camera->theta.y);
-//			printf("len: %f\n", vector_length(viewport_pt));
-//			print_coords(viewport_pt);
+            rotate_camera(m()->camera->theta, &viewport_pt);
 			color = trace_ray(m()->camera->coord, viewport_pt, 1, INT_MAX, 3);
 			if (vp_to_canvas(x, 0) >= 0 && vp_to_canvas(x, 0) < IMG_W && \
 				vp_to_canvas(y, 1) >= 0 && vp_to_canvas(y, 1) < IMG_H)

@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 20:54:35 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/09 16:25:41 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/11 16:10:38 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,17 @@ int	build_plane(char *input)
 	return (1);
 }
 
-int	build_cylinder(char *input)
+void    build_cylinder_caps(t_plane *plane, t_coord center, t_coord vector)
+{
+    plane->vector = vector;
+    normalize(&vector);
+    plane->coord = do_op_coords(ADD, center, coord_constant_op(MULTIPLY, vector, ((t_cylinder *)(*__this_body()))->height / 2));
+    plane->color = ((t_cylinder *)(*__this_body()))->color;
+    plane->specular = ((t_cylinder *)(*__this_body()))->specular;
+    plane->reflective = ((t_cylinder *)(*__this_body()))->reflective;
+}
+
+int    build_cylinder(char *input)
 {
 	char	**details;
 
@@ -121,5 +131,7 @@ int	build_cylinder(char *input)
 	if (((t_cylinder *)(*__this_body()))->diameter == INT_MAX || \
 		((t_cylinder *)(*__this_body()))->height == INT_MAX)
 		return (0);
+    build_cylinder_caps(&((t_cylinder *)(*__this_body()))->top, ((t_cylinder *)(*__this_body()))->coord, ((t_cylinder *)(*__this_body()))->vector);
+    build_cylinder_caps(&((t_cylinder *)(*__this_body()))->bottom, ((t_cylinder *)(*__this_body()))->coord, coord_constant_op(MULTIPLY,((t_cylinder *)(*__this_body()))->vector, -1));
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:33:05 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/09 19:29:43 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/11 16:12:02 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ int	move_light(int k)
 
 int move_body(int k)
 {
-    // printf("%d, X: %d,x: %d\n", k, XK_X, XK_x);
     if (k == XK_a)
         ((t_body *)(*who_movin()))->coord.x -= 0.1;
     else if (k == XK_d)
@@ -116,7 +115,8 @@ int move_body(int k)
         ((t_body *)(*who_movin()))->coord.y += 0.1;
     else if (k == XK_s)
         ((t_body *)(*who_movin()))->coord.y -= 0.1;
-	else if (((t_body *)(*who_movin()))->id == PL && \
+	else if ((((t_body *)(*who_movin()))->id == PL || \
+            ((t_body *)(*who_movin()))->id == CY )&& \
 		(k == XK_b || k == XK_h || k == XK_n || k == XK_j || k == XK_m || k == XK_k))
         rotate_plane(k);
     else if (k == XK_Up)
@@ -168,9 +168,6 @@ int move_camera(int k)
 		m()->ambient->light_ratio += .1;
     else
         return (0);
-//    m()->camera->theta = find_theta((t_coord){0, 0, 1}, m()->camera->vector);
-    // printf("======theta======\n");
-    // print_coords(m()->camera->theta);
     return (1);
 }
 
