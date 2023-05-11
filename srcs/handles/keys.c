@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 17:37:56 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/11 17:52:16 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/11 18:23:54 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,9 @@ int	move_body(int k)
 	return (1);
 }
 
-int	move_camera(int k)
+void	apply_rotation(int k)
 {
-	if (k == XK_a)
-		m()->camera->coord.x -= 0.1;
-	else if (k == XK_d)
-		m()->camera->coord.x += 0.1;
-	else if (k == XK_w)
-		m()->camera->coord.y += 0.1;
-	else if (k == XK_s)
-		m()->camera->coord.y -= 0.1;
-	else if (k == XK_Up)
+	if (k == XK_Up)
 	{
 		rotate_x(0.2, &m()->camera->vector);
 		m()->camera->theta.x += 0.2;
@@ -70,9 +62,25 @@ int	move_camera(int k)
 		rotate_y(0.2, &m()->camera->vector);
 		m()->camera->theta.y += 0.2;
 	}
-	else if (!(*who_movin()) && !(*which_light()) && (k == XK_minus || k == 65453) && m()->ambient->light_ratio > .1)
+}
+
+int	move_camera(int k)
+{
+	if (k == XK_a)
+		m()->camera->coord.x -= 0.1;
+	else if (k == XK_d)
+		m()->camera->coord.x += 0.1;
+	else if (k == XK_w)
+		m()->camera->coord.y += 0.1;
+	else if (k == XK_s)
+		m()->camera->coord.y -= 0.1;
+	else if (k == XK_Up || k == XK_Down || k == XK_Left || k == XK_Right)
+		apply_rotation(k);
+	else if (!(*who_movin()) && !(*which_light()) && \
+			(k == XK_minus || k == 65453) && m()->ambient->light_ratio > .1)
 		m()->ambient->light_ratio -= .1;
-	else if (!(*who_movin()) && !(*which_light()) && (k == XK_plus || k == 65451) && m()->ambient->light_ratio < .9)
+	else if (!(*who_movin()) && !(*which_light()) && \
+			(k == XK_plus || k == 65451) && m()->ambient->light_ratio < .9)
 		m()->ambient->light_ratio += .1;
 	else
 		return (0);
