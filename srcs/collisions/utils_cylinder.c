@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_cylinder.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 17:20:31 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/11 17:24:04 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/12 14:11:28 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,16 @@ static double	find_distance_in_axis(double t, t_cylinder *cy, t_coord ray)
 	cross = do_op_coords(ADD, \
 						m()->camera->coord, \
 						coord_constant_op(MULTIPLY, ray, t));
-	center_to_coord = do_op_coords(SUBTRACT, cy->coord, cross);
+	center_to_coord = do_op_coords(SUBTRACT, cross, cy->coord);
 	angle = dot_product(center_to_coord, cy->vector);
 	angle = acos(angle / \
 			(vector_length(center_to_coord) * vector_length(cy->vector)));
-	return (fabs(vector_length(center_to_coord) * cos(angle)));
+	return ((vector_length(center_to_coord) * cos(angle)));
 }
 
 int	in_cylinder(double t, t_cylinder *cy, t_coord ray)
 {
-	return (find_distance_in_axis(t, cy, ray) > (cy->height / 2));
+	return (fabs(find_distance_in_axis(t, cy, ray)) > (cy->height / 2));
 }
 
 int	in_plane(t_coord point, t_cylinder *cy)
