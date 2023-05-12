@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   utils_cylinder.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 17:20:31 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/12 15:15:11 by mvenanci         ###   ########.fr       */
+/*   Updated: 2023/05/12 15:39:25 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-static double	find_distance_in_axis(double t, t_cylinder *cy, t_coord ray, t_coord origin)
+static double	find_distance_in_axis(double t, t_cylinder *cy, t_coord ray, \
+				t_coord origin)
 {
 	t_coord	cross;
 	t_coord	center_to_coord;
@@ -54,7 +55,8 @@ t_coord	find_normal(double t, t_cylinder *cy, t_coord ray, t_coord origin)
 						coord_constant_op(MULTIPLY, ray, t));
 	if (in_plane(point_in_surface, cy))
 		return (cy->vector);
-	dist = find_distance_in_axis(t, cy, ray, origin) / vector_length(cy->vector);
+	dist = find_distance_in_axis(t, cy, ray, origin) / \
+								vector_length(cy->vector);
 	point_in_axis = coord_constant_op(MULTIPLY, cy->vector, dist);
 	point_in_axis = do_op_coords(ADD, cy->coord, point_in_axis);
 	normal = do_op_coords(SUBTRACT, point_in_surface, point_in_axis);

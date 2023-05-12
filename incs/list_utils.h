@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_utils.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 21:03:30 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2023/04/06 18:49:49 by mvenanci         ###   ########.fr       */
+/*   Updated: 2023/05/12 15:51:12 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ struct					s_array
 	t_tree				*(*add_leaf)(void *cont);
 	t_tree				*(*search_tree)(t_tree *root, void *cont);
 	int					(*cmp)(void *cont1, void *cont2);
+	int					(*index_of)(void *cont);
 };
 
 t_array					*array(void *lst);

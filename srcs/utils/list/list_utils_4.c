@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_utils_4.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 18:19:33 by mvenanci          #+#    #+#             */
-/*   Updated: 2023/04/15 15:56:07 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2023/05/12 15:50:27 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,4 +94,21 @@ void	__destroy_tree(t_tree *root)
 		free(root);
 	}
 	return ;
+}
+
+int	__index_of(void	*cont)
+{
+	int		index;
+	t_elems	*temp;
+
+	index = 0;
+	temp = (*__this())->begin;
+	while (temp && temp->cont != cont)
+	{
+		index++;
+		temp = temp->next;
+	}
+	if (!temp)
+		return (-1);
+	return (index);
 }

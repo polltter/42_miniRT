@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   control_lights.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 17:51:43 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/12 14:25:48 by mvenanci         ###   ########.fr       */
+/*   Updated: 2023/05/12 15:54:04 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,6 @@ int	toggle_select_light(void)
 		selected = 0;
 	}
 	return (selected);
-}
-
-/* Adicionar a biblioteca listas */
-int	index_of(t_elems *list, t_light *temp)
-{
-	int	index;
-
-	index = 0;
-	while (list && temp != list->cont)
-	{
-		index++;
-		list = list->next;
-	}
-	if (!list)
-		return (-1);
-	return (index);
 }
 
 void	select_right(int selected)
@@ -88,11 +72,9 @@ void	select_left(int selected)
 
 void	select_light(int k, t_light *temp)
 {
-	t_elems		*list;
-	int			selected;
+	int	selected;
 
-	list = array(m()->lights)->begin;
-	selected = index_of(list, temp);
+	selected = array(m()->lights)->index_of((void *)temp);
 	if (k == XK_Right)
 		select_right(selected);
 	else if (k == XK_Left)

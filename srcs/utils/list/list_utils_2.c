@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_utils_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 23:25:26 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2023/03/27 15:43:39 by mvenanci         ###   ########.fr       */
+/*   Updated: 2023/05/12 15:51:50 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	**__to_array(void);
 void	__build_tree(void);
 t_tree	*__search_tree(t_tree *root, void *cont);
 t_tree	*__add_leaf(void *cont);
+int		__index_of(void	*cont);
 
 t_array	**__this(void)
 {
@@ -77,5 +78,6 @@ void	*creat_array(void)
 	new->build_tree = __build_tree;
 	new->add_leaf = __add_leaf;
 	new->search_tree = __search_tree;
+	new->index_of = __index_of;
 	return (new);
 }
