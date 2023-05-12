@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   control_lights.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 17:51:43 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/11 18:18:23 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/12 14:25:48 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,9 +119,9 @@ int	move_light(int k)
 	else if (k == XK_w)
 		temp->coord.y += .1;
 	else if (k == XK_Up)
-		temp->coord.z += .1;
+		temp->coord.z += .5;
 	else if (k == XK_Down)
-		temp->coord.z -= .1;
+		temp->coord.z -= .5;
 	else
 		return (0);
 	return (1);

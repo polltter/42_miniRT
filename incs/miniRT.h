@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:04:06 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/11 19:38:14 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/12 15:15:30 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,9 +142,9 @@ double			collision_cy_surface(t_coord origin, t_coord ray, \
 				t_cylinder *body);
 double			collision_cy_plane(t_coord origin, t_coord ray, \
 				t_cylinder *body);
-int				in_cylinder(double t, t_cylinder *cy, t_coord ray);
+int				in_cylinder(double t, t_cylinder *cy, t_coord ray, t_coord origin);
 t_coord			find_projection(t_coord new_vector, t_coord plane);
-t_coord			find_normal(double t, t_cylinder *cy, t_coord ray);
+t_coord			find_normal(double t, t_cylinder *cy, t_coord ray, t_coord origin);
 
 //threads
 void			build_threads(void);
