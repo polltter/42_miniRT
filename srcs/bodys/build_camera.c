@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 17:02:12 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/09 17:03:04 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/12 16:42:15 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_camera	*build_camera(char *input, int id)
 	camera->vector = get_coord(details[2], 1);
 	camera->fov = ft_atoi(details[3], 180);
 	freepp((void **)details);
-	m()->viewport.height = IMG_H / IMG_H;
+	m()->viewport.height = (double)IMG_H / IMG_W;
 	m()->viewport.width = 2 * tan(camera->fov / 2.0 * M_PI / 180.0);
 	if (!camera_check(camera))
 	{
