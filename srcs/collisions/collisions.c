@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:54:27 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/11 17:02:24 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/12 13:05:37 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ t_point	sphere_collision(t_coord origin, t_coord viewport_pt, t_sphere sphere)
 
 	r = sphere.diameter / 2;
 	t = do_op_coords(SUBTRACT, origin, sphere.coord);
+	new = (t_point){0, 0};
 	new = collision_point(viewport_pt, t, r, new);
 	return (new);
 }

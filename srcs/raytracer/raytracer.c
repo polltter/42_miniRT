@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 19:43:23 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/11 20:27:36 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/12 13:07:36 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_coord	calc_normal(t_body *closest, t_coord point, double t, t_coord vp_pt)
 	}
 	else if (closest->id == PL)
 		normal = ((t_plane *)closest)->vector;
-	else if (closest->id == CY)
+	else
 		normal = find_normal(t, (t_cylinder *)closest, vp_pt);
 	if (dot_product(normal, vp_pt) > 0)
 		normal = coord_constant_op(MULTIPLY, normal, -1);
