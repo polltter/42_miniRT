@@ -6,7 +6,7 @@
 /*   By: touteiro <touteiro@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 18:05:34 by touteiro          #+#    #+#             */
-/*   Updated: 2023/05/12 14:11:53 by touteiro         ###   ########.fr       */
+/*   Updated: 2023/05/12 15:32:59 by touteiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ void	left_click(int x, int y)
 
 	viewport_pt = canvas_to_viewport(x - IMG_W / 2, -y + IMG_H / 2);
 	rotate_camera(m()->camera->theta, &viewport_pt);
+	if (*who_movin())
+		((t_body *)(*who_movin()))->color = \
+			((t_body *)(*who_movin()))->original_color;
 	(*who_movin()) = body_to_move(m()->camera->coord, viewport_pt);
 	if (*which_light())
 		toggle_select_light();
